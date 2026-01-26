@@ -10,7 +10,7 @@ export class Collection<T> {
     return this.elements;
   }
   
-  getCertainElement(index: number): T {
+  getByIndex(index: number): T {
     return this.elements[index];
   }
   
@@ -18,12 +18,12 @@ export class Collection<T> {
     this.elements = [];
   }
   
-  deleteCertainElement(element: T): T[] {
-    return this.elements.filter(el => el !== element);
+  removeElement(element: T): T[] {
+    return this.elements.filter((el:T) => el !== element);
   }
   
   replaceElement(oldElement: T, newElement: T): T[] {
-    return this.elements.map(el => el === oldElement ? newElement : el);
+    return this.elements.map((el:T) => el === oldElement ? newElement : el);
   }
   
 }

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { DifferentColors } from '../enums/Color';
+import { Color } from '../enums/Color';
 import './Collection';
 
 @Component({
@@ -9,30 +9,31 @@ import './Collection';
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
-  companyName: string = 'РУМТИБЕТ';
+  
+  companyName: string = 'румтибет';
   
   constructor() {
-    this.saveUserVisitDate();
-    this.saveUserVisitCount();
+    this.saveLastVisitDate();
+    this.saveVisitCount();
   }
   
-  checkMainColors(color: DifferentColors): boolean {
-    const mainColors = [
-      DifferentColors.RED,
-      DifferentColors.GREEN,
-      DifferentColors.BLUE
+  isMainColor(color: Color): boolean {
+    const mainColors: Color[] = [
+      Color.RED,
+      Color.GREEN,
+      Color.BLUE
     ];
     return mainColors.includes(color);
   }
   
-  saveUserVisitDate(): void {
+  saveLastVisitDate(): void {
     const now: string = new Date().toISOString();
-    localStorage.setItem('lastUserEnter', now); 
+    localStorage.setItem('last-enter', now); 
   }
   
-  saveUserVisitCount(): void {
-    const visitCount: number = Number(localStorage.getItem('visitCount'));
-    localStorage.setItem('visitCount', (visitCount + 1).toString());
+  saveVisitCount(): void {
+    const visitCount: number = Number(localStorage.getItem('visit-count'));
+    localStorage.setItem('visit-count', (visitCount + 1).toString());
   }
   
 }

@@ -28,8 +28,9 @@
   
   .companyNameText {
     font-size: 16px;
-    letter-spacing: 5px;
+    letter-spacing: 6px;
     font-weight: 700;
+    text-transform: uppercase;
   }
   
   .navigation {
@@ -63,7 +64,7 @@
   gap: 41px;
   
   .banner {
-    background-image: url('/images/bg-main.png');
+    background-image: url('/images/bg-mountains.png');
     background-repeat: no-repeat;
     background-size: cover;
     width: 100%;
@@ -134,7 +135,7 @@
     transform: translateY(-50%);
     width: 18px;
     height: 18px;
-    background: url('/icons/calendar.svg') no-repeat center;
+    background: url('/icons/calendar-icon.svg') no-repeat center;
     background-size: contain;
     pointer-events: none; 
   }
