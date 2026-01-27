@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Color } from '../enums/Color';
-import './Collection';
+import './collection';
 
 @Component({
   selector: 'app-root',

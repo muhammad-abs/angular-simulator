@@ -19,11 +19,11 @@ export class Collection<T> {
   }
   
   removeElement(element: T): T[] {
-    return this.elements.filter((el:T) => el !== element);
+    return this.elements.filter((el: T) => el !== element);
   }
   
   replaceElement(oldElement: T, newElement: T): T[] {
-    return this.elements.map((el:T) => el === oldElement ? newElement : el);
+    return this.elements.map((el: T) => el === oldElement ? newElement : el);
   }
   
 }
