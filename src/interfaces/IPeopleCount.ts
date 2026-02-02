@@ -1,4 +1,4 @@
-export interface ICountPeople {
+export interface IPeopleCount {
   id: number;
   count: number;
 }

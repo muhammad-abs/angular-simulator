@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { Color } from '../enums/Color';
 import './collection';
-import { IAdvantages } from '../interfaces/IAdvantages';
-import { IProgramCards } from '../interfaces/IProgramCards';
+import { IAdvantage } from '../interfaces/IAdvantage';
+import { IProgramCard } from '../interfaces/IProgramCard';
 import { FormsModule } from '@angular/forms';
-import { ISearchProgram } from '../interfaces/ISearchProgram';
-import { ILocation } from '../interfaces/ILocations';
-import { ICountPeople } from '../interfaces/ICountPeople';
+import { IProgram } from '../interfaces/IProgram';
+import { ILocation } from '../interfaces/ILocation';
+import { IPeopleCount } from '../interfaces/IPeopleCount';
 
 @Component({
   selector: 'app-root',
@@ -17,15 +17,10 @@ import { ICountPeople } from '../interfaces/ICountPeople';
 export class AppComponent {
   
   isLoadingPage: boolean = true;
-  
-  inputValue: string = '';
-  
-  isTask: boolean = true;
-  
-  numberValue: number = 0;
-  
-  timeValue: string = '';
-  
+  enteredText: string = '';
+  isTimerView: boolean = true;
+  counter: number = 0;
+  currentDateTime: Date = new Date();
   isDateFocused: boolean = false;
   
   locations: ILocation[] = [
@@ -34,53 +29,51 @@ export class AppComponent {
     { id: 3, value: 'Греция' }
   ];
   
-  countPeople: ICountPeople[] = [ 
+  peopleCount: IPeopleCount[] = [ 
     { id: 1, count: 4 },
     { id: 2, count: 8 },
-    { id: 3, count: 12},
-    { id: 4, count: 16}
+    { id: 3, count: 12 },
+    { id: 4, count: 16 }
   ];
   
-  searchProgram: ISearchProgram = {
+  programs: IProgram = {
     location: '',
     dateRange: '',
-    countPeople: ''
+    peopleCount: ''
   }
   
-  isFormTuched: boolean = false;
-  
+  isFormTouched: boolean = false;
   readonly companyName: string = 'румтибет';
-
-  selectedAdvantageId!: number;
+  currentAdvantageId!: number;
   
-  advantages: IAdvantages[] = [
+  advantages: IAdvantage[] = [
     {
       id: 1,
       title: 'Опытный гид',
       description: 'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.',
-      icon: 'exp-guide-icon.svg'
+      icon: 'exp-guide-icon'
     },
     {
       id: 2,
       title: 'Безопасный поход',
       description: 'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.',
-      icon: 'safe-hiking-icon.svg'
+      icon: 'safe-hiking-icon'
     },
     {
       id: 3,
       title: 'Лояльные цены',
       description: 'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.',
-      icon: 'loyal-prices-icon.svg'
+      icon: 'loyal-prices-icon'
     },
   ];
   
-  selectedProgramCardId!: number;
+  currentProgramCardId!: number;
   
-  programCards: IProgramCards[] = [
-    { id: 1, image: 'mountains.png' },
-    { id: 2, image: 'hiking.png' },
-    { id: 3, image: 'snowmobile.png' },
-    { id: 4, image: 'river.png' }
+  programCards: IProgramCard[] = [
+    { id: 1, image: 'mountains' },
+    { id: 2, image: 'hiking' },
+    { id: 3, image: 'snowmobile' },
+    { id: 4, image: 'river' }
   ];
   
   constructor() {
@@ -88,7 +81,7 @@ export class AppComponent {
     this.saveVisitCount();
     
     setInterval(() => {
-    this.timeValue = new Date().toLocaleString('ru-RU');
+      this.currentDateTime = new Date();
     }, 1000); 
     
     setTimeout(() => {
@@ -97,31 +90,31 @@ export class AppComponent {
   }
   
   changeTask(): void {
-    this.isTask = !this.isTask;
+    this.isTimerView = !this.isTimerView;
   }
   
   increaseNumber(): void {
-    this.numberValue +=1;
+    this.counter +=1;
   }
   
   reduceNumber(): void {
-    this.numberValue -=1;
+    this.counter -=1;
   }
   
-  tuchedForm(): void {
-    this.isFormTuched = true;
+  onFocus(): void {
+    this.isFormTouched = true;
   }
   
   isFormInvalid(): boolean {
-    return !this.searchProgram.location || !this.searchProgram.dateRange || !this.searchProgram.countPeople;
+    return !this.programs.location || !this.programs.dateRange || !this.programs.peopleCount;
   }
   
   selectAdvantage(advantageId: number): void {
-    this.selectedAdvantageId = advantageId;
+    this.currentAdvantageId = advantageId;
   }
   
   selectProgramCard(programCardId: number): void {
-    this.selectedProgramCardId = programCardId;
+    this.currentProgramCardId = programCardId;
   }
   
   private isMainColor(color: Color): boolean {
