@@ -22,6 +22,10 @@ export class AppComponent {
   counter: number = 0;
   currentDateTime: Date = new Date();
   isDateFocused: boolean = false;
+  isFormTouched: boolean = false;
+  readonly companyName: string = 'румтибет';
+  currentAdvantageId!: number;
+  currentProgramCardId!: number;
   
   locations: ILocation[] = [
     { id: 1, value: 'Турция' },
@@ -41,10 +45,6 @@ export class AppComponent {
     dateRange: '',
     peopleCount: ''
   }
-  
-  isFormTouched: boolean = false;
-  readonly companyName: string = 'румтибет';
-  currentAdvantageId!: number;
   
   advantages: IAdvantage[] = [
     {
@@ -66,9 +66,7 @@ export class AppComponent {
       icon: 'loyal-prices-icon'
     },
   ];
-  
-  currentProgramCardId!: number;
-  
+    
   programCards: IProgramCard[] = [
     { id: 1, image: 'mountains' },
     { id: 2, image: 'hiking' },
@@ -99,10 +97,6 @@ export class AppComponent {
   
   reduceNumber(): void {
     this.counter -=1;
-  }
-  
-  onFocus(): void {
-    this.isFormTouched = true;
   }
   
   isFormInvalid(): boolean {
