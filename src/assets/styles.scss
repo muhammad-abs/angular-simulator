@@ -1,16 +1,12 @@
 @use './fonts';
 @use './normalize';
 @use './button';
+@use './desc.block';
 
 * {
   font-family: 'Nunito Sans';
   margin: 0px;
   padding: 0px;
-}
-
-.container {
-  display: block;
-  width: 1180px;
 }
 
 :root {

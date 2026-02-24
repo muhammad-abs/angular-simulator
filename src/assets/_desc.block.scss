@@ -1,0 +1,30 @@
+.desc-block {
+  display: flex;
+  flex-direction: column;
+  width: 580px;
+  margin: 64px 0;
+  gap: 40px;
+  color: #18121E;
+  
+  .title-wrapper {
+    .subtitle {
+      font-weight: 400;
+      font-size: 24px;
+      line-height: 20px;
+      color: #F2BE22;
+    }
+    
+    .title {
+      margin-top: 8px;
+      font-weight: 800;
+      font-size: 32px;
+      line-height: 120%;
+    }
+  }
+  
+  .desc {
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 150%;
+  }
+}

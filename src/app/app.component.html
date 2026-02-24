@@ -1,65 +1,228 @@
-<header class="header">
-  <div class="container">
-    
-    <div class="logo">
-      <div class="logo-img">
-        <img src="/images/logo.svg" alt="logo">
-      </div>
-      <div class="logo-text">
-        <span class="companyNameText">{{ companyName }}</span>
-      </div>
-    </div>
-    
-    <div class="navigation">
-      <nav class="menu">
-        <a href="#">Главная</a>
-        <a href="#">Про гида</a>
-        <a href="#">Программа тура</a>
-        <a href="#">Стоимость</a>
-        <a href="#">Блог</a>
-        <a href="#">Контакты</a>
-      </nav>
-      <button class="primary-button consultation-button">Консультация</button>
-    </div>
-    
-  </div>
-</header>
-
-<section class="main-info white-text">
+@if (isLoadingPage) {
+  <div class="spinner"></div>
+} @else {
+  <header class="header">
+    <div class="container">
   
-  <div class="banner"></div>
-  <div class="title container">
-    <h1>Насладись прогулкой в горах <br> с командой единомышленников</h1>
-  </div> 
-
-  <div class="search-program">
-    <div class="input-field">
-      <select>
-        <option>Локация для тура</option>
-        <option>Турция</option>
-        <option>Италия</option>
-        <option>Греция</option>
-      </select>
+      <div class="logo">
+        <div class="logo-img">
+          <img src="/images/logo.svg" alt="logo">
+        </div>
+        <div class="logo-text">
+          <span class="companyNameText">{{ companyName }}</span>
+        </div>
+      </div>
+  
+      <div class="navigation">
+        <nav class="menu">
+          <a href="#" id="main">Главная</a>
+          <a href="#" id="our-trip">Про гида</a>
+          <a href="#" id="tour-program">Программа тура</a>
+          <a href="#" id="price">Стоимость</a>
+          <a href="#" id="blog">Блог</a>
+          <a href="#" id="contacts">Контакты</a>
+        </nav>
+        <button id="consultation-button" class="primary-button consultation-button">Консультация</button>
+      </div>
+  
+    </div>
+  </header>
+  
+  <section class="functions">
+    <div class="container">
+  
+      @if(isTimerView) {
+        <div class="timer">
+          <p>{{ currentDateTime.toLocaleString('ru-RU') }}</p>
+          <button 
+            class="change-task-button primary-button"
+            (click)="changeTask()"
+            id="change-task-button"
+          >
+            Показать кликер
+          </button>
+        </div>
+      } @else {
+        <div class="clicker">
+          <div class="clicker-container">
+            
+            <button id="increase-number-btn" (click)="increaseNumber()">+</button>
+            <p>{{ counter }}</p>
+            <button id="reduce-number-btn" (click)="reduceNumber()" [disabled]="counter < 1">-</button>
+          
+            <button 
+              id="change-task-button"
+              class="change-task-button primary-button" 
+              (click)="changeTask()"
+            >
+              Показать дату
+            </button>
+          </div>
+        </div>
+      }
+  
+    </div>
+  </section>
+  
+  <section class="main-info white-text">
+  
+    <div class="banner"></div>
+  
+    <div class="title container">
+      <h1>Насладись прогулкой в горах <br> с командой единомышленников</h1>
+    </div>
+  
+    <div class="search-program" (focusin)="isFormTouched = true">
+  
+      <div class="input-field">
+        <select id="program-locations" [(ngModel)]="programs.location">
+          <option value="" selected hidden>Локация для тура</option>
+          @for (location of locations; track location.id) {
+            <option [id]="'location-' + location.id">{{ location.value }}</option>
+          }
+        </select>
+          <span>выберите из списка</span>
+      </div>
+  
+      <div class="input-field date">
+        <input 
+          id="program-dateRange"
+          [(ngModel)]="programs.dateRange"
+          [type]="isDateFocused ? 'date' : 'text'"
+          placeholder="Дата похода"
+          (focus)="isDateFocused = true"
+          (blur)="!programs.dateRange ? isDateFocused = false : null"
+        >
+  
+        <span class="calendar-icon"></span>
+        <span>укажите диапазон</span>
+      </div>
+  
+      <div class="input-field">
+        <select id="program-peopleCount" [(ngModel)]="programs.peopleCount">
+          <option value="" selected hidden>Участники</option>
+          @for (peopleCount of peopleCount; track peopleCount.id) {
+            <option [id]="'peopleCount-' + peopleCount.id">{{ peopleCount.count }}</option>
+          }
+        </select>
         <span>выберите из списка</span>
+      </div>
+  
+      <button
+        class="search-program-button primary-button"
+        id="search-program-button"
+        [disabled]="(isFormInvalid() && isFormTouched)"
+      >
+        Найти программу
+      </button>
+  
     </div>
-    
-    <div class="input-field date">
-      <input type="date">
-      <span class="calendar-icon"></span>
-      <span>укажите диапазон</span>
+  
+  </section>
+  
+  <section class="live-input">
+    <div class="container">
+      <div class="content">
+        <input id="enteredText" [(ngModel)]="enteredText" type="text">
+        <p>{{ enteredText }}</p>
+      </div>
     </div>
-    
-    <div class="input-field">
-      <select>
-        <option>Участники</option>
-        <option>4</option>
-        <option>8</option>
-        <option>12</option>
-        <option>16</option>
-      </select>
-      <span>минимум 4 человека</span>
+  </section>
+  
+  <section class="our-trip">
+    <div class="container">
+  
+      <div class="visual-content">
+        <div class="video-card">
+          <div class="video-card-back">
+            <img src="/images/video-card-back.png" alt="video-card-back">
+          </div>
+          <div class="video-card-front">
+            <img src="/images/video-card-front.png" alt="video-card-front">
+  
+            <div class="video-card-front-circle">
+              <img src="/icons/video-play-btn.svg" alt="video-play-button">
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <div class="desc-content desc-block">
+        <div class="title-wrapper">
+          <p class="subtitle">о нашем походе</p>
+          <h2 class="title">Исследуйте все горные массивы мира вместе с нами</h2>
+        </div>
+  
+        <div class="desc">
+          <p>
+            Его корни уходят в один фрагмент классической латыни 45 года н.э., то есть более двух тысячелетий назад. Ричард МакКлинток, профессор латыни из колледжа Hampden-Sydney, штат Вирджиния, взял одно из самых странных слов в Lorem Ipsum, "consectetur" и занялся его поисками в классической латинской литературе.
+          </p>
+        </div>
+  
+        <button id="program-info-button" class="primary-button program-info-button">
+          Программа тура
+        </button>
+      </div>
+  
     </div>
-    
-    <div class="search-program-button">Найти программу</div>
-  </div>
-</section>
+  </section>
+  
+  <section class="tour-program">
+    <div class="container">
+  
+      <div class="desc-content desc-block">
+        <div class="title-wrapper">
+          <p class="subtitle">наше предложение</p>
+          <h2 class="title">Лучшие программы для тебя</h2>
+        </div>
+  
+        <div class="desc">
+          <p>
+            Его корни уходят в один фрагмент классической латыни 45 года н.э., то есть более двух тысячелетий назад. Ричард МакКлинток, профессор латыни из колледжа.
+          </p>
+        </div>
+  
+        <div class="advantages-list">
+          @for (advantage of advantages; track advantage.id) {
+            <div class="advantage"
+              [id]="'advantage-' + advantage.id"
+              (mouseenter)="selectAdvantage(advantage.id)"
+              (mouseleave)="selectAdvantage(0)"
+              [class.mouseenter-advantage]="advantage.id === currentAdvantageId"
+            >
+  
+              <img [src]="'/icons/' + advantage.icon + '.svg'" alt="advantage.title">
+              <div class="advantage-text">
+                <h3>{{ advantage.title }}</h3>
+                <p>{{ advantage.description }}</p>
+              </div>
+            </div>
+          }
+        </div>
+  
+        <button id="program-price-button" class="primary-button program-price-button">
+          Стоимость программ
+        </button>
+      </div>
+  
+      <div class="program-cards">
+        @for (programCard of programCards; track programCard.id) {
+          <div class="img-wrapper"
+            [id]="'program-card-' + programCard.id"
+            (mouseenter)="selectProgramCard(programCard.id)"
+            (mouseleave)="selectProgramCard(0)"
+          >
+  
+            @if (programCard.id === currentProgramCardId) {
+              <div class="programCard-overlay"></div>
+            }
+  
+            <img [src]="'/images/program-card-'+ programCard.image + '.png'" [alt]="programCard.image">
+          </div>
+        }
+      </div>
+  
+    </div>
+  </section>
+}
+
