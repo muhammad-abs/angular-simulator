@@ -22,7 +22,14 @@
           <a href="#" id="blog">Блог</a>
           <a href="#" id="contacts">Контакты</a>
         </nav>
-        <button id="consultation-button" class="primary-button consultation-button">Консультация</button>
+        
+        <button 
+          id="consultation-button"
+          class="primary-button consultation-button"
+          (click)="messageService.addMessage(MessageTypes.SUCCESS, 'Вы записаны на консультацию')"
+        >
+          Консультация
+        </button>
       </div>
   
     </div>
@@ -50,7 +57,7 @@
             <p>{{ counter }}</p>
             <button id="reduce-number-btn" (click)="reduceNumber()" [disabled]="counter < 1">-</button>
           
-            <button 
+            <button
               id="change-task-button"
               class="change-task-button primary-button" 
               (click)="changeTask()"
@@ -60,7 +67,6 @@
           </div>
         </div>
       }
-  
     </div>
   </section>
   
@@ -85,7 +91,7 @@
       </div>
   
       <div class="input-field date">
-        <input 
+        <input
           id="program-dateRange"
           [(ngModel)]="programs.dateRange"
           [type]="isDateFocused ? 'date' : 'text'"
@@ -101,6 +107,7 @@
       <div class="input-field">
         <select id="program-peopleCount" [(ngModel)]="programs.peopleCount">
           <option value="" selected hidden>Участники</option>
+          
           @for (peopleCount of peopleCount; track peopleCount.id) {
             <option [id]="'peopleCount-' + peopleCount.id">{{ peopleCount.count }}</option>
           }
@@ -112,12 +119,12 @@
         class="search-program-button primary-button"
         id="search-program-button"
         [disabled]="(isFormInvalid() && isFormTouched)"
+        (click)="messageService.addMessage(MessageTypes.INFO, 'Программа успешно найдена')"
       >
         Найти программу
       </button>
   
     </div>
-  
   </section>
   
   <section class="live-input">
@@ -159,7 +166,11 @@
           </p>
         </div>
   
-        <button id="program-info-button" class="primary-button program-info-button">
+        <button
+          id="program-info-button" 
+          class="primary-button program-info-button"
+          (click)="messageService.addMessage(MessageTypes.ERROR, 'Программа тура недоступна')"
+        >
           Программа тура
         </button>
       </div>
@@ -200,7 +211,11 @@
           }
         </div>
   
-        <button id="program-price-button" class="primary-button program-price-button">
+        <button 
+          id="program-price-button" 
+          class="primary-button program-price-button"
+          (click)="messageService.addMessage(MessageTypes.WARN, 'Стоимость программ от 10k$')"
+        >
           Стоимость программ
         </button>
       </div>
@@ -224,5 +239,132 @@
   
     </div>
   </section>
+  
+  <section class="popular-tours">
+    <div class="container desc-block">
+      
+      <div class="title-wrapper">
+        <p class="subtitle">по версии отдыхающих</p>
+        <h2 class="title">Популярные направления</h2>
+      </div>
+      
+      <div class="destination-cards">
+        @for (destination of popularDestinations; track destination.id) {
+          <div class="card-wrapper">
+            <img [src]="'/images/destination-' + destination.image + '.png'" [alt]="destination.image">
+          
+            <div class="destination-review">
+              <img src="/icons/review-icon.svg" alt="review icon">
+              <p>{{ destination.review }}</p>
+            </div>
+            
+            <div class="destination-desc-block"
+              (mouseenter)="selectedDestination = destination"
+              (mouseleave)="selectedDestination = undefined"
+            >
+              @if (selectedDestination?.id === destination.id) {
+                <div class="selectedDestination">
+                  <ng-container
+                    [ngTemplateOutlet]="destinationDesc"
+                    [ngTemplateOutletContext]="{ destinationDesc: selectedDestination }"
+                  >
+                  </ng-container>
+                </div>
+              } @else {
+                <div class="destination-title">
+                  <div class="destination-text">
+                    <h4>{{ destination.title }}</h4>
+                    <p>{{ destination.subTitle }}</p>
+                  </div>
+                  
+                  <div class="destination-cost">
+                    <p>{{ destination.cost }} &#36;</p>
+                  </div>
+                </div>
+              }
+            </div>
+            
+          </div>
+        }
+      </div>
+      
+      <button id="destination-rating-button" class="primary-button destination-rating-button">
+          Рейтинг направлений
+      </button>
+    </div>
+  </section>
+  
+  <section class="blogs">
+    <div class="container desc-block">
+      
+      <div class="title-wrapper">
+        <p class="subtitle">делимся впечатлениями</p>
+        <h2 class="title">Блог о путешествиях</h2>
+      </div>
+      
+      <div class="articles">
+        @for (article of articles; track article.id) {
+          <div class="article"
+            [id]="'article-' + article.id"
+            (mouseenter)="selectArticle(article.id)"
+            (mouseleave)="selectArticle(0)"
+            [class.mouseenter-article]="article.id === currentArticleId"
+          >
+            <div>
+              <img [src]="'/images/article-' + article.img + '.png'" [alt]="article.img">
+            </div>
+            
+            <div class="article-desc">
+              <h2>{{ article.title }}</h2>
+              <p>{{ article.desc }}</p>
+              
+              <div class="footer">
+                <p>{{ article.date }}</p>
+                <button id="read-article-button">читать статью</button>
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+      
+      <button id="other-materials-button" class="primary-button other-materials-button">
+        Другие материалы
+      </button>
+    </div>
+  </section>
 }
+
+<div class="message-wrapper">
+  @for (messageEl of messageService.messages; track messageEl.id) {
+    <ng-container
+      [ngTemplateOutlet]="messageOverlay"
+      [ngTemplateOutletContext]="{ message: messageEl }"
+    >
+    </ng-container>
+  }
+</div>
+
+<ng-template #messageOverlay let-message="message">
+  <div class="message">
+    
+    <div class="message-icon"></div>
+    <div class="message-info">
+      <h2> {{ message.type }} </h2>
+      <p> {{ message.text }} </p>
+    </div>
+    
+    <button
+      id="message-close-button" 
+      class="message-close-button"
+      (click)="messageService.closeMessage(message)"
+    >
+    </button>
+  </div>
+</ng-template>
+
+<ng-template #destinationDesc let-destination="destinationDesc">
+  <div>
+    <p>{{ destination.desc }}</p>
+  </div>
+</ng-template>
 
