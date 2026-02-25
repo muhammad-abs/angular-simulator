@@ -36,7 +36,7 @@ export class AppComponent {
   currentProgramCardId!: number;
   selectedDestination?: IDestination;
   currentArticleId!: number;
-  MessageTypes: typeof Message = Message;
+  messageTypes: typeof Message = Message;
   
   articles: IArticle[] = [
     {
@@ -67,9 +67,9 @@ export class AppComponent {
       desc: 'Для современного мира базовый.',
       date: '01/07/2023'
     },
-  ]
+  ];
   
-  popularDestinations: IDestination[] = [
+  destinations: IDestination[] = [
     { 
       id: 1, 
       image: 'lake',
@@ -97,7 +97,7 @@ export class AppComponent {
       review: '5.0',
       desc: '3Его корни уходят в один фрагмент классической латыни 45 года н.э., то есть более двух тысячелетий назад. Ричард МакКлинток, профессор латыни из колледжа Hampden-Sydney, штат Вирджиния, взял одно из самых странных слов в Lorem Ipsum, "consectetur"и занялся его поисками в классической латинской литературе.'
     },
-  ]
+  ];
   
   locations: ILocation[] = [
     { id: 1, value: 'Турция' },
@@ -198,12 +198,12 @@ export class AppComponent {
 
   private saveLastVisitDate(): void {
     const nowDate: string = new Date().toISOString();
-    this.localStorageService.setValue('last-visit', nowDate);
+    this.localStorageService.setValue<string>('last-visit', nowDate);
   }
   
   private saveVisitCount(): void {
-    const visitCount: number = Number(this.localStorageService.getValue('visit-count'));
-    this.localStorageService.setValue('visit-count', (visitCount + 1).toString());
+    const visitCount: number = Number(this.localStorageService.getValue<number>('visit-count'));
+    this.localStorageService.setValue<string>('visit-count', (visitCount + 1).toString());
   }
 }
 

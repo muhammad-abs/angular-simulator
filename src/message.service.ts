@@ -15,7 +15,8 @@ export class MessageService {
       type: type,
       text: text
     };
-    this.messages = [message, ...this.messages]
+    
+    this.messages = [message, ...this.messages];
     
     setTimeout(() => {
       this.closeMessage(message);
@@ -23,7 +24,7 @@ export class MessageService {
   }
   
   closeMessage(messageToRemove: IMessage): void {
-    this.messages = this.messages.filter((message: IMessage) => {return message !== messageToRemove});
+    this.messages = this.messages.filter((message: IMessage) => message !== messageToRemove);
   }
   
 }
