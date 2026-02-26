@@ -26,7 +26,7 @@
         <button 
           id="consultation-button"
           class="primary-button consultation-button"
-          (click)="messageService.addMessage(messageTypes.SUCCESS, 'Вы записаны на консультацию')"
+          (click)="messageService.addMessage(messageType.SUCCESS, 'Вы записаны на консультацию')"
         >
           Консультация
         </button>
@@ -119,7 +119,7 @@
         class="search-program-button primary-button"
         id="search-program-button"
         [disabled]="(isFormInvalid() && isFormTouched)"
-        (click)="messageService.addMessage(messageTypes.INFO, 'Программа успешно найдена')"
+        (click)="messageService.addMessage(messageType.INFO, 'Программа успешно найдена')"
       >
         Найти программу
       </button>
@@ -169,7 +169,7 @@
         <button
           id="program-info-button" 
           class="primary-button program-info-button"
-          (click)="messageService.addMessage(messageTypes.ERROR, 'Программа тура недоступна')"
+          (click)="messageService.addMessage(messageType.ERROR, 'Программа тура недоступна')"
         >
           Программа тура
         </button>
@@ -214,7 +214,7 @@
         <button 
           id="program-price-button" 
           class="primary-button program-price-button"
-          (click)="messageService.addMessage(messageTypes.WARN, 'Стоимость программ от 10k$')"
+          (click)="messageService.addMessage(messageType.WARN, 'Стоимость программ от 10k$')"
         >
           Стоимость программ
         </button>
@@ -258,32 +258,18 @@
               <p>{{ destination.review }}</p>
             </div>
             
-            <div class="destination-desc-block"
-              (mouseenter)="selectedDestination = destination"
-              (mouseleave)="selectedDestination = undefined"
-            >
-              @if (selectedDestination?.id === destination.id) {
-                <div class="selectedDestination">
-                  <ng-container
-                    [ngTemplateOutlet]="destinationDesc"
-                    [ngTemplateOutletContext]="{ destinationDesc: selectedDestination }"
-                  >
-                  </ng-container>
+            <div class="destination-desc-block">
+              <div class="destination-title">
+                <div class="destination-text">
+                  <h4>{{ destination.title }}</h4>
+                  <p>{{ destination.subTitle }}</p>
                 </div>
-              } @else {
-                <div class="destination-title">
-                  <div class="destination-text">
-                    <h4>{{ destination.title }}</h4>
-                    <p>{{ destination.subTitle }}</p>
-                  </div>
-                  
-                  <div class="destination-cost">
-                    <p>{{ destination.cost }} &#36;</p>
-                  </div>
+                
+                <div class="destination-cost">
+                  <p>{{ destination.cost }} &#36;</p>
                 </div>
-              }
+              </div>
             </div>
-            
           </div>
         }
       </div>
@@ -359,12 +345,6 @@
       (click)="messageService.closeMessage(message)"
     >
     </button>
-  </div>
-</ng-template>
-
-<ng-template #destinationDesc let-destination="destinationDesc">
-  <div>
-    <p>{{ destination.desc }}</p>
   </div>
 </ng-template>
 

@@ -34,9 +34,8 @@ export class AppComponent {
   readonly companyName: string = 'румтибет';
   currentAdvantageId!: number;
   currentProgramCardId!: number;
-  selectedDestination?: IDestination;
   currentArticleId!: number;
-  messageTypes: typeof Message = Message;
+  messageType: typeof Message = Message;
   
   articles: IArticle[] = [
     {
