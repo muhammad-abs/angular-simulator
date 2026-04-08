@@ -27,5 +27,6 @@ export class HeaderComponent {
       path: '/users',
       exact: false
     }
-  ]
+  ];
+  
 }

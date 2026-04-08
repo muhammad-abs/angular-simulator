@@ -49,9 +49,9 @@
           </div>
           
           <div class="social-refs">
-            @for (network of socialNetworks; track network.id) {
+            @for (network of socialNetworks; track network) {
               <a [href]="network" class="social-link">
-                <img [src]="'/icons/social-networks/' + network.img + '.svg'" [alt]="network.img" width="32" height="32">
+                <img [src]="'/icons/social-networks/' + network + '-icon.svg'" [alt]="network" width="32" height="32">
               </a>
             }
           </div>
@@ -60,11 +60,11 @@
         <div class="services">
           <h4>Наши услуги</h4>
           <ul class="list">
-            @for (service of services; track service.id) {
+            @for (service of services; track service) {
               <li class="services-item">
                 <a href="#" class="service-link">
                   <img src="/icons/arrow-icon.svg" class="arrow-icon" alt="arrow">
-                  <span class="service-text">{{ service.service }}</span>
+                  <span class="service-text">{{ service }}</span>
                 </a>
               </li>
             }
@@ -74,11 +74,11 @@
         <div class="travel-info">
           <h4>Важно для путешествий</h4>
           <ul class="list">
-            @for (info of travelInfo; track info.id) {
+            @for (info of travelInfo; track info) {
               <li class="info-item">
                 <a href="#" class="info-link">
                   <img src="/icons/arrow-icon.svg" class="arrow-icon" alt="arrow">
-                  <span class="service-text">{{ info.info }}</span>
+                  <span class="service-text">{{ info }}</span>
                 </a>
               </li>
             }
