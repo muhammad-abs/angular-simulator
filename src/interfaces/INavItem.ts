@@ -1,6 +1,6 @@
 export interface INavItem {
   id: number;
-  lable: string;
+  label: string;
   path: string;
   exact: boolean;
 }

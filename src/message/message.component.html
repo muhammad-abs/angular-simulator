@@ -1,8 +1,8 @@
 <div class="message-wrapper">
-  @for (messageEl of messageService.messages; track messageEl.id) {
+  @for (message of messageService.messages; track message.id) {
     <ng-container
       [ngTemplateOutlet]="messageOverlay"
-      [ngTemplateOutletContext]="{ message: messageEl }"
+      [ngTemplateOutletContext]="{ message: message }"
     >
     </ng-container>
   }

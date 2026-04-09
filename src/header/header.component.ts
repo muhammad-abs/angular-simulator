@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { MessageService } from '../message.service';
-import { INavItem } from '../interfaces/INavItems';
+import { INavItem } from '../interfaces/INavItem';
 import { RouterLink, RouterLinkActive } from "@angular/router";
 
 @Component({
@@ -17,13 +17,13 @@ export class HeaderComponent {
   navItems: INavItem[] = [
     {
       id: 1,
-      lable: 'Главная',
+      label: 'Главная',
       path: '/',
       exact: true
     },
     {
       id: 2,
-      lable: 'Пользователи',
+      label: 'Пользователи',
       path: '/users',
       exact: false
     }
