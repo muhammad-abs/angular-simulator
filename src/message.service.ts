@@ -9,7 +9,7 @@ export class MessageService {
   
   messages: IMessage[] = [];
   
-  addMessage(type: Message, text: string): void {
+  private addMessage(type: Message, text: string): void {
     const message: IMessage = {
       id: Date.now(),
       type: type,
@@ -21,6 +21,22 @@ export class MessageService {
     setTimeout(() => {
       this.closeMessage(message);
     }, 5000);
+  }
+  
+  showWarn(message: string): void {
+    this.addMessage(Message.WARN, message);
+  }
+
+  showError(message: string): void {
+    this.addMessage(Message.ERROR, message);
+  }
+
+  showSuccess(message: string): void {
+    this.addMessage(Message.SUCCESS, message);
+  }
+
+  showInfo(message: string): void {
+    this.addMessage(Message.INFO, message);
   }
   
   closeMessage(messageToRemove: IMessage): void {

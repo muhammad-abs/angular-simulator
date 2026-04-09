@@ -1,0 +1,27 @@
+<div class="message-wrapper">
+  @for (message of messageService.messages; track message.id) {
+    <ng-container
+      [ngTemplateOutlet]="messageOverlay"
+      [ngTemplateOutletContext]="{ message: message }"
+    >
+    </ng-container>
+  }
+</div>
+
+<ng-template #messageOverlay let-message="message">
+  <div class="message">
+    
+    <div class="message-icon"></div>
+    <div class="message-info">
+      <h2>{{ message.type }}</h2>
+      <p>{{ message.text }}</p>
+    </div>
+    
+    <button
+      id="message-close-button" 
+      class="message-close-button"
+      (click)="messageService.closeMessage(message)"
+    >
+    </button>
+  </div>
+</ng-template>

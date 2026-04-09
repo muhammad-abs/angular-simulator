@@ -1,0 +1,87 @@
+@use '../assets/_mixins' as *;
+@use '../assets/animations' as *;
+
+.header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10;
+  background: transparent;
+  color: var(--white-color);
+  height: 72px;
+  padding-top: 26px;
+  
+  .container {
+    @include flex-between();
+    
+    width: 100%;
+    max-width: 1180px;
+    margin: 0 auto;
+    
+    .logo {
+      @include flex-center();
+      
+      flex-direction: column;
+      gap: 8.79px;
+      cursor: pointer;
+    }
+  
+    .companyNameText {
+      font-size: 16px;
+      letter-spacing: 6px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+  
+    .menu {
+      @include flex-between;
+    }
+  
+    .nav {
+      font-size: 18px;
+      font-weight: 600;
+      
+      .list {
+        @include flex-center();
+        
+        gap: 24px;
+        list-style: none;
+        
+        .item {
+          
+          a {
+            color: var(--white-color);
+            text-decoration: none;
+            
+            display: inline-flex;
+            align-items: center;
+            text-decoration: none;
+            line-height: 1;
+            transition: opacity 200ms ease;
+          }
+          
+          .active-link {
+            text-decoration: underline;
+            text-underline-offset: 6px;
+            text-decoration-color: rgba(255, 255, 255, 0.7);
+          }
+          
+          a:hover {
+            opacity: 0.8;
+          }
+        }
+      }
+    }
+    
+    .consultation-button {
+      margin-left: 49px;
+      width: 157px;
+      height: 44px;
+      align-items: center;
+      background-color: white;
+      color: var(--primary-color);
+      border: none;
+    }
+  }
+}

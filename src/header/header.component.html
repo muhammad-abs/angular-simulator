@@ -1,0 +1,41 @@
+<header class="header">
+    <div class="container">
+  
+      <div class="logo">
+        <div class="logo-img">
+          <img src="/images/logo.svg" alt="logo">
+        </div>
+        <div class="logo-text">
+          <span class="companyNameText">{{ companyName }}</span>
+        </div>
+      </div>
+  
+      <div class="menu">
+        <nav class="nav">
+          <ul class="list">
+            @for (navItem of navItems; track navItem.id) {
+              <li class="item">
+                <a
+                  [id] = "navItem.id"
+                  [routerLink]="navItem.path"
+                  routerLinkActive="active-link"
+                  [routerLinkActiveOptions]="{ exact: navItem.exact }"
+                >
+                  {{ navItem.lable }}
+                </a>
+              </li>
+            }
+          </ul>
+        </nav>
+        
+        <button 
+          id="consultation-button" 
+          class="primary-button consultation-button"
+          (click)="messageService.showSuccess('Вы записаны на консультацию')"
+        >
+          Консультация
+        </button>
+      </div>
+  
+    </div>
+  </header>
