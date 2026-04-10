@@ -1,13 +1,15 @@
 import { Injectable } from '@angular/core';
-import { Message } from './enums/Message';
-import { IMessage } from './interfaces/IMessage';
+import { Message } from '../enums/Message';
+import { IMessage } from '../interfaces/IMessage';
+import { BehaviorSubject, delay, filter, Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class MessageService {
   
-  messages: IMessage[] = [];
+  private messageSubject: BehaviorSubject<IMessage[]> = new BehaviorSubject<IMessage[]>([]);
+  message$: Observable<IMessage[]> = this.messageSubject.asObservable();
   
   private addMessage(type: Message, text: string): void {
     const message: IMessage = {
@@ -16,11 +18,11 @@ export class MessageService {
       text: text
     };
     
-    this.messages = [message, ...this.messages];
+    this.messageSubject.next([message, ...this.messageSubject.getValue()]);
     
-    setTimeout(() => {
-      this.closeMessage(message);
-    }, 5000);
+    of(message).pipe(
+      delay(5000)
+    ).subscribe((message: IMessage) => this.closeMessage(message));
   }
   
   showWarn(message: string): void {
@@ -40,7 +42,9 @@ export class MessageService {
   }
   
   closeMessage(messageToRemove: IMessage): void {
-    this.messages = this.messages.filter((message: IMessage) => message !== messageToRemove);
+    this.messageSubject.next(
+      this.messageSubject.getValue()
+      .filter((message: IMessage) => message !== messageToRemove));
   }
   
 }

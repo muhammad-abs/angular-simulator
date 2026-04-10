@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { MessageService } from '../message.service';
+import { MessageService } from '../services/message.service';
 import { Message } from '../enums/Message';
 import { FormsModule } from '@angular/forms';
 import { IAdvantage } from '../interfaces/IAdvantage';

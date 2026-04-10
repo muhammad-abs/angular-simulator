@@ -1,29 +1,24 @@
 import { Component, inject } from '@angular/core';
-import { LocalStorageService } from '../local-storage.service';
+import { LocalStorageService } from '../services/local-storage.service';
 import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from "../header/header.component";
 import { FooterComponent } from "../footer/footer.component";
 import { MessageComponent } from "../message/message.component";
+import { LoaderComponent } from "../loader/loader.component";
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, HeaderComponent, FooterComponent, MessageComponent],
+  imports: [RouterOutlet, HeaderComponent, FooterComponent, MessageComponent, LoaderComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
   
   localStorageService: LocalStorageService = inject(LocalStorageService);
-  
-  isLoadingPage: boolean = true;
-  
+    
   constructor() {
     this.saveLastVisitDate();
     this.saveVisitCount();
-    
-    setTimeout(() => {
-      this.isLoadingPage = false;
-    }, 2000);
   }
 
   private saveLastVisitDate(): void {

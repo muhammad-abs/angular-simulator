@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { MessageService } from '../message.service';
+import { MessageService } from '../services/message.service';
 import { CommonModule} from '@angular/common';
 
 @Component({
@@ -11,5 +11,6 @@ import { CommonModule} from '@angular/common';
 export class MessageComponent {
   
   messageService: MessageService = inject(MessageService);
+  message$ = this.messageService.message$
   
 }
