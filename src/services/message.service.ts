@@ -17,7 +17,7 @@ export class MessageService {
       type: type,
       text: text
     };
-    
+
     this.messageSubject.next([message, ...this.messageSubject.getValue()]);
     
     of(message).pipe(

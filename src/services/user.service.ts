@@ -19,7 +19,7 @@ export class UserService {
   users$: Observable<IUser[]> = this.usersSubject.asObservable();
   
   setUsers(user: IUser[]): void {
-    this.usersSubject.next(user)
+    this.usersSubject.next(user);
   }
   
   getUsers(): IUser[] {
