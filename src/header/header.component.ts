@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { MessageService } from '../message.service';
+import { MessageService } from '../services/message.service';
 import { INavItem } from '../interfaces/INavItem';
 import { RouterLink, RouterLinkActive } from "@angular/router";
 
