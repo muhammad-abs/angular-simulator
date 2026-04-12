@@ -20,9 +20,9 @@ export class MessageService {
 
     this.messageSubject.next([message, ...this.messageSubject.getValue()]);
     
-    of(message).pipe(
-      delay(5000)
-    ).subscribe((message: IMessage) => this.closeMessage(message));
+    setTimeout(() => {
+      this.closeMessage(message);
+    }, 5000);
   }
   
   showWarn(message: string): void {
