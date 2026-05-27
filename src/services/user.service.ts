@@ -19,9 +19,6 @@ export class UserService {
   
   private usersSubject: BehaviorSubject<IUser[]> = new BehaviorSubject<IUser[]>([]);
   users$: Observable<IUser[]> = this.usersSubject.asObservable();
-  
-  private searchSubject : BehaviorSubject<string> = new BehaviorSubject<string>('');
-  search$: Observable<string> = this.searchSubject.asObservable();
 
   private USERS_KEY: string = 'users';
   
@@ -29,7 +26,7 @@ export class UserService {
     this.usersSubject.next(users);
   }
   
-  handleCreateUser(user: IUser): void {
+  createUser(user: IUser): void {
     this.updateUsers(this.getUsers().concat(user));
   }
   
@@ -37,17 +34,13 @@ export class UserService {
     return this.usersSubject.getValue();
   }
   
-  handleDeleteUser(id: number): void {
+  deleteUser(id: number): void {
     this.updateUsers(this.getUsers().filter((currentUser: IUser) => currentUser.id !== id));
   }
   
   updateUsers(updatedUsers: IUser[]): void {
     this.setUsers(updatedUsers);
     this.localStorageService.setValue(this.USERS_KEY, updatedUsers);
-  }
-  
-  onSearchChanged(search: string): void {
-    this.searchSubject.next(search);
   }
   
   loadUsers(): Observable<IUser[]> {

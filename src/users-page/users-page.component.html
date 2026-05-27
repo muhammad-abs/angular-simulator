@@ -4,7 +4,7 @@
     <h1 class="users-page-title">Список Пользователей</h1>
     
     <div class="users-card-list">
-      <app-users-filter (searchChanged)="onSearchChanged($event)"/>
+      <app-users-filter (filter)="onSearchChanged($event)"/>
       @for (user of filteredUsers$ | async; track user.id) {
         <app-user-card [user]="user" (deleteUser)="handleDeleteUser($event)"/>
       } @empty {

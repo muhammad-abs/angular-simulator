@@ -11,7 +11,7 @@ import { debounceTime, distinctUntilChanged, map, tap } from 'rxjs';
 })
 export class UsersFilterComponent implements OnInit {
 
-  @Output() searchChanged: EventEmitter<string> = new EventEmitter<string>();
+  @Output() filter: EventEmitter<string> = new EventEmitter<string>();
 
   filterFormControl: FormControl<string | null> = new FormControl<string>('');
   private destroyRef: DestroyRef = inject(DestroyRef);
@@ -21,7 +21,7 @@ export class UsersFilterComponent implements OnInit {
       debounceTime(200),
       distinctUntilChanged(),
       map((value: string | null) => value ?? ''),
-      tap((value: string) => this.searchChanged.emit(value)),
+      tap((value: string) => this.filter.emit(value)),
       takeUntilDestroyed(this.destroyRef),
     ).subscribe();
   }
