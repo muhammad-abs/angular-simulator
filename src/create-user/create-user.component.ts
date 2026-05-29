@@ -10,7 +10,7 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
 })
 export class CreateUserComponent {
   
-  @Output() userCreated: EventEmitter<IUser> = new EventEmitter<IUser>();
+  @Output() createUser: EventEmitter<IUser> = new EventEmitter<IUser>();
   
   private fb: FormBuilder = inject(FormBuilder);
   
@@ -37,9 +37,9 @@ export class CreateUserComponent {
     })
   })
     
-  createUser(): void {
+  handleSubmit(): void {
     const formValue: IUser = { id: Date.now(), ...this.userForm.value };
-    this.userCreated.emit(formValue);
+    this.createUser.emit(formValue);
     this.userForm.reset();
   }
   

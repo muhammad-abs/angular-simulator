@@ -22,25 +22,23 @@ export class UserService {
 
   private USERS_KEY: string = 'users';
   
-  setUsers(users: IUser[]): void {
-    this.usersSubject.next(users);
-  }
-  
-  createUser(user: IUser): void {
-    this.updateUsers(this.getUsers().concat(user));
-  }
-  
   getUsers(): IUser[] {
     return this.usersSubject.getValue();
   }
   
-  deleteUser(id: number): void {
-    this.updateUsers(this.getUsers().filter((currentUser: IUser) => currentUser.id !== id));
+  setUsers(users: IUser[]): void {
+    this.usersSubject.next(users);
+    this.localStorageService.setValue(this.USERS_KEY, users);
   }
   
-  updateUsers(updatedUsers: IUser[]): void {
+  createUser(user: IUser): void {
+    const updatedUsers: IUser[] = this.getUsers().concat(user);
     this.setUsers(updatedUsers);
-    this.localStorageService.setValue(this.USERS_KEY, updatedUsers);
+  }
+  
+  deleteUser(id: number): void {
+    const updatedUsers: IUser[] = this.getUsers().filter((currentUser: IUser) => currentUser.id !== id);
+    this.setUsers(updatedUsers);
   }
   
   loadUsers(): Observable<IUser[]> {
