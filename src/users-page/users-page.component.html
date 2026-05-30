@@ -1,87 +1,17 @@
 <section class="users-page">
   <div class="users-page-container">
+    
     <h1 class="users-page-title">Список Пользователей</h1>
     
     <div class="users-card-list">
-      @for (user of users$ | async; track user.id) {
-        <article class="card-user-item">
-          <h2 class="card-user-name">{{ user.name }}</h2>
-          <p class="card-user-nickname">{{ '&#64;' + user.username }}</p>
-
-          <div class="card-user-section">
-            <div class="card-user-wrapper">
-              <span class="card-user-title">Контакты</span>
-              <div class="card-user-line"></div>
-            </div>
-            
-            <div class="card-user-info">
-              <span class="card-user-property">Эл. почта:</span>
-              <span class="user-info-value">{{ user.email }}</span>
-            </div>
-            <div class="card-user-info">
-              <span class="card-user-property">Телефон:</span>
-              <span class="user-info-value">{{ user.phone }}</span>
-            </div>
-            <div class="card-user-info">
-              <span class="card-user-property">Веб-сайт:</span>
-              <span class="user-info-value user-value-link">{{ user.website }}</span>
-            </div>
-          </div>
-
-          <div class="card-user-section">
-            <div class="card-user-wrapper">
-              <span class="card-user-title">Адрес проживания</span>
-              <div class="card-user-line"></div>
-            </div>
-            
-            <div class="card-user-info">
-              <span class="card-user-property">Город:</span>
-              <span class="user-info-value">{{ user.address.city }}</span>
-            </div>
-            <div class="card-user-info">
-              <span class="card-user-property">Улица:</span>
-              <span class="user-info-value">{{ user.address.street }}</span>
-            </div>
-            <div class="card-user-info">
-              <span class="card-user-property">Офис:</span>
-              <span class="user-info-value">{{ user.address.suite }}</span>
-            </div>
-            <div class="card-user-info">
-              <span class="card-user-property">Индекс:</span>
-              <span class="user-info-value">{{ user.address.zipcode }}</span>
-            </div>
-            <div class="card-user-info">
-              <span class="card-user-property">Координаты:</span>
-              <div class="user-info-geo">
-                <span class="user-info-value">{{ user.address.geo.lat }}</span>
-                <span class="user-info-value">{{ user.address.geo.lng }}</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="card-user-section">
-            <div class="card-user-wrapper">
-              <span class="card-user-title">Место работы</span>
-              <div class="card-user-line"></div>
-            </div>
-            
-            <div class="card-user-info">
-              <span class="card-user-property">Компания:</span>
-              <span class="user-info-value">{{ user.company.name }}</span>
-            </div>
-            <div class="card-user-info">
-              <span class="card-user-property">Миссия:</span>
-              <span class="user-info-value user-value-mission">{{ user.company.catchPhrase }}</span>
-            </div>
-            <div class="card-user-info">
-              <span class="card-user-property">Специализация:</span>
-              <span class="user-info-value">{{ user.company.bs }}</span>
-            </div>
-          </div>
-        </article>
+      <app-users-filter (filter)="onFilter($event)"/>
+      @for (user of filteredUsers$ | async; track user.id) {
+        <app-user-card [user]="user" (deleteUser)="handleDeleteUser($event)"/>
       } @empty {
         <div class="users-page-empty">Нет пользователей для отображения</div>
-      }
+        }
+      <app-create-user (createUser)="handleCreateUser($event)"/>
     </div>
+    
   </div>
 </section>
