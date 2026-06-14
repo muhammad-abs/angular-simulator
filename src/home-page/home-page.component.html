@@ -75,7 +75,7 @@
           <img src="/images/video-card-front.png" alt="video-card-front">
 
           <div class="video-card-front-circle">
-            <img src="/icons/video-play-btn.svg" alt="video-play-button">
+            <fa-icon [icon]="faCirclePlay" class="fa-3x"/>
           </div>
         </div>
       </div>
@@ -128,8 +128,7 @@
             (mouseleave)="selectAdvantage(0)"
             [class.mouseenter-advantage]="advantage.id === currentAdvantageId"
           >
-
-            <img [src]="'/icons/' + advantage.icon + '.svg'" alt="advantage.title">
+            <fa-icon [icon]="advantage.icon" class="fa-2x" style="color: #F2BE22"/>
             <div class="advantage-text">
               <h3>{{ advantage.title }}</h3>
               <p>{{ advantage.description }}</p>
@@ -181,7 +180,7 @@
           <img [src]="'/images/destination-' + destination.image + '.png'" [alt]="destination.image">
         
           <div class="destination-review">
-            <img src="/icons/review-icon.svg" alt="review icon">
+            <fa-icon [icon]="faStar" style="color: #F2BE22"/>
             <p>{{ destination.review }}</p>
           </div>
           

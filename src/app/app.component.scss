@@ -1,0 +1,50 @@
+.light, .dark {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--site-bg);
+  color: var(--text-main);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.dark {
+  .main-info, .header {
+    background-color: #132b2b !important;
+  }
+  .main-info .banner {
+    z-index: -1 !important;
+  }
+}
+
+.light {
+  .header {
+    background-color: #18121E80 !important;
+  }
+}
+
+.main-info .banner {
+  z-index: 1 !important;
+}
+.main-info .title, .main-info .search-program, .main-info .live-input {
+  position: relative;
+  z-index: 2 !important;
+}
+
+.our-trip, .popular-tours, .photo {
+  background-color: var(--site-bg) !important;
+}
+
+.tour-program, .blogs, .users-page {
+  background-color: var(--section-light-bg) !important;
+}
+
+.article, .card-user-item {
+  background-color: var(--card-bg) !important;
+  transition: background-color 0.3s ease;
+}
+
+.article-desc, .card-user-item {
+  h2, p, span, div, a {
+    color: var(--text-main) !important;
+  }
+}

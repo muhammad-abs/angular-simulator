@@ -150,12 +150,13 @@ footer {
       .social-refs {
         display: flex;
         align-items: center;
-        gap: 16px;
+        gap: 34px;
 
         .social-link {
           display: inline-flex;
-          width: 32px;
-          height: 32px;
+          width: 16px;
+          height: 16px;
+          color: #fff;
         }
       }
     }

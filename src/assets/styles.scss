@@ -3,6 +3,8 @@
 @use './button';
 @use './desc.block';
 
+@import "primeicons/primeicons.css";
+
 * {
   font-family: 'Nunito Sans';
   margin: 0px;
@@ -13,4 +15,44 @@
   --primary-color: #18121E;
   --white-color: #FDFDFD;
   --secondary-color: #F2BE22;
+  
+  --site-bg: #ffffff;
+  --section-light-bg: #F3F5F4; 
+  --text-main: #18121E;
+  --card-bg: #ffffff;
+
+  --search-bg: rgba(255, 255, 255, 0.2); 
+  --search-text: #ffffff;
+  --search-border: #E1E3E4;
+}
+
+.light {
+  --site-bg: #ffffff;
+  --section-light-bg: #F3F5F4;
+  --text-main: #18121E;
+  --card-bg: #ffffff;
+  
+  --search-bg: rgba(255, 255, 255, 0.2);
+  --search-text: #18121E;
+  --search-border: #18121E;
+}
+
+.dark {
+  --site-bg: #1a1a1a;
+  --section-light-bg: #242424; 
+  --text-main: #ffffff;
+  --card-bg: #2a2a2a;
+
+  --search-bg: rgba(255, 255, 255, 0.1); 
+  --search-text: #ffffff;
+  --search-border: rgba(255, 255, 255, 0.4);
+
+  .desc-block { color: #ffffff !important; }
+  .article-desc { color: #ffffff !important; }
+  .card-user-name, .card-user-title, .user-info-value { color: #ffffff !important; }
+  
+  select option {
+    background-color: #2a2a2a;
+    color: #ffffff;
+  }
 }

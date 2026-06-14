@@ -1,6 +1,6 @@
 <header class="header">
+  <div class="container" style="max-width: 2680px;">
     <div class="container">
-  
       <div class="logo">
         <div class="logo-img">
           <img src="/images/logo.svg" alt="logo">
@@ -9,7 +9,6 @@
           <span class="companyNameText">{{ companyName }}</span>
         </div>
       </div>
-  
       <div class="menu">
         <nav class="nav">
           <ul class="list">
@@ -27,15 +26,40 @@
             }
           </ul>
         </nav>
-        
-        <button 
-          id="consultation-button" 
+    
+        <button
+          id="consultation-button"
           class="primary-button consultation-button"
           (click)="messageService.showSuccess('Вы записаны на консультацию')"
         >
           Консультация
         </button>
       </div>
-  
     </div>
+    
+    <div class="theme">
+      <button (click)="toggleTheme('custom')" >Переключить тему</button>
+    </div>
+  </div>
+  
+  <div>
+    <p-toggleswitch [(ngModel)]="switched" (onChange)="toggleTheme('prime')"/> 
+
+    @if (switched === false) {
+      <i class="pi pi-sun" style="font-size: 1.5rem"></i>
+    } @else {
+        <i class="pi pi-moon" style="font-size: 1.5rem"></i>
+      }
+  </div>
+  
+  <div>
+    <p-selectbutton 
+      [options]="presetOptions" 
+      [(ngModel)]="currentPreset" 
+      (onChange)="updatePreset($event.value)"
+      optionLabel="name" 
+      optionValue="value" 
+    />
+  </div>
+    
   </header>

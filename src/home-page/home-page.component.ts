@@ -10,16 +10,22 @@ import { IProgramCard } from '../interfaces/IProgramCard';
 import { IDestination } from '../interfaces/IDestination';
 import { IArticle } from '../interfaces/IArticle';
 import { IPhoto } from '../interfaces/IPhoto';
+import { faCirclePlay, faStar, faUsers, faTag, faShieldHalved } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
 
 @Component({
   selector: 'app-home-page',
-  imports: [FormsModule],
+  imports: [FormsModule, FontAwesomeModule],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss',
 })
 export class HomePageComponent {
   
   messageService: MessageService = inject(MessageService);
+  
+  faCirclePlay = faCirclePlay;
+  faStar = faStar;
   
   isDateFocused: boolean = false;
   isFormTouched: boolean = false;
@@ -57,25 +63,25 @@ export class HomePageComponent {
     { id: 3, image: 'snowmobile' },
     { id: 4, image: 'river' }
   ];
-    
+  
   advantages: IAdvantage[] = [
     {
       id: 1,
       title: 'Опытный гид',
       description: 'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.',
-      icon: 'exp-guide-icon'
+      icon: faUsers
     },
     {
       id: 2,
       title: 'Безопасный поход',
       description: 'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.',
-      icon: 'safe-hiking-icon'
+      icon: faShieldHalved
     },
     {
       id: 3,
       title: 'Лояльные цены',
       description: 'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.',
-      icon: 'loyal-prices-icon'
+      icon: faTag
     },
   ];
   
