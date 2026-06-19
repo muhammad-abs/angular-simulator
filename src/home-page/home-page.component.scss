@@ -17,6 +17,11 @@
     top: 0;
     left: 0;
     z-index: -1;
+
+    :host-context(.my-app-dark) &,
+    .my-app-dark & {
+      filter: brightness(0.7) contrast(1.1);
+    }
   }
   
   .title {
@@ -46,6 +51,12 @@
     backdrop-filter: blur(6px);
     border-radius: 10px;
     margin-bottom: 82px;
+
+    :host-context(.my-app-dark) &,
+    .my-app-dark & {
+      background: rgba(15, 23, 42, 0.65);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
     
     .input-field {
       display: flex;
@@ -112,7 +123,8 @@
 
     select option {
       text-transform: none;
-      color: #333;
+      color: var(--primary-text-color);
+      background-color: var(--primary-bg-color);
     }
 
     .input-field span {
@@ -132,11 +144,18 @@
       @include flex-center();
       
       font-weight: 700;
-      color: #1A3E3E;
+      color: var(--secondary-bg-color);
       width: 213px;
       background-color: #fff;
       border: 1px solid #fff;
       margin-bottom: 29px;
+
+      :host-context(.my-app-dark) &,
+      .my-app-dark & {
+        background-color: var(--third-text-color);
+        border-color: var(--third-text-color);
+        color: #0F172A;
+      }
     }
     
     .search-program-button:disabled {
@@ -164,8 +183,8 @@
       margin-top: 15px;
       width: 454px;
       height: 42px;
-      background-color: #1A3E3E;
-      color: #fff;
+      background-color: var(--secondary-bg-color);
+      color: var(--secondary-text-color);
       padding-left: 20px;
       
       input {
@@ -174,11 +193,13 @@
         border-radius: 4px;
         display: flex;
         border: 1px solid #E1E3E4;
-        padding-left: 10px
+        padding-left: 10px;
+        background-color: var(--primary-bg-color);
+        color: var(--primary-text-color);
       }
       
       p {
-        font-size: 18px
+        font-size: 18px;
       }
     }
   }
@@ -187,7 +208,8 @@
 .our-trip {
   @include flex-center();
   
-  background-color: #FFFFFF;
+  background-color: var(--primary-bg-color);
+  color: var(--primary-text-color);
 
   .container {
     @include flex-center();
@@ -241,7 +263,8 @@
 .tour-program {
   @include flex-center();
   
-  background-color: #F3F5F4;
+  background-color: var(--third-bg-color);
+  color: var(--primary-text-color);
 
   .container {
     @include flex-center();
@@ -274,7 +297,7 @@
             h3 {
               font-weight: 700;
               font-size: 18px;
-              letter-spacing: 1,2%;
+              letter-spacing: 1.2%;
             }
             
             p {
@@ -289,7 +312,7 @@
         .mouseenter-advantage {
           @include transform();
           
-          background: rgba(0, 163, 255, 0.05);
+          background: rgba(242, 190, 34, 0.08); 
         }
       }
       
@@ -316,6 +339,11 @@
           inset: 0;
           background: rgba(26, 62, 62, 0.3);
           z-index: 1;
+
+          :host-context(.my-app-dark) &,
+          .my-app-dark & {
+            background: rgba(15, 23, 42, 0.45);
+          }
         }
         
         img {
@@ -331,7 +359,8 @@
 .popular-tours {
   @include flex-center();
   
-  background-color: #FFFFFF;
+  background-color: var(--primary-bg-color);
+  color: var(--primary-text-color);
   max-height: 893px;
   
   .container {
@@ -370,7 +399,7 @@
           top: 50px;
           right: 0px;
           gap: 7px;
-          background: #FDFDFD66;
+          background: rgba(255, 255, 255, 0.4);
           backdrop-filter: blur(4px);
           border-radius: 4px 0 0 4px;
           
@@ -396,9 +425,14 @@
           box-sizing: border-box;
           border-radius: 0 0 32px 32px;
           padding: 20px 0px 20px 32px;
-          background: #FFFFFF33;
+          background: rgba(255, 255, 255, 0.2);
           backdrop-filter: blur(6px);
           color: #FDFDFD;
+
+          :host-context(.my-app-dark) &,
+          .my-app-dark & {
+            background: rgba(15, 23, 42, 0.45);
+          }
           
           .selectedDestination {
             width: 316px;
@@ -433,7 +467,7 @@
               margin-right: 32px;
               width: 86px;
               height: 40px;
-              background: #FFFFFF4D;
+              background: rgba(255, 255, 255, 0.3);
               border-radius: 4px;
               
               p {
@@ -460,7 +494,7 @@
   @include flex-center();
   
   max-height: 1036px;
-  background-color: #F3F5F4;
+  background-color: var(--third-bg-color);
   
   .container {
     @include flex-center();
@@ -484,7 +518,7 @@
         display: flex;
         width: 580px;
         height: 312px;
-        background-color: #FDFDFD;
+        background-color: var(--primary-bg-color);
         border-radius: 10px;
         gap: 24px;
         
@@ -499,7 +533,7 @@
           width: 294px;
           gap: 24px;
           padding: 16px 16px 16px 0px;
-          color: #18121E;
+          color: var(--primary-text-color);
           
           h2 {
             padding-top: 16px;
@@ -525,13 +559,13 @@
               font-weight: 700;
               font-size: 14px;
               line-height: 20px;
-              color: #F2BE22
+              color: var(--third-text-color);
             }
             
             button {
               border: none;
               background: transparent;
-              color: #1A3E3E;
+              color: var(--primary-text-color);
               cursor: pointer;
             }
           }
@@ -539,7 +573,12 @@
       }
       
       .mouseenter-article {
-        box-shadow: 0px 0px 15px 0px #18121E1F;
+        box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.08);
+
+        :host-context(.my-app-dark) &,
+        .my-app-dark & {
+          box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.4);
+        }
         
         h2 {
           text-decoration: underline;
@@ -558,7 +597,7 @@
   @include flex-center();
   
   max-height: 1036px;
-  background-color: #FFFFFF;
+  background-color: var(--primary-bg-color);
   
   .container {
     @include flex-center();

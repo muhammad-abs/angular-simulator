@@ -1,9 +1,5 @@
-@if(theme$ | async; as currentTheme) {
-  <div [class]="currentTheme">
-    <app-loader></app-loader>
-    <app-header></app-header>
-    <router-outlet></router-outlet>
-    <app-footer></app-footer>
-    <app-message></app-message>
-  </div>
-}
+<app-loader></app-loader>
+<app-header></app-header>
+<router-outlet></router-outlet>
+<app-footer></app-footer>
+<app-message></app-message>

@@ -7,9 +7,6 @@ import { MessageComponent } from "../message/message.component";
 import { LoaderComponent } from "../loader/loader.component";
 import { ButtonModule } from 'primeng/button';
 import { ThemeService } from '../services/theme.service';
-import { Observable } from 'rxjs';
-import { Theme } from '../enums/Theme';
-import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-root',
@@ -20,7 +17,6 @@ import { AsyncPipe } from '@angular/common';
     MessageComponent,
     LoaderComponent,
     ButtonModule,
-    AsyncPipe
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
@@ -30,8 +26,6 @@ export class AppComponent {
   
   localStorageService: LocalStorageService = inject(LocalStorageService);
   themeService: ThemeService = inject(ThemeService);
-  
-  theme$: Observable<Theme> = this.themeService.theme$;
     
   constructor() {
     this.saveLastVisitDate();

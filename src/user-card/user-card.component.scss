@@ -1,15 +1,20 @@
 .card-user-item {
-  padding: 20px 20px 24px;
-  border-top: 4px solid #d9a066;
+  position: relative;
+  padding: 24px 20px;
+  border-top: 4px solid var(--third-text-color); 
   border-radius: 4px;
-  background-color: #ffffff;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+  background-color: var(--primary-bg-color); 
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15); 
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  box-sizing: border-box;
 }
 
 .card-user-name {
   display: block;
   margin: 0 0 6px;
-  color: #243f3d;
+  color: var(--primary-text-color);
   font-size: 22px;
   font-weight: 700;
   line-height: 1.2;
@@ -17,14 +22,14 @@
 
 .card-user-nickname {
   margin: 0 0 20px;
-  color: #d9a066;
+  color: var(--third-text-color); 
   font-size: 14px;
   font-weight: 500;
   line-height: 1.2;
 }
 
 .card-user-section {
-  margin-bottom: 20px;
+  margin-bottom: 24px;
   
   &:last-child {
     margin-bottom: 0;
@@ -37,16 +42,17 @@
 
 .card-user-title {
   display: block;
-  color: #243f3d;
-  font-size: 14px;
+  color: var(--primary-text-color);
+  font-size: 13px;
   font-weight: 700;
   line-height: 1.2;
   text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .card-user-line {
   margin-top: 8px;
-  border-bottom: 1px solid #e5e5e5;
+  border-bottom: 1px solid rgba(141, 154, 154, 0.2);
 }
 
 .card-user-info {
@@ -62,14 +68,14 @@
 }
 
 .card-user-property {
-  color: #8d9a9a;
+  color: var(--placeholder-color); 
   font-size: 14px;
   font-weight: 400;
   line-height: 1.35;
 }
 
 .user-info-value {
-  color: #243f3d;
+  color: var(--primary-text-color);
   font-size: 14px;
   font-weight: 600;
   line-height: 1.35;
@@ -78,15 +84,46 @@
 }
 
 .user-value-link {
-  color: #d9a066;
+  color: var(--third-text-color); 
+  text-decoration: none;
+  
+  &:hover {
+    text-decoration: underline;
+  }
 }
 
 .user-value-mission {
   font-style: italic;
+  font-weight: 400;
 }
 
 .user-info-geo {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+}
+
+button {
+  margin-top: auto;
+  padding: 12px 20px;
+  width: 100%;
+  border: 1px solid #ef4444; 
+  border-radius: 4px;
+  background-color: transparent;
+  color: #ef4444;
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s ease-in-out;
+
+  &:hover {
+    background-color: #ef4444; 
+    color: #ffffff;            
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.25);
+  }
+
+  &:active {
+    transform: scale(0.98); 
+  }
 }

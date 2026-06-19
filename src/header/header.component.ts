@@ -1,16 +1,17 @@
 import { Component, inject} from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MessageService } from '../services/message.service';
 import { INavItem } from '../interfaces/INavItem';
 import { RouterLink, RouterLinkActive } from "@angular/router";
 import { ThemeService } from '../services/theme.service';
-import { ThemeKey } from '../types/theme.types';
-import { ToggleSwitchModule } from 'primeng/toggleswitch';
+import { ToggleSwitchChangeEvent, ToggleSwitchModule } from 'primeng/toggleswitch';
 import { FormsModule } from '@angular/forms';
-import { Theme } from '../enums/Theme';
 import { Observable, tap } from 'rxjs';
 import { SelectButtonModule } from 'primeng/selectbutton';
-
+import { faMoon, faSun, IconDefinition } from '@fortawesome/free-regular-svg-icons';
+import { Preset } from '../enums/Preset';
+import { AsyncPipe, NgClass } from '@angular/common';
+import { ITheme } from '../interfaces/ITheme';
+ 
 @Component({
   selector: 'app-header',
   imports: [
@@ -18,23 +19,27 @@ import { SelectButtonModule } from 'primeng/selectbutton';
     RouterLinkActive,
     FormsModule,
     ToggleSwitchModule,
-    SelectButtonModule
+    SelectButtonModule,
+    AsyncPipe,
+    NgClass
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
 export class HeaderComponent {
   
-  readonly companyName: string = 'румтибет';
-  protected messageService: MessageService = inject(MessageService);
-  private themeService: ThemeService = inject(ThemeService);
+  messageService: MessageService = inject(MessageService);
+  themeService: ThemeService = inject(ThemeService);
   
-  private primeTheme$: Observable<Theme> = this.themeService.primeTheme$;
+  preset$: Observable<Preset> = this.themeService.preset$;
+  isDarkMode$: Observable<boolean> = this.themeService.isDarkMode$;
   
-  protected switched: boolean = false;
-  protected currentPreset!: string;
+  presetOptions: ITheme[] = this.themeService.presetOptions;
   
-  protected navItems: INavItem[] = [
+  faMoon: IconDefinition = faMoon;
+  faSun: IconDefinition = faSun;
+  
+  navItems: INavItem[] = [
     {
       id: 1,
       label: 'Главная',
@@ -49,30 +54,14 @@ export class HeaderComponent {
     }
   ];
   
-  protected presetOptions = [
-    { name: 'Nora', value: 'nora' },
-    { name: 'Lara', value: 'lara' },
-    { name: 'Aura', value: 'aura' }
-  ];
+  readonly companyName: string = 'румтибет';
   
-  toggleTheme(theme: ThemeKey): void {
-    this.themeService.toggleTheme(theme);
+  handleToggleMode(event: ToggleSwitchChangeEvent): void {
+    this.themeService.toggleMode(event.checked);
   }
   
-  themeSubscription = this.primeTheme$.pipe(
-    tap((primeTheme: Theme) => { 
-      this.switched = (primeTheme === Theme.DARK);
-    }),
-    takeUntilDestroyed()
-  ).subscribe();
-  
-  ngOnInit(): void {
-    this.switched = this.themeService.getCurrentTheme('prime') === Theme.DARK;
-    this.currentPreset = this.themeService.getCurrentPreset();
-  }
-  
-  updatePreset(preset: string): void {
-    this.themeService.updatePreset(preset);
+  handleChangePreset(preset: Preset): void {
+    this.themeService.changePreset(preset);
   }
   
 }

@@ -1,6 +1,7 @@
 <header class="header">
   <div class="container" style="max-width: 2680px;">
     <div class="container">
+      
       <div class="logo">
         <div class="logo-img">
           <img src="/images/logo.svg" alt="logo">
@@ -9,13 +10,14 @@
           <span class="companyNameText">{{ companyName }}</span>
         </div>
       </div>
+      
       <div class="menu">
         <nav class="nav">
           <ul class="list">
             @for (navItem of navItems; track navItem.id) {
               <li class="item">
                 <a
-                  [id] = "navItem.id"
+                  [id]="navItem.id"
                   [routerLink]="navItem.path"
                   routerLinkActive="active-link"
                   [routerLinkActiveOptions]="{ exact: navItem.exact }"
@@ -26,6 +28,29 @@
             }
           </ul>
         </nav>
+
+        <div class="theme-controls">
+          <div class="mode-switcher">
+            <p-toggle-switch 
+              id="app-mode-switcher"
+              [ngModel]="isDarkMode$ | async"
+              (onChange)="handleToggleMode($event)"
+            >
+            </p-toggle-switch>
+            <i class="pi" [ngClass]="(isDarkMode$ | async) === true ? 'pi-moon' : 'pi-sun'"></i>
+          </div>
+          
+          <div class="preset-switcher">
+            <p-selectbutton
+              id="select-preset-button"
+              [ngModel]="preset$ | async"
+              (onChange)="handleChangePreset($event.value)"
+              [options]="presetOptions"
+              optionLabel="name"
+              optionValue="value"
+            />
+          </div>
+        </div>
     
         <button
           id="consultation-button"
@@ -35,31 +60,7 @@
           Консультация
         </button>
       </div>
-    </div>
-    
-    <div class="theme">
-      <button (click)="toggleTheme('custom')" >Переключить тему</button>
-    </div>
-  </div>
-  
-  <div>
-    <p-toggleswitch [(ngModel)]="switched" (onChange)="toggleTheme('prime')"/> 
 
-    @if (switched === false) {
-      <i class="pi pi-sun" style="font-size: 1.5rem"></i>
-    } @else {
-        <i class="pi pi-moon" style="font-size: 1.5rem"></i>
-      }
+    </div>
   </div>
-  
-  <div>
-    <p-selectbutton 
-      [options]="presetOptions" 
-      [(ngModel)]="currentPreset" 
-      (onChange)="updatePreset($event.value)"
-      optionLabel="name" 
-      optionValue="value" 
-    />
-  </div>
-    
-  </header>
+</header>

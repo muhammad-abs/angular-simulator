@@ -9,50 +9,29 @@
   font-family: 'Nunito Sans';
   margin: 0px;
   padding: 0px;
+  box-sizing: border-box;
 }
-
+ 
 :root {
-  --primary-color: #18121E;
-  --white-color: #FDFDFD;
-  --secondary-color: #F2BE22;
+  --primary-text-color: #18121E;
+  --primary-bg-color: #FFFFFF;
   
-  --site-bg: #ffffff;
-  --section-light-bg: #F3F5F4; 
-  --text-main: #18121E;
-  --card-bg: #ffffff;
-
-  --search-bg: rgba(255, 255, 255, 0.2); 
-  --search-text: #ffffff;
-  --search-border: #E1E3E4;
+  --secondary-text-color: #FDFDFD;
+  --secondary-bg-color: #1A3E3E;
+  
+  --third-text-color: #F2BE22;
+  --third-bg-color: #F3F5F4;
+  --placeholder-color: #8A9494;
 }
 
-.light {
-  --site-bg: #ffffff;
-  --section-light-bg: #F3F5F4;
-  --text-main: #18121E;
-  --card-bg: #ffffff;
+.my-app-dark {
+  --primary-text-color: #FDFDFD;
+  --primary-bg-color: #171f2d;
   
-  --search-bg: rgba(255, 255, 255, 0.2);
-  --search-text: #18121E;
-  --search-border: #18121E;
-}
-
-.dark {
-  --site-bg: #1a1a1a;
-  --section-light-bg: #242424; 
-  --text-main: #ffffff;
-  --card-bg: #2a2a2a;
-
-  --search-bg: rgba(255, 255, 255, 0.1); 
-  --search-text: #ffffff;
-  --search-border: rgba(255, 255, 255, 0.4);
-
-  .desc-block { color: #ffffff !important; }
-  .article-desc { color: #ffffff !important; }
-  .card-user-name, .card-user-title, .user-info-value { color: #ffffff !important; }
+  --secondary-text-color: #E2E8F0;
+  --secondary-bg-color: #0F172A;
   
-  select option {
-    background-color: #2a2a2a;
-    color: #ffffff;
-  }
+  --third-text-color: #F2BE22;
+  --third-bg-color: #09182d;
+  --placeholder-color: #94A3B8;
 }
