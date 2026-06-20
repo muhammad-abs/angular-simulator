@@ -8,9 +8,10 @@ import { FormsModule } from '@angular/forms';
 import { Observable, tap } from 'rxjs';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { faMoon, faSun, IconDefinition } from '@fortawesome/free-regular-svg-icons';
-import { Preset } from '../enums/Preset';
-import { AsyncPipe, NgClass } from '@angular/common';
-import { ITheme } from '../interfaces/ITheme';
+import { PrimePreset } from '../enums/PrimePreset';
+import { AsyncPipe } from '@angular/common';
+import { IPreset } from '../interfaces/IPreset';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
  
 @Component({
   selector: 'app-header',
@@ -21,7 +22,7 @@ import { ITheme } from '../interfaces/ITheme';
     ToggleSwitchModule,
     SelectButtonModule,
     AsyncPipe,
-    NgClass
+    FontAwesomeModule
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
@@ -31,10 +32,10 @@ export class HeaderComponent {
   messageService: MessageService = inject(MessageService);
   themeService: ThemeService = inject(ThemeService);
   
-  preset$: Observable<Preset> = this.themeService.preset$;
+  preset$: Observable<PrimePreset> = this.themeService.preset$;
   isDarkMode$: Observable<boolean> = this.themeService.isDarkMode$;
   
-  presetOptions: ITheme[] = this.themeService.presetOptions;
+  presetOptions: IPreset[] = this.themeService.presetOptions;
   
   faMoon: IconDefinition = faMoon;
   faSun: IconDefinition = faSun;
@@ -56,11 +57,11 @@ export class HeaderComponent {
   
   readonly companyName: string = 'румтибет';
   
-  handleToggleMode(event: ToggleSwitchChangeEvent): void {
-    this.themeService.toggleMode(event.checked);
+  toggleDarkMode(event: ToggleSwitchChangeEvent): void {
+    this.themeService.toggleDarkMode(event.checked);
   }
   
-  handleChangePreset(preset: Preset): void {
+  changePreset(preset: PrimePreset): void {
     this.themeService.changePreset(preset);
   }
   

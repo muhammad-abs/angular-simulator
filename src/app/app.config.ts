@@ -1,17 +1,22 @@
 import { ApplicationConfig, provideBrowserGlobalErrorListeners, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { providePrimeNG } from 'primeng/config';
-import Aura from '@primeuix/themes/aura';
-import Lara from '@primeuix/themes/lara';
-import Nora from '@primeuix/themes/nora';
 import { routes } from './app.routes';
 import { Preset } from '@primeuix/themes/types';
+import { PRESETS_MAP } from '../configs/Preset.config'
+import { PrimePreset } from '../enums/PrimePreset';
 
 function getInitialPreset(): Preset {
-  const savedPreset: string | null = localStorage.getItem('prime-preset');
-  if (savedPreset === 'nora') return Nora;
-  if (savedPreset === 'lara') return Lara;
-  else return Aura;
+  const savedPreset: PrimePreset | null = localStorage.getItem('prime-preset') as PrimePreset | null;
+
+  switch(savedPreset) {
+    case (PrimePreset.LARA):
+      return PRESETS_MAP[savedPreset];
+    case (PrimePreset.NORA):
+      return PRESETS_MAP[savedPreset];
+    default:
+      return PRESETS_MAP[PrimePreset.AURA];
+  };
 }
 
 export const appConfig: ApplicationConfig = {

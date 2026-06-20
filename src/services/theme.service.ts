@@ -2,8 +2,8 @@ import { inject, Injectable } from '@angular/core';
 import { LocalStorageService } from './local-storage.service';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { usePreset } from '@primeuix/themes';
-import { Preset } from '../enums/Preset';
-import { ITheme } from '../interfaces/ITheme';
+import { PrimePreset } from '../enums/PrimePreset';
+import { IPreset } from '../interfaces/IPreset';
 import { PRESETS_MAP } from '../configs/Preset.config'
 
 @Injectable({ providedIn: 'root' })
@@ -18,45 +18,45 @@ export class ThemeService {
   private isDarkModeSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(this.initDarkMode());
   isDarkMode$: Observable<boolean> = this.isDarkModeSubject.asObservable()
     .pipe(
-      tap((isDarkMode: boolean) => this.toggleHtmlClass(isDarkMode))
+      tap((isDarkMode: boolean) => this.applyDarkMode(isDarkMode))
     );
   
-  private presetSubject: BehaviorSubject<Preset> = new BehaviorSubject<Preset>(this.initPreset());
-  preset$: Observable<Preset> = this.presetSubject.asObservable()
+  private presetSubject: BehaviorSubject<PrimePreset> = new BehaviorSubject<PrimePreset>(this.initPreset());
+  preset$: Observable<PrimePreset> = this.presetSubject.asObservable()
     .pipe(
-      tap((preset: Preset) => this.setPreset(preset))
+      tap((preset: PrimePreset) => this.setPreset(preset))
     );
   
-  presetOptions: ITheme[] = [
-    { name: 'Nora', value: Preset.NORA },
-    { name: 'Lara', value: Preset.LARA },
-    { name: 'Aura', value: Preset.AURA }
+  presetOptions: IPreset[] = [
+    { name: 'Nora', value: PrimePreset.NORA },
+    { name: 'Lara', value: PrimePreset.LARA },
+    { name: 'Aura', value: PrimePreset.AURA }
   ];
   
-  toggleMode(isDarkMode: boolean): void {
-    this.localStorageService.setValue(this.APP_MODE_KEY, isDarkMode);
+  toggleDarkMode(isDarkMode: boolean): void {
+    this.localStorageService.setValue<boolean>(this.APP_MODE_KEY, isDarkMode);
     this.isDarkModeSubject.next(isDarkMode);
   }
   
-  changePreset(preset: Preset): void {
-    this.localStorageService.setValue(this.APP_PRESET_KEY, preset);
+  changePreset(preset: PrimePreset): void {
+    this.localStorageService.setValue<PrimePreset>(this.APP_PRESET_KEY, preset);
     this.presetSubject.next(preset);
   }
   
-  toggleHtmlClass(isDarkMode: boolean): void {
+  applyDarkMode(isDarkMode: boolean): void {
     document.documentElement.classList.toggle(this.DARK_MODE_CLASS, isDarkMode === true);
   }
   
-  setPreset(preset: Preset): void {
+  setPreset(preset: PrimePreset): void {
     usePreset(PRESETS_MAP[preset]);
   }
   
   private initDarkMode(): boolean {
-    return this.localStorageService.getValue(this.APP_MODE_KEY) ?? false;
+    return this.localStorageService.getValue<boolean>(this.APP_MODE_KEY) ?? false;
   }
   
-  private initPreset(): Preset {
-    return this.localStorageService.getValue(this.APP_PRESET_KEY) ?? Preset.AURA;
+  private initPreset(): PrimePreset {
+    return this.localStorageService.getValue<PrimePreset>(this.APP_PRESET_KEY) ?? PrimePreset.AURA;
   }
 
 }

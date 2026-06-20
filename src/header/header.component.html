@@ -34,17 +34,19 @@
             <p-toggle-switch 
               id="app-mode-switcher"
               [ngModel]="isDarkMode$ | async"
-              (onChange)="handleToggleMode($event)"
+              (onChange)="toggleDarkMode($event)"
             >
+              <ng-template #handle>
+                <fa-icon [icon]="(isDarkMode$ | async) ? faMoon : faSun"></fa-icon>
+              </ng-template>
             </p-toggle-switch>
-            <i class="pi" [ngClass]="(isDarkMode$ | async) === true ? 'pi-moon' : 'pi-sun'"></i>
           </div>
           
           <div class="preset-switcher">
             <p-selectbutton
               id="select-preset-button"
               [ngModel]="preset$ | async"
-              (onChange)="handleChangePreset($event.value)"
+              (onChange)="changePreset($event.value)"
               [options]="presetOptions"
               optionLabel="name"
               optionValue="value"
