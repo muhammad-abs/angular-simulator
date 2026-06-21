@@ -8,15 +8,8 @@ import { PrimePreset } from '../enums/PrimePreset';
 
 function getInitialPreset(): Preset {
   const savedPreset: PrimePreset | null = localStorage.getItem('prime-preset') as PrimePreset | null;
-
-  switch(savedPreset) {
-    case (PrimePreset.LARA):
-      return PRESETS_MAP[savedPreset];
-    case (PrimePreset.NORA):
-      return PRESETS_MAP[savedPreset];
-    default:
-      return PRESETS_MAP[PrimePreset.AURA];
-  };
+  
+  return PRESETS_MAP[savedPreset ?? PrimePreset.AURA];
 }
 
 export const appConfig: ApplicationConfig = {
