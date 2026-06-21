@@ -1,6 +1,7 @@
 <header class="header">
+  <div class="container" style="max-width: 2680px;">
     <div class="container">
-  
+      
       <div class="logo">
         <div class="logo-img">
           <img src="/images/logo.svg" alt="logo">
@@ -9,14 +10,14 @@
           <span class="companyNameText">{{ companyName }}</span>
         </div>
       </div>
-  
+      
       <div class="menu">
         <nav class="nav">
           <ul class="list">
             @for (navItem of navItems; track navItem.id) {
               <li class="item">
                 <a
-                  [id] = "navItem.id"
+                  [id]="navItem.id"
                   [routerLink]="navItem.path"
                   routerLinkActive="active-link"
                   [routerLinkActiveOptions]="{ exact: navItem.exact }"
@@ -27,15 +28,41 @@
             }
           </ul>
         </nav>
-        
-        <button 
-          id="consultation-button" 
+
+        <div class="theme-controls">
+          <div class="mode-switcher">
+            <p-toggle-switch 
+              id="app-mode-switcher"
+              [ngModel]="isDarkMode$ | async"
+              (onChange)="toggleDarkMode($event)"
+            >
+              <ng-template #handle>
+                <fa-icon [icon]="(isDarkMode$ | async) ? faMoon : faSun"></fa-icon>
+              </ng-template>
+            </p-toggle-switch>
+          </div>
+          
+          <div class="preset-switcher">
+            <p-selectbutton
+              id="select-preset-button"
+              [ngModel]="preset$ | async"
+              (onChange)="changePreset($event.value)"
+              [options]="presetOptions"
+              optionLabel="name"
+              optionValue="value"
+            />
+          </div>
+        </div>
+    
+        <button
+          id="consultation-button"
           class="primary-button consultation-button"
           (click)="messageService.showSuccess('Вы записаны на консультацию')"
         >
           Консультация
         </button>
       </div>
-  
+
     </div>
-  </header>
+  </div>
+</header>

@@ -1,20 +1,31 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ViewEncapsulation } from '@angular/core';
 import { LocalStorageService } from '../services/local-storage.service';
 import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from "../header/header.component";
 import { FooterComponent } from "../footer/footer.component";
 import { MessageComponent } from "../message/message.component";
 import { LoaderComponent } from "../loader/loader.component";
+import { ButtonModule } from 'primeng/button';
+import { ThemeService } from '../services/theme.service';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, HeaderComponent, FooterComponent, MessageComponent, LoaderComponent],
+  imports: [
+    RouterOutlet,
+    HeaderComponent,
+    FooterComponent,
+    MessageComponent,
+    LoaderComponent,
+    ButtonModule,
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
+  encapsulation: ViewEncapsulation.None
 })
 export class AppComponent {
   
   localStorageService: LocalStorageService = inject(LocalStorageService);
+  themeService: ThemeService = inject(ThemeService);
     
   constructor() {
     this.saveLastVisitDate();

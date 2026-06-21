@@ -50,8 +50,8 @@
           
           <div class="social-refs">
             @for (network of socialNetworks; track network) {
-              <a [href]="network" class="social-link">
-                <img [src]="'/icons/social-networks/' + network + '-icon.svg'" [alt]="network" width="32" height="32">
+              <a [href]="network.url" class="social-link">
+                <fa-icon [icon]="network.icon" class="fa-xl"/>
               </a>
             }
           </div>

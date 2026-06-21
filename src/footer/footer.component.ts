@@ -1,17 +1,27 @@
 import { Component, inject } from '@angular/core';
 import { MessageService } from '../services/message.service';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faTelegram, faVk, faPinterest, faSkype } from '@fortawesome/free-brands-svg-icons';
+
 
 @Component({
   selector: 'app-footer',
-  imports: [],
+  imports: [FontAwesomeModule],
   templateUrl: './footer.component.html',
   styleUrl: './footer.component.scss',
 })
 export class FooterComponent {
   
   messageService: MessageService = inject(MessageService);
+  
+  socialNetworks: any = [
+    { icon: faTelegram, url: '#' },
+    { icon: faVk, url: '#' },
+    { icon: faPinterest, url: '#' },
+    { icon: faSkype, url: '#' }
+  ]
 
-  socialNetworks: string[] = [
+  socialNetworks2: string[] = [
     'telegram',
     'vk',
     'pinterest',

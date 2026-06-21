@@ -3,14 +3,35 @@
 @use './button';
 @use './desc.block';
 
+@import "primeicons/primeicons.css";
+
 * {
   font-family: 'Nunito Sans';
   margin: 0px;
   padding: 0px;
+  box-sizing: border-box;
+}
+ 
+:root {
+  --primary-text-color: #18121E;
+  --primary-bg-color: #FFFFFF;
+  
+  --secondary-text-color: #FDFDFD;
+  --secondary-bg-color: #1A3E3E;
+  
+  --third-text-color: #F2BE22;
+  --third-bg-color: #F3F5F4;
+  --placeholder-color: #8A9494;
 }
 
-:root {
-  --primary-color: #18121E;
-  --white-color: #FDFDFD;
-  --secondary-color: #F2BE22;
+.my-app-dark {
+  --primary-text-color: #FDFDFD;
+  --primary-bg-color: #171f2d;
+  
+  --secondary-text-color: #E2E8F0;
+  --secondary-bg-color: #0F172A;
+  
+  --third-text-color: #F2BE22;
+  --third-bg-color: #09182d;
+  --placeholder-color: #94A3B8;
 }
