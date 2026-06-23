@@ -1,0 +1,92 @@
+@use "../../assets/animations" as *;
+@import "../user-card/user-card.component.scss";
+
+.users-page {
+  min-height: 100vh;
+  padding: 60px 0 150px; 
+  background-color: var(--third-bg-color);
+  box-sizing: border-box;
+}
+
+.users-page-container {
+  width: 100%;
+  max-width: 1180px;
+  margin: 100px auto;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+.users-page-title {
+  margin: 0px 0 10px;
+  color: var(--primary-text-color);
+  font-size: 42px;
+  font-weight: 700;
+  line-height: 1.1;
+  text-align: center;
+}
+
+.users-filter-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 50px;
+  width: 100%;
+
+  ::v-deep input {
+    width: 100%;
+    max-width: 400px;
+    padding: 12px 16px;
+    border: 1px solid rgba(141, 154, 154, 0.3);
+    border-radius: 6px;
+    background-color: var(--primary-bg-color);
+    color: var(--primary-text-color) !important;
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
+    transition: all 0.2s ease;
+
+    &:focus {
+      outline: none;
+      border-color: var(--third-text-color);
+      box-shadow: 0 0 0 3px rgba(242, 190, 34, 0.2);
+    }
+  }
+}
+
+.users-card-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  justify-content: center;
+  gap: 44px; 
+  align-items: stretch;
+}
+
+.users-page-empty {
+  grid-column: 1 / -1;
+  text-align: center;
+  color: var(--placeholder-color);
+  font-size: 18px;
+  padding: 40px;
+}
+
+app-create-user, app-user-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.animated-gradient-border {
+  position: relative;
+  
+  border: var(--border-thickness) solid transparent; 
+  border-radius: 12px; 
+
+  background-image: 
+    linear-gradient(var(--primary-bg-color, white), var(--primary-bg-color, white)), 
+    linear-gradient(to right, var(--gradient-colors));
+  
+  background-size: 100% 100%, 200% auto;
+  background-origin: padding-box, border-box;
+  background-clip: padding-box, border-box;
+  
+  animation: moveGradient 2s linear infinite;
+}

@@ -1,0 +1,24 @@
+<section class="users-page">
+  <div class="users-page-container">
+        
+    <h1 class="users-page-title">Список Пользователей</h1>
+    <app-users></app-users>
+    
+    <div class="users-filter-wrapper">
+      <app-users-filter (filter)="onFilter($event)"/>
+    </div>
+    
+    <div class="users-card-list">
+      @for (user of filteredUsers$ | async; track user.id) {
+        <app-user-card 
+          [gradient]="{ delay: 200, colors: ['#F2BE22', '#E2E8F0'], thickness: '2px' }"
+          [user]="user" 
+          (deleteUser)="handleDeleteUser($event)"/>
+      } @empty {
+        <div class="users-page-empty">Нет пользователей для отображения</div>
+      }
+      <app-create-user (createUser)="handleCreateUser($event)"/>
+    </div>
+    
+  </div>
+</section>
