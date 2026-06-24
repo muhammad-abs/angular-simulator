@@ -24,7 +24,7 @@ export class NumberPipe implements PipeTransform {
   }
   
   standardizeNumber(value: string): string {
-    const cleanValue = value.split('x')[0].replace(/[\s().-]/g, '');
+    const cleanValue: string = value.split('x')[0].replace(/[\s().-]/g, '');
     
     const normalizedNumber = cleanValue.length === 10 
     ? '38' + cleanValue 
@@ -40,12 +40,12 @@ export class NumberPipe implements PipeTransform {
   }
 
   getInternationalFormat(number: string): string {
-    const formatted = number.replace(/^(\d{2})(\d{3})(\d{3})(\d{2})(\d{2})$/, '$1 $2 $3 $4 $5');
+    const formatted: string = number.replace(/^(\d{2})(\d{3})(\d{3})(\d{2})(\d{2})$/, '$1 $2 $3 $4 $5');
     return `+${ formatted }`;
   }
 
   getNationalFormat(number: string): string {
-    const formatted = number.slice(2);
+    const formatted: string = number.slice(2);
     return formatted.replace(/^(\d{3})(\d{3})(\d{2})(\d{2})$/, '$1 $2 $3 $4');
   }
 

@@ -13,13 +13,13 @@ export class GradientDirective {
     thickness: '2px'
   }
   
-  @HostBinding('class.animated-gradient-border') isEffectActive = false;
-  @HostBinding('style.display') display = 'block';
+  @HostBinding('class.animated-gradient-border') isEffectActive: boolean = false;
+  @HostBinding('style.display') display: string = 'block';
   
   @HostBinding('style.--gradient-colors')
   get scssColors(): string {
-    const colors = this.GradientConfiguration.colors;
-    return `${colors.join(', ')}, ${colors[0]}`;
+    const colors: string[] = this.GradientConfiguration.colors;
+    return `${ colors.join(', ') }, ${ colors[0] }`;
   }
 
   @HostBinding('style.--border-thickness')
