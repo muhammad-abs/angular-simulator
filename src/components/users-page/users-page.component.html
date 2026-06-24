@@ -2,7 +2,10 @@
   <div class="users-page-container">
         
     <h1 class="users-page-title">Список Пользователей</h1>
-    <app-users></app-users>
+    
+    <h4 class="users-count-title">
+      {{ usersCount$ | async | pluralPipe : 'пользователь' : 'пользователя' : 'пользователей' }}
+    </h4>
     
     <div class="users-filter-wrapper">
       <app-users-filter (filter)="onFilter($event)"/>

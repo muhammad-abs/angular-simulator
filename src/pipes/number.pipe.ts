@@ -11,17 +11,16 @@ export class NumberPipe implements PipeTransform {
     
     switch(mode) {
       case('compact'):
-        return `${this.compact(value)}`;
+        return `${ this.getCompactFormat(value) }`;
       case('international'):
-        return `${this.international(value)}`;
+        return `${ this.getInternationalFormat(value) }`;
       case('national'):
-        return this.national(value);
+        return this.getNationalFormat(value);
       case('masked'):
-        return this.masked(value);
+        return this.getMaskedFormat(value);
       default:
-        return `+${value}`;
+        return `+${ value }`;
     }
-    
   }
   
   standardizeNumber(value: string): string {
@@ -33,24 +32,24 @@ export class NumberPipe implements PipeTransform {
       ? '3' + cleanValue 
       : cleanValue; 
       
-    return normalizedNumber.length === 12 ? normalizedNumber : `+${cleanValue}`;
+    return normalizedNumber.length === 12 ? normalizedNumber : `+${ cleanValue }`;
   }
   
-  compact(number: string): string {
-    return `+${number}`;
+  getCompactFormat(number: string): string {
+    return `+${ number }`;
   }
 
-  international(number: string): string {
+  getInternationalFormat(number: string): string {
     const formatted = number.replace(/^(\d{2})(\d{3})(\d{3})(\d{2})(\d{2})$/, '$1 $2 $3 $4 $5');
-    return `+${formatted}`;
+    return `+${ formatted }`;
   }
 
-  national(number: string): string {
-    const nationalPart = number.slice(2);
-    return nationalPart.replace(/^(\d{3})(\d{3})(\d{2})(\d{2})$/, '$1 $2 $3 $4');
+  getNationalFormat(number: string): string {
+    const formatted = number.slice(2);
+    return formatted.replace(/^(\d{3})(\d{3})(\d{2})(\d{2})$/, '$1 $2 $3 $4');
   }
 
-  masked(number: string): string {
+  getMaskedFormat(number: string): string {
     return number.replace(/^(\d{2})(\d{3})(\d{3})(\d{2})(\d{2})$/, '+$1 $2 *** ** $5');
   }
   

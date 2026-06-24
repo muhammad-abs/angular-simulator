@@ -6,12 +6,19 @@ import { BehaviorSubject, combineLatest, map, Observable, pipe, tap } from 'rxjs
 import { UserCardComponent } from "../user-card/user-card.component";
 import { CreateUserComponent } from '../create-user/create-user.component';
 import { UsersFilterComponent } from '../users-filter/users-filter.component';
-import { UsersComponent } from "../users/users.component";
 import { GradientDirective } from "../../directives/gradient.directive";
+import { PluralPipe } from '../../pipes/plural.pipe';
 
 @Component({
   selector: 'app-users-page',
-  imports: [AsyncPipe, UserCardComponent, CreateUserComponent, UsersFilterComponent, UsersComponent, GradientDirective],
+  imports: [
+    AsyncPipe, 
+    UserCardComponent, 
+    CreateUserComponent, 
+    UsersFilterComponent, 
+    GradientDirective,
+    PluralPipe
+  ],
   templateUrl: './users-page.component.html',
   styleUrl: './users-page.component.scss',
 })
@@ -29,6 +36,10 @@ export class UsersPageComponent {
       const normalizedSearch: string = search.toLowerCase().trim();
       return users.filter((user: IUser) => user.name.toLowerCase().trim().includes(normalizedSearch));
     })
+  );
+  
+  usersCount$: Observable<number> = this.users$.pipe(
+    map((users: IUser[]) => users.length)
   );
 
   ngOnInit(): void {

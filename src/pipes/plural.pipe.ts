@@ -6,26 +6,22 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class PluralPipe implements PipeTransform {
 
-  transform(count: number | string | null, form1: string, form2: string, form3: string): string {
+  transform(count: number | string | null, one: string, few: string, many: string): string {
   
-  const currentCount: number = count !== null ? Number(count) : 0;
-  const mod100: number = currentCount % 100;
-  const mod10: number = currentCount % 10;
-  
-  if (mod100 >= 11 && mod100 <= 14) {
-    return `${currentCount} ${form3}`;
-  }
-  
-  switch(mod10) {
-    case 1:
-      return `${currentCount} ${form1}`;
-    case 2:
-    case 3:
-    case 4:
-      return `${currentCount} ${form2}`;
-    default:
-      return `${currentCount} ${form3}`;
+    const currentCount: number = count !== null ? Number(count) : 0;
+    const lastDigit: number = currentCount % 10;
+    const lastTwoDigits: number = currentCount % 100;
+
+    switch (true) {
+      case lastTwoDigits >= 11 && lastTwoDigits <= 14:
+        return `${ currentCount } ${ many }`;
+      case lastDigit === 1:
+        return `${ currentCount } ${ one }`;
+      case lastDigit >= 2 && lastDigit <= 4:
+        return `${ currentCount } ${ few }`;
+      default:
+        return `${ currentCount } ${ many }`;
     }
-  };
+  }
   
 }
