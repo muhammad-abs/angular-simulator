@@ -7,7 +7,7 @@ export class GradientDirective {
   
   private timeoutId!: number;
   
-  @Input('gradient') GradientConfiguration = {
+  @Input('gradient') gradientConfiguration = {
     delay: 1000,
     colors: ['white', 'blue'],
     thickness: '2px'
@@ -18,20 +18,20 @@ export class GradientDirective {
   
   @HostBinding('style.--gradient-colors')
   get scssColors(): string {
-    const colors: string[] = this.GradientConfiguration.colors;
+    const colors: string[] = this.gradientConfiguration.colors;
     return `${ colors.join(', ') }, ${ colors[0] }`;
   }
 
   @HostBinding('style.--border-thickness')
   get scssThickness(): string {
-    return this.GradientConfiguration.thickness;
+    return this.gradientConfiguration.thickness;
   }
   
   @HostListener('mouseenter')
   onEnter(): void {
     this.timeoutId = setTimeout(() => {
       this.isEffectActive = true;
-    }, this.GradientConfiguration.delay);
+    }, this.gradientConfiguration.delay);
   }
   
   @HostListener('mouseleave')

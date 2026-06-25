@@ -4,7 +4,7 @@
     <h1 class="users-page-title">Список Пользователей</h1>
     
     <h4 class="users-count-title">
-      {{ usersCount$ | async | pluralPipe : 'пользователь' : 'пользователя' : 'пользователей' }}
+      {{ usersCount | pluralPipe : 'пользователь' : 'пользователя' : 'пользователей' }}
     </h4>
     
     <div class="users-filter-wrapper">

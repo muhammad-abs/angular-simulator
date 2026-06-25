@@ -31,15 +31,14 @@ export class UsersPageComponent {
   
   users$: Observable<IUser[]> = this.userService.users$;
   
+  usersCount: number = 0;
+  
   filteredUsers$: Observable<IUser[]> = combineLatest([this.users$, this.filterText$]).pipe(
     map(([users, search]: [IUser[], string]) => {
       const normalizedSearch: string = search.toLowerCase().trim();
       return users.filter((user: IUser) => user.name.toLowerCase().trim().includes(normalizedSearch));
-    })
-  );
-  
-  usersCount$: Observable<number> = this.users$.pipe(
-    map((users: IUser[]) => users.length)
+    }),
+    tap((users: IUser[]) => this.usersCount = users.length)
   );
 
   ngOnInit(): void {
