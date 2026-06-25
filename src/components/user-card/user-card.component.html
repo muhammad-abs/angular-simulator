@@ -1,6 +1,6 @@
 <article class="card-user-item">
   
-  <h2 class="card-user-name">{{ user.name || 'Неизвестно' }}</h2>
+  <h2 class="card-user-name">{{ user.name || 'Неизвестно' | uppercase }}</h2>
   <p class="card-user-nickname">{{ user.username ? '&#64;' + user.username : 'Неизвестно' }}</p>
 
   <div class="card-user-section">
@@ -15,7 +15,7 @@
     </div>
     <div class="card-user-info">
       <span class="card-user-property">Телефон:</span>
-      <span class="user-info-value">{{ user.phone || "Неизвестно" }}</span>
+      <span class="user-info-value">{{ user.phone || "Неизвестно" | number: 'masked' }}</span> 
     </div>
     <div class="card-user-info">
       <span class="card-user-property">Веб-сайт:</span>
@@ -74,6 +74,5 @@
     </div>
   </div>
   
-  <button (click)="onDeleteUser()">Удалить карточку</button>
-  
+  <button hover (click)="onDeleteUser()">Удалить карточку</button>
 </article>

@@ -1,16 +1,24 @@
 import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
-import { IUser } from '../interfaces/IUser';
+import { IUser } from '../../interfaces/IUser';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { HoverDirective } from "../../directives/hover.directive";
+import { GradientDirective } from "../../directives/gradient.directive";
 
 @Component({
   selector: 'app-create-user',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, HoverDirective, GradientDirective],
   templateUrl: './create-user.component.html',
   styleUrl: './create-user.component.scss',
 })
 export class CreateUserComponent {
   
   @Output() createUser: EventEmitter<IUser> = new EventEmitter<IUser>();
+  
+  inputGradientConfig = { 
+    delay: 100, 
+    colors: ['#F2BE22', '#E2E8F0'], 
+    thickness: '1px' 
+  };
   
   private fb: FormBuilder = inject(FormBuilder);
   

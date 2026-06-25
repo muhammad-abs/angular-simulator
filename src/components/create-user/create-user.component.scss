@@ -1,3 +1,5 @@
+@use "../../assets/animations" as *;
+
 .card-user-item {
   position: relative;
   padding: 20px 20px 24px;
@@ -83,6 +85,28 @@ input {
     border-color: var(--third-text-color); 
     box-shadow: 0 0 0 2px rgba(242, 190, 34, 0.2); 
   }
+}
+
+.animated-gradient-border {
+  position: relative;
+  
+  border: var(--border-thickness) solid transparent; 
+  border-radius: 6px; 
+
+  background-image: 
+    linear-gradient(var(--primary-bg-color, white), var(--primary-bg-color, white)), 
+    linear-gradient(to right, var(--gradient-colors));
+  
+  background-size: 100% 100%, 200% auto;
+  background-origin: padding-box, border-box;
+  background-clip: padding-box, border-box;
+  
+  animation: moveGradient 2s linear infinite;
+}
+
+.animated-gradient-border:focus {
+  outline: none; 
+  border: var(--border-thickness) solid transparent;
 }
 
 .user-info-geo {
