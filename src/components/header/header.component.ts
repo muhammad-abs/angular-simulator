@@ -1,16 +1,16 @@
 import { Component, inject} from '@angular/core';
-import { MessageService } from '../services/message.service';
-import { INavItem } from '../interfaces/INavItem';
+import { MessageService } from '../../services/message.service';
+import { INavItem } from '../../interfaces/INavItem';
 import { RouterLink, RouterLinkActive } from "@angular/router";
-import { ThemeService } from '../services/theme.service';
+import { ThemeService } from '../../services/theme.service';
 import { ToggleSwitchChangeEvent, ToggleSwitchModule } from 'primeng/toggleswitch';
 import { FormsModule } from '@angular/forms';
 import { Observable, tap } from 'rxjs';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { faMoon, faSun, IconDefinition } from '@fortawesome/free-regular-svg-icons';
-import { PrimePreset } from '../enums/PrimePreset';
+import { PrimePreset } from '../../enums/PrimePreset';
 import { AsyncPipe } from '@angular/common';
-import { IPreset } from '../interfaces/IPreset';
+import { IPreset } from '../../interfaces/IPreset';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
  
 @Component({

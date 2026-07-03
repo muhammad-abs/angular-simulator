@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { MessageService } from '../services/message.service';
+import { MessageService } from '../../services/message.service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faTelegram, faVk, faPinterest, faSkype } from '@fortawesome/free-brands-svg-icons';
 

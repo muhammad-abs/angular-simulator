@@ -1,3 +1,6 @@
+@use "../../assets/animations" as *;
+@import "../user-card/user-card.component.scss";
+
 .users-page {
   min-height: 100vh;
   padding: 60px 0 150px; 
@@ -14,13 +17,22 @@
 }
 
 .users-page-title {
-  margin: 0 0 50px;
+  margin: 0px 0 10px;
   color: var(--primary-text-color);
   font-size: 42px;
   font-weight: 700;
   line-height: 1.1;
   text-align: center;
 }
+
+.users-count-title {
+  margin: 0 0 50px;
+  color: var(--third-text-color);
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.1;
+  text-align: center;
+} 
 
 .users-filter-wrapper {
   display: flex;
@@ -69,4 +81,21 @@ app-create-user, app-user-card {
   display: flex;
   flex-direction: column;
   height: 100%;
+}
+
+.animated-gradient-border {
+  position: relative;
+  
+  border: var(--border-thickness) solid transparent; 
+  border-radius: 12px; 
+
+  background-image: 
+    linear-gradient(var(--primary-bg-color, white), var(--primary-bg-color, white)), 
+    linear-gradient(to right, var(--gradient-colors));
+  
+  background-size: 100% 100%, 200% auto;
+  background-origin: padding-box, border-box;
+  background-clip: padding-box, border-box;
+  
+  animation: moveGradient 2s linear infinite;
 }

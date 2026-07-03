@@ -34,4 +34,10 @@
   --third-text-color: #F2BE22;
   --third-bg-color: #09182d;
   --placeholder-color: #94A3B8;
+  
+  .primary-button {
+    background-color: var(--third-text-color);
+    border-color: var(--third-text-color);
+    color: #0F172A;
+  }
 }

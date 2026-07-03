@@ -1,15 +1,15 @@
 import { Component, inject } from '@angular/core';
-import { MessageService } from '../services/message.service';
-import { Message } from '../enums/Message';
+import { MessageService } from '../../services/message.service';
+import { Message } from '../../enums/Message';
 import { FormsModule } from '@angular/forms';
-import { IAdvantage } from '../interfaces/IAdvantage';
-import { IProgram } from '../interfaces/IProgram';
-import { ILocation } from '../interfaces/ILocation';
-import { IPeopleCount } from '../interfaces/IPeopleCount';
-import { IProgramCard } from '../interfaces/IProgramCard';
-import { IDestination } from '../interfaces/IDestination';
-import { IArticle } from '../interfaces/IArticle';
-import { IPhoto } from '../interfaces/IPhoto';
+import { IAdvantage } from '../../interfaces/IAdvantage';
+import { IProgram } from '../../interfaces/IProgram';
+import { ILocation } from '../../interfaces/ILocation';
+import { IPeopleCount } from '../../interfaces/IPeopleCount';
+import { IProgramCard } from '../../interfaces/IProgramCard';
+import { IDestination } from '../../interfaces/IDestination';
+import { IArticle } from '../../interfaces/IArticle';
+import { IPhoto } from '../../interfaces/IPhoto';
 import { faCirclePlay, faStar, faUsers, faTag, faShieldHalved } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 

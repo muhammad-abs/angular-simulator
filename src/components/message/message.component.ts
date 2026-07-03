@@ -1,8 +1,8 @@
 import { Component, inject } from '@angular/core';
-import { MessageService } from '../services/message.service';
+import { MessageService } from '../../services/message.service';
 import { CommonModule} from '@angular/common';
 import { Observable } from 'rxjs';
-import { IMessage } from '../interfaces/IMessage';
+import { IMessage } from '../../interfaces/IMessage';
 
 @Component({
   selector: 'app-message',
