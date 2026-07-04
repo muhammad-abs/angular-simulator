@@ -5,6 +5,9 @@ import { routes } from './app.routes';
 import { Preset } from '@primeuix/themes/types';
 import { PRESETS_MAP } from '../configs/Preset.config'
 import { PrimePreset } from '../enums/PrimePreset';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { httpLoggingInterceptor } from '../interceptors/http-logging.interceptor';
+import { httpErrorInterceptor } from '../interceptors/http-error.interceptor';
 
 function getInitialPreset(): Preset {
   const savedPreset: PrimePreset | null = localStorage.getItem('prime-preset') as PrimePreset | null;
@@ -24,6 +27,7 @@ export const appConfig: ApplicationConfig = {
           darkModeSelector: '.my-app-dark'
         }
       }
-    })
+    }),
+    provideHttpClient(withInterceptors([httpLoggingInterceptor, httpErrorInterceptor]))
   ]
 };

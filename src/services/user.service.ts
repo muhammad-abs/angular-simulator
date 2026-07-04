@@ -50,10 +50,6 @@ export class UserService {
       return this.userApiService.getUsers()
         .pipe(
           finalize(() => this.loaderService.hideLoader()),
-          catchError((error: HttpErrorResponse) => {
-            this.messageService.showError('Пользователи не были загружены');
-            return of([]);
-          }),
         );
     }
   }
