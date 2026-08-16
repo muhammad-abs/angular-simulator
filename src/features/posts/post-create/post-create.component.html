@@ -1,0 +1,50 @@
+<div class="create-post-container">
+  <h2>Создание нового поста</h2>
+
+  <form [formGroup]="createForm" (ngSubmit)="onSubmit()" class="create-form">
+    <div class="field">
+      <label for="title">Title</label>
+      <input id="title" type="text" pInputText formControlName="title" />
+    </div>
+
+    <div class="field">
+      <label for="body">Body</label>
+      <textarea id="body" rows="4" pInputText formControlName="body"></textarea>
+    </div>
+
+    <div class="field">
+      <label for="tags">Tags (через запятую)</label>
+      <input id="tags" type="text" pInputText formControlName="tagsString" />
+    </div>
+
+    <div class="field">
+      <label for="views">Views</label>
+      <input id="views" type="number" pInputText formControlName="views" min="0" />
+    </div>
+
+    <div class="field">
+      <label for="userId">User ID</label>
+      <input id="userId" type="number" pInputText formControlName="userId" min="1" />
+    </div>
+
+    <div style="display: flex; gap: 1rem;">
+      <div class="field" style="flex: 1;">
+        <label for="likes">Likes</label>
+        <input id="likes" type="number" pInputText formControlName="likes" min="0" />
+      </div>
+      <div class="field" style="flex: 1;">
+        <label for="dislikes">Dislikes</label>
+        <input id="dislikes" type="number" pInputText formControlName="dislikes" min="0" />
+      </div>
+    </div>
+
+    <button
+      pButton
+      type="submit"
+      label="Создать"
+      class="submit-btn"
+      [disabled]="createForm.invalid || isSubmitting"
+      [loading]="isSubmitting"
+    ></button>
+  </form>
+</div>

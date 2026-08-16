@@ -1,0 +1,39 @@
+.edit-dialog-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+
+    label {
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: #333333;
+    }
+
+    input {
+      width: 100%;
+      box-sizing: border-box;
+    }
+  }
+
+  .dialog-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+
+    .save-btn {
+      background-color: #1a3e3b;
+      border-color: #1a3e3b;
+
+      &:hover {
+        background-color: #132f2d;
+        border-color: #132f2d;
+      }
+    }
+  }
+}

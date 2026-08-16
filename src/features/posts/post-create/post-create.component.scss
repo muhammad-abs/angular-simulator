@@ -1,0 +1,61 @@
+:host {
+  display: block;
+  padding-top: 160px; 
+  padding-bottom: 160px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.create-post-container {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 2rem;
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+
+  h2 {
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    color: #1a3e3b;
+  }
+
+  .create-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+
+      label {
+        font-weight: 600;
+        font-size: 0.9rem;
+        color: #333333;
+      }
+
+      input, textarea {
+        width: 100%;
+        box-sizing: border-box;
+      }
+    }
+
+    .submit-btn {
+      margin-top: 0.5rem;
+      background-color: #1a3e3b;
+      border-color: #1a3e3b;
+      width: 100%;
+
+      &:hover {
+        background-color: #132f2d;
+        border-color: #132f2d;
+      }
+    }
+  }
+}
+
+textarea {
+  resize: none;
+}
