@@ -15,7 +15,7 @@ export class PostApiService {
   private url: string = 'https://dummyjson.com/posts';
 
   getPosts(limit: number = 10, skip: number = 0): Observable<IPostResponse> {
-    const params = new HttpParams()
+    const params: HttpParams = new HttpParams()
       .set('limit', limit.toString())
       .set('skip', skip.toString())
       .set('select', 'title,tags,views');
@@ -24,19 +24,19 @@ export class PostApiService {
   }
 
   getPostById(id: number | string): Observable<IPost> {
-    return this.http.get<IPost>(`${this.url}/${id}`);
+    return this.http.get<IPost>(`${ this.url }/${ id }`);
   }
 
   createPost(post: Partial<IPost>): Observable<IPost> {
-    return this.http.post<IPost>(`${this.url}/add`, post);
+    return this.http.post<IPost>(`${ this.url }/add`, post);
   }
 
   updatePost(id: number | string, postData: Partial<IPost>): Observable<IPost> {
-    return this.http.put<IPost>(`${this.url}/${id}`, postData);
+    return this.http.put<IPost>(`${ this.url }/${ id }`, postData);
   }
 
   deletePost(id: number | string): Observable<IPost> {
-    return this.http.delete<IPost>(`${this.url}/${id}`);
+    return this.http.delete<IPost>(`${ this.url }/${ id }`);
   }
   
 }

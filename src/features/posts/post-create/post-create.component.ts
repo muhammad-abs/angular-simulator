@@ -71,11 +71,8 @@ export class PostCreateComponent {
 
     return {
       id: 0,
-      title: this.createForm.value.title,
-      body: this.createForm.value.body,
-      userId: Number(this.createForm.value.userId),
+      ...this.createForm.value,
       tags: parsedTags,
-      views: Number(this.createForm.value.views),
       reactions: {
         likes: this.createForm.value.likes,
         dislikes: this.createForm.value.dislikes,

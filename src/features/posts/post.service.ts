@@ -8,6 +8,7 @@ import { IPost } from './IPost';
   providedIn: 'root',
 })
 export class PostService {
+  
   private postApiService: PostApiService = inject(PostApiService);
 
   private postsSubject: BehaviorSubject<IPostResponse | null> =

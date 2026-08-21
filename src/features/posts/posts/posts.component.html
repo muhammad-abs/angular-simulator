@@ -27,28 +27,18 @@
   </ng-template>
 
   <ng-template #body let-post> 
-    <tr [pContextMenuRow]="post" (dblclick)="onRowDoubleClick(post)">
-      <td>
-        @if (isLoading$ | async) {
-          <p-skeleton width="85%" height="1.5rem" />
-        } @else {
-          <span>{{ post.title }}</span>
-        }
-      </td>
-      <td>
-        @if (isLoading$ | async) {
-          <p-skeleton width="50%" height="1.5rem" />
-        } @else {
-          <span>{{ post.tags?.join(', ') }}</span>
-        }
-      </td>
-      <td>
-        @if (isLoading$ | async) {
-          <p-skeleton width="30%" height="1.5rem" />
-        } @else {
-          <span>{{ post.views }}</span>
-        }
-      </td>
-    </tr>
+    @if (isLoading$ | async) {
+      <tr>
+        <td><p-skeleton width="85%" height="1.5rem" /></td>
+        <td><p-skeleton width="50%" height="1.5rem" /></td>
+        <td><p-skeleton width="30%" height="1.5rem" /></td>
+      </tr>
+    } @else {
+      <tr [pContextMenuRow]="post" (dblclick)="onRowDoubleClick(post)">
+        <td><span>{{ post.title }}</span></td>
+        <td><span>{{ post.tags?.join(', ') }}</span></td>
+        <td><span>{{ post.views }}</span></td>
+      </tr>
+    }
   </ng-template>
 </p-table>
