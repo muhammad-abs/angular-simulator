@@ -1,0 +1,23 @@
+<form [formGroup]="editForm" (ngSubmit)="savePost()">
+  <div style="display: flex; flex-direction: column; gap: 1rem;">
+    <div>
+      <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Title:</label>
+      <input pInputText type="text" formControlName="title" style="width: 100%;" />
+    </div>
+
+    <div>
+      <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Tags (через запятую):</label>
+      <input pInputText type="text" formControlName="tags" style="width: 100%;" placeholder="history, american, crime" />
+    </div>
+
+    <div>
+      <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Views:</label>
+      <input pInputText type="number" formControlName="views" style="width: 100%;" />
+    </div>
+
+    <div style="display: flex; justify-content: flex-end; gap: 0.5rem; margin-top: 1rem;">
+      <button pButton type="button" label="Отмена" class="p-button-secondary" (click)="closeDialog()"></button>
+      <button pButton type="submit" label="Сохранить" [disabled]="editForm.invalid"></button>
+    </div>
+  </div>
+</form>

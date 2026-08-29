@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { AsyncPipe } from '@angular/common';
 import { IUser } from '../../interfaces/IUser';
@@ -22,7 +22,7 @@ import { PluralPipe } from '../../pipes/plural.pipe';
   templateUrl: './users-page.component.html',
   styleUrl: './users-page.component.scss',
 })
-export class UsersPageComponent {
+export class UsersPageComponent implements OnInit {
   
   private userService: UserService = inject(UserService);
   
