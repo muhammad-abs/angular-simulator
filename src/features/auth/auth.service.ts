@@ -1,8 +1,9 @@
 import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject, catchError, Observable, of, tap, throwError } from 'rxjs';
-import { IAuthResponse, ILoginRequest, IRefreshResponse, IUser } from './IAuth';
+import { IAuthResponse, IAuthTokens, ILoginRequest, IRefreshResponse, IUser } from './IAuth';
 import { LocalStorageService } from '../../services/local-storage.service';
 import { AuthApiService } from './auth-api.service';
+import { TokenType } from '../../enums/TokenType';
 
 @Injectable({
   providedIn: 'root',
@@ -12,22 +13,21 @@ export class AuthService {
   localStorageService: LocalStorageService = inject(LocalStorageService)
   authApiService: AuthApiService = inject(AuthApiService)
   
-  private TOKEN_KEY: string = 'access_token';
-  private readonly REFRESH_TOKEN_KEY = 'refresh_token';
+  private readonly TOKENS_KEY = 'auth_tokens';
   
   private currentUserSubject: BehaviorSubject<IUser | null> = new BehaviorSubject<IUser | null>(null);
   $currentUser: Observable<IUser | null> = this.currentUserSubject.asObservable();
   
-  get accessToken(): string | null {
-    return this.localStorageService.getValue<string>(this.TOKEN_KEY);
+  get tokens(): IAuthTokens | null {
+    return this.localStorageService.getValue<IAuthTokens>(this.TOKENS_KEY);
   }
-  
-  get refreshTokenValue(): string | null { 
-   return this.localStorageService.getValue<string>(this.REFRESH_TOKEN_KEY);
+
+  getToken(type: TokenType): string | null {
+    return this.tokens?.[type as keyof IAuthTokens] ?? null;
   }
   
   get isAuthenticated(): boolean {
-    return !!this.accessToken;
+    return !!this.getToken(TokenType.ACCESS);
   }
   
   login(loginAndPassword: ILoginRequest): Observable<IAuthResponse> {
@@ -39,8 +39,8 @@ export class AuthService {
     );
   }
   
-  getMe(): Observable<IUser> {
-    return this.authApiService.getMe().pipe(
+  getCurrentProfile(): Observable<IUser> {
+    return this.authApiService.getCurrentProfile().pipe(
       tap((user: IUser) => {
         this.currentUserSubject.next(user);
       }),
@@ -52,7 +52,7 @@ export class AuthService {
   }
   
   refreshToken(): Observable<IRefreshResponse> {
-    const currentRefreshToken: string | null = this.refreshTokenValue;
+    const currentRefreshToken: string | null = this.getToken(TokenType.REFRESH);
 
     if (!currentRefreshToken) {
       this.logout();
@@ -71,13 +71,13 @@ export class AuthService {
   }
   
   public initializeApp(): Observable<IUser | null> {
-    const token: string | null = this.accessToken;
+    const token: string | null = this.getToken(TokenType.ACCESS);
 
     if (!token) {
       return of(null);
     }
 
-    return this.getMe().pipe(
+    return this.getCurrentProfile().pipe(
       catchError(() => {
         this.logout();
         return of(null);
@@ -86,14 +86,12 @@ export class AuthService {
   }
   
   logout(): void {
-    this.localStorageService.removeValue(this.TOKEN_KEY);
-    this.localStorageService.removeValue(this.REFRESH_TOKEN_KEY);
+    this.localStorageService.removeValue(this.TOKENS_KEY);
     this.currentUserSubject.next(null);
   }
   
   private saveTokens(accessToken: string, refreshToken: string): void {
-    this.localStorageService.setValue(this.TOKEN_KEY, accessToken);
-    this.localStorageService.setValue(this.REFRESH_TOKEN_KEY, refreshToken);
+    this.localStorageService.setValue(this.TOKENS_KEY, { accessToken, refreshToken });
   }
   
 }

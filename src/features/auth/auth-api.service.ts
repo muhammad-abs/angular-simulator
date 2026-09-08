@@ -16,7 +16,7 @@ export class AuthApiService {
     return this.http.post<IAuthResponse>(`${ this.API_URL }/login`, loginAndPassword);
   }
   
-  getMe(): Observable<IUser> {
+  getCurrentProfile(): Observable<IUser> {
     return this.http.get<IUser>(`${ this.API_URL }/me`);
   }
   

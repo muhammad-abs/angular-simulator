@@ -23,3 +23,8 @@ export interface IRefreshResponse {
   accessToken: string;
   refreshToken: string;
 }
+
+export interface IAuthTokens {
+  accessToken: string;
+  refreshToken: string;
+}

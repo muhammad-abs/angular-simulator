@@ -3,18 +3,23 @@ import { inject } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { catchError, switchMap, throwError } from 'rxjs';
 import { IRefreshResponse } from '../IAuth';
+import { TokenType } from '../../../enums/TokenType';
 
 export const authInterceptor: HttpInterceptorFn = (req: HttpRequest<unknown>, next:HttpHandlerFn) => {
   
   const authService: AuthService = inject(AuthService);
-  const token: string | null = authService.accessToken;
+  const token: string | null = authService.getToken(TokenType.ACCESS);
+  
+  const addTokenHeader = (request: HttpRequest<unknown>, bearerToken: string): HttpRequest<unknown> => {
+    return request.clone({
+      setHeaders: {
+        Authorization: `Bearer ${bearerToken}`,
+      },
+    });
+  };
   
   if (token) {
-    req = req.clone({
-      setHeaders: {
-        Authorization: `Bearer ${ token }`,
-      },
-    })
+    req = addTokenHeader(req, token);
   }
   
   return next(req).pipe(
@@ -24,14 +29,10 @@ export const authInterceptor: HttpInterceptorFn = (req: HttpRequest<unknown>, ne
       if (error.status === 401 && !isAuthRequest) {
         return authService.refreshToken().pipe(
           switchMap((response: IRefreshResponse) => {
-            const newReq = req.clone({
-              setHeaders: {
-                Authorization: `Bearer ${response.accessToken}`,
-              },
-            });
+            const newReq = addTokenHeader(req, response.accessToken);
             return next(newReq);
           }),
-          catchError((refreshError) => {
+          catchError((refreshError: HttpErrorResponse) => {
               return throwError(() => refreshError);
           })
         );
