@@ -13,7 +13,7 @@ export class AuthService {
   localStorageService: LocalStorageService = inject(LocalStorageService)
   authApiService: AuthApiService = inject(AuthApiService)
   
-  private readonly TOKENS_KEY = 'auth_tokens';
+  private readonly TOKENS_KEY: "auth_tokens" = 'auth_tokens';
   
   private currentUserSubject: BehaviorSubject<IUser | null> = new BehaviorSubject<IUser | null>(null);
   $currentUser: Observable<IUser | null> = this.currentUserSubject.asObservable();
