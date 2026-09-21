@@ -1,10 +1,16 @@
 import { Routes } from '@angular/router';
+import { authGuard } from '../features/auth/components/auth.guard';
+import { LoginComponent } from '../features/auth/components/login/login.component';
 
 export const routes: Routes = [
   {
     path: '',
     loadComponent: () =>
       import('../components/home-page/home-page.component').then((m) => m.HomePageComponent),
+  },
+  { 
+    path: 'login', 
+    component: LoginComponent, 
   },
   {
     path: 'users',
@@ -15,6 +21,7 @@ export const routes: Routes = [
     path: 'posts',
     loadChildren: () =>
       import('../features/posts/posts.routes').then((m) => m.postsRoutes),
+    canActivate: [authGuard],
   },
   {
     path: '**',

@@ -52,7 +52,19 @@ export class HeaderComponent {
       label: 'Пользователи',
       path: '/users',
       exact: false
-    }
+    },
+    { 
+      id: 3, 
+      label: 'Посты', 
+      path: '/posts', 
+      exact: false 
+    },
+    { 
+      id: 4, 
+      label: 'Логин', 
+      path: '/login', 
+      exact: false 
+    },
   ];
   
   readonly companyName: string = 'румтибет';

@@ -1,4 +1,4 @@
-import { ApplicationConfig, provideBrowserGlobalErrorListeners, provideZoneChangeDetection } from '@angular/core';
+import { ApplicationConfig, inject, provideAppInitializer, provideBrowserGlobalErrorListeners, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { providePrimeNG } from 'primeng/config';
 import { routes } from './app.routes';
@@ -8,6 +8,8 @@ import { PrimePreset } from '../enums/PrimePreset';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { httpLoggingInterceptor } from '../interceptors/http-logging.interceptor';
 import { httpErrorInterceptor } from '../interceptors/http-error.interceptor';
+import { authInterceptor } from '../features/auth/components/auth.interceptor';
+import { AuthService } from '../features/auth/auth.service';
 
 function getInitialPreset(): Preset {
   const savedPreset: PrimePreset | null = localStorage.getItem('prime-preset') as PrimePreset | null;
@@ -28,6 +30,10 @@ export const appConfig: ApplicationConfig = {
         }
       }
     }),
-    provideHttpClient(withInterceptors([httpLoggingInterceptor, httpErrorInterceptor]))
+    provideHttpClient(withInterceptors([httpLoggingInterceptor, httpErrorInterceptor, authInterceptor])),
+    provideAppInitializer(() => {
+      const authService = inject(AuthService);
+      return authService.initializeApp();
+    }),
   ]
 };
