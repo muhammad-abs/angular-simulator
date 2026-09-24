@@ -1,16 +1,15 @@
 <header class="header">
-  <div class="container" style="max-width: 2680px;">
+  <div class="container" style="max-width: 2680px">
     <div class="container">
-      
       <div class="logo">
         <div class="logo-img">
-          <img src="/images/logo.svg" alt="logo">
+          <img src="/images/logo.svg" alt="logo" />
         </div>
         <div class="logo-text">
           <span class="companyNameText">{{ companyName }}</span>
         </div>
       </div>
-      
+
       <div class="menu">
         <nav class="nav">
           <ul class="list">
@@ -31,7 +30,7 @@
 
         <div class="theme-controls">
           <div class="mode-switcher">
-            <p-toggle-switch 
+            <p-toggle-switch
               id="app-mode-switcher"
               [ngModel]="isDarkMode$ | async"
               (onChange)="toggleDarkMode($event)"
@@ -41,7 +40,7 @@
               </ng-template>
             </p-toggle-switch>
           </div>
-          
+
           <div class="preset-switcher">
             <p-selectbutton
               id="select-preset-button"
@@ -53,7 +52,7 @@
             />
           </div>
         </div>
-    
+
         <button
           id="consultation-button"
           class="primary-button consultation-button"
@@ -62,7 +61,6 @@
           Консультация
         </button>
       </div>
-
     </div>
   </div>
 </header>

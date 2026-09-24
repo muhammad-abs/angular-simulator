@@ -18,9 +18,7 @@
         placeholder="Введите логин"
       />
       @if (loginForm.get('username')?.touched && loginForm.get('username')?.invalid) {
-        <small class="field-error">
-          Логин обязателен для заполнения
-        </small>
+        <small class="field-error"> Логин обязателен для заполнения </small>
       }
     </div>
 
@@ -34,9 +32,7 @@
         placeholder="Введите пароль"
       />
       @if (loginForm.get('password')?.touched && loginForm.get('password')?.invalid) {
-        <small class="field-error">
-          Пароль обязателен для заполнения
-        </small>
+        <small class="field-error"> Пароль обязателен для заполнения </small>
       }
     </div>
 

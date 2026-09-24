@@ -3,7 +3,7 @@
 @use './button';
 @use './desc.block';
 
-@import "primeicons/primeicons.css";
+@import 'primeicons/primeicons.css';
 
 * {
   font-family: 'Nunito Sans';
@@ -11,33 +11,33 @@
   padding: 0px;
   box-sizing: border-box;
 }
- 
+
 :root {
-  --primary-text-color: #18121E;
-  --primary-bg-color: #FFFFFF;
-  
-  --secondary-text-color: #FDFDFD;
-  --secondary-bg-color: #1A3E3E;
-  
-  --third-text-color: #F2BE22;
-  --third-bg-color: #F3F5F4;
-  --placeholder-color: #8A9494;
+  --primary-text-color: #18121e;
+  --primary-bg-color: #ffffff;
+
+  --secondary-text-color: #fdfdfd;
+  --secondary-bg-color: #1a3e3e;
+
+  --third-text-color: #f2be22;
+  --third-bg-color: #f3f5f4;
+  --placeholder-color: #8a9494;
 }
 
 .my-app-dark {
-  --primary-text-color: #FDFDFD;
+  --primary-text-color: #fdfdfd;
   --primary-bg-color: #171f2d;
-  
-  --secondary-text-color: #E2E8F0;
-  --secondary-bg-color: #0F172A;
-  
-  --third-text-color: #F2BE22;
+
+  --secondary-text-color: #e2e8f0;
+  --secondary-bg-color: #0f172a;
+
+  --third-text-color: #f2be22;
   --third-bg-color: #09182d;
-  --placeholder-color: #94A3B8;
-  
+  --placeholder-color: #94a3b8;
+
   .primary-button {
     background-color: var(--third-text-color);
     border-color: var(--third-text-color);
-    color: #0F172A;
+    color: #0f172a;
   }
 }

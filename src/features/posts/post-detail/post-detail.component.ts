@@ -8,12 +8,7 @@ import { IPost } from '../IPost';
 @Component({
   selector: 'app-post-detail',
   standalone: true,
-  imports: [
-    RouterLink,
-    CardModule,
-    TagModule,
-    ButtonModule
-  ],
+  imports: [RouterLink, CardModule, TagModule, ButtonModule],
   templateUrl: './post-detail.component.html',
   styleUrl: './post-detail.component.scss',
 })
@@ -26,5 +21,5 @@ export class PostDetailComponent implements OnInit {
   ngOnInit(): void {
     this.post = this.route.snapshot.data['post'];
   }
-  
+
 }

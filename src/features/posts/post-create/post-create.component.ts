@@ -12,14 +12,7 @@ import { IPost } from '../IPost';
 @Component({
   selector: 'app-post-create',
   standalone: true,
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    RouterLink,
-    InputTextModule,
-    InputNumberModule,
-    ButtonModule,
-  ],
+  imports: [CommonModule, ReactiveFormsModule, InputTextModule, InputNumberModule, ButtonModule],
   templateUrl: './post-create.component.html',
   styleUrl: './post-create.component.scss',
 })
@@ -56,7 +49,7 @@ export class PostCreateComponent {
         catchError(() => EMPTY),
         finalize(() => {
           this.isSubmitting = false;
-        })
+        }),
       )
       .subscribe();
   }
@@ -79,5 +72,5 @@ export class PostCreateComponent {
       },
     };
   }
-  
+
 }

@@ -1,5 +1,5 @@
 const eslint = require('@eslint/js');
-const { defineConfig } = require('eslint/config');
+const { defineConfig, globalIgnores } = require('eslint/config');
 const tseslint = require('typescript-eslint');
 const angular = require('angular-eslint');
 
@@ -8,6 +8,7 @@ const eslintConfigPrettier = require('eslint-config-prettier');
 const stylistic = require('@stylistic/eslint-plugin');
 
 module.exports = defineConfig([
+  globalIgnores(['.angular/', 'dist/', 'node_modules/']),
   {
     files: ['**/*.ts'],
 
@@ -27,8 +28,6 @@ module.exports = defineConfig([
     processor: angular.processInlineTemplates,
 
     rules: {
-      'prettier/prettier': 'error',
-
       '@typescript-eslint/no-unused-vars': 'off',
       '@typescript-eslint/no-inferrable-types': 'off',
       '@typescript-eslint/consistent-generic-constructors': 'off',
@@ -41,7 +40,7 @@ module.exports = defineConfig([
           style: 'camelCase',
         },
       ],
-      
+
       '@angular-eslint/component-selector': [
         'error',
         {

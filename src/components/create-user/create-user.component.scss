@@ -1,11 +1,11 @@
-@use "../../assets/animations" as *;
+@use '../../assets/animations' as *;
 
 .card-user-item {
   position: relative;
   padding: 20px 20px 24px;
-  border-top: 4px solid var(--third-text-color); 
+  border-top: 4px solid var(--third-text-color);
   border-radius: 4px;
-  background-color: var(--primary-bg-color); 
+  background-color: var(--primary-bg-color);
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
   display: flex;
   flex-direction: column;
@@ -21,7 +21,7 @@ form {
 
 .card-user-section {
   margin-bottom: 16px;
-  
+
   &:last-child {
     margin-bottom: 0;
   }
@@ -51,7 +51,7 @@ form {
   grid-template-columns: 110px 1fr;
   gap: 10px;
   margin-bottom: 8px;
-  align-items: center; 
+  align-items: center;
 
   &:last-child {
     margin-bottom: 0;
@@ -71,10 +71,10 @@ input {
   box-sizing: border-box;
   border: 1px solid rgba(141, 154, 154, 0.3);
   border-radius: 4px;
-  background-color: var(--third-bg-color); 
-  
-  color: var(--primary-text-color) !important; 
-  
+  background-color: var(--third-bg-color);
+
+  color: var(--primary-text-color) !important;
+
   font-family: 'Nunito Sans', sans-serif;
   font-size: 14px;
   font-weight: 600;
@@ -82,30 +82,32 @@ input {
 
   &:focus {
     outline: none;
-    border-color: var(--third-text-color); 
-    box-shadow: 0 0 0 2px rgba(242, 190, 34, 0.2); 
+    border-color: var(--third-text-color);
+    box-shadow: 0 0 0 2px rgba(242, 190, 34, 0.2);
   }
 }
 
 .animated-gradient-border {
   position: relative;
-  
-  border: var(--border-thickness) solid transparent; 
-  border-radius: 6px; 
 
-  background-image: 
-    linear-gradient(var(--primary-bg-color, white), var(--primary-bg-color, white)), 
+  border: var(--border-thickness) solid transparent;
+  border-radius: 6px;
+
+  background-image:
+    linear-gradient(var(--primary-bg-color, white), var(--primary-bg-color, white)),
     linear-gradient(to right, var(--gradient-colors));
-  
-  background-size: 100% 100%, 200% auto;
+
+  background-size:
+    100% 100%,
+    200% auto;
   background-origin: padding-box, border-box;
   background-clip: padding-box, border-box;
-  
+
   animation: moveGradient 2s linear infinite;
 }
 
 .animated-gradient-border:focus {
-  outline: none; 
+  outline: none;
   border: var(--border-thickness) solid transparent;
 }
 
@@ -129,8 +131,8 @@ button {
   width: 100%;
   border: none;
   border-radius: 4px;
-  background-color: var(--third-text-color); 
-  color: #18121E; 
+  background-color: var(--third-text-color);
+  color: #18121e;
   font-family: 'Nunito Sans', sans-serif;
   font-size: 12px;
   font-weight: 800;
@@ -140,8 +142,8 @@ button {
   transition: all 0.25s ease-in-out;
 
   &:not(:disabled):hover {
-    background-color: #e0ae1a; 
-    box-shadow: 0 5px 15px rgba(242, 190, 34, 0.35); 
+    background-color: #e0ae1a;
+    box-shadow: 0 5px 15px rgba(242, 190, 34, 0.35);
     transform: translateY(-1px);
   }
 
@@ -150,10 +152,10 @@ button {
   }
 
   &:disabled {
-    background-color: var(--third-bg-color); 
-    color: var(--placeholder-color); 
+    background-color: var(--third-bg-color);
+    color: var(--placeholder-color);
     border: 1px solid rgba(141, 154, 154, 0.2);
-    cursor: not-allowed; 
+    cursor: not-allowed;
     box-shadow: none;
     transform: none;
     opacity: 0.5;

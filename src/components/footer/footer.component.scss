@@ -2,7 +2,9 @@ footer {
   padding-top: 0;
   background: var(--secondary-bg-color);
   color: var(--secondary-text-color);
-  transition: background 0.3s ease, color 0.3s ease;
+  transition:
+    background 0.3s ease,
+    color 0.3s ease;
 
   .container {
     width: 1180px;
@@ -14,7 +16,7 @@ footer {
     position: relative;
     z-index: 2;
     height: 98px;
-    
+
     .subscribe-wrapper {
       width: 1180px;
       height: 196px;
@@ -28,7 +30,9 @@ footer {
       gap: 64px;
       box-sizing: border-box;
       transform: translateY(-98px);
-      transition: background 0.3s ease, box-shadow 0.3s ease;
+      transition:
+        background 0.3s ease,
+        box-shadow 0.3s ease;
     }
 
     .title-wrapper {
@@ -80,7 +84,9 @@ footer {
           line-height: 20px;
           outline: none;
           box-sizing: border-box;
-          transition: background 0.3s ease, border-color 0.2s ease;
+          transition:
+            background 0.3s ease,
+            border-color 0.2s ease;
 
           &:focus {
             border-color: var(--third-text-color);
@@ -102,13 +108,15 @@ footer {
           font-weight: 600;
 
           cursor: pointer;
-          transition: transform 0.2s ease, opacity 0.2s ease;
+          transition:
+            transform 0.2s ease,
+            opacity 0.2s ease;
 
           &:hover {
             opacity: 0.9;
             transform: translateY(-1px);
           }
-          
+
           &:active {
             transform: translateY(0);
           }
@@ -119,11 +127,11 @@ footer {
         font-size: 14px;
         line-height: 18px;
         color: var(--placeholder-color);
-        
+
         a {
           color: var(--primary-text-color);
           text-decoration: underline;
-          
+
           &:hover {
             color: var(--third-text-color);
           }
@@ -170,7 +178,7 @@ footer {
           color: var(--secondary-text-color);
           text-decoration: underline;
           font-size: 14px;
-          
+
           &:hover {
             color: var(--third-text-color);
           }
@@ -188,7 +196,7 @@ footer {
           height: 16px;
           color: var(--secondary-text-color);
           transition: color 0.2s ease;
-          
+
           &:hover {
             color: var(--third-text-color);
           }
@@ -196,7 +204,8 @@ footer {
       }
     }
 
-    .services, .travel-info {
+    .services,
+    .travel-info {
       width: 280px;
 
       h4 {
@@ -215,7 +224,8 @@ footer {
           margin-top: 16px;
         }
 
-        .service-link, .info-link {
+        .service-link,
+        .info-link {
           display: flex;
           align-items: center;
           gap: 10px;
@@ -249,15 +259,16 @@ footer {
       align-items: center;
       justify-content: space-between;
 
-      p, a {
+      p,
+      a {
         font-size: 14px;
         color: var(--secondary-text-color);
         opacity: 0.7;
       }
-      
+
       a {
         text-decoration: underline;
-        
+
         &:hover {
           color: var(--third-text-color);
           opacity: 1;

@@ -7,7 +7,7 @@ export interface IUser {
   website: string;
   address: IAddress;
   company: ICompany;
-} 
+}
 
 interface IAddress {
   street: string;

@@ -1,15 +1,15 @@
 @if (post) {
   <div class="post-detail-container">
     <p-card class="post-card">
-      
       <div class="mb-3">
         <button
           id="back-btn"
-          pButton 
-          type="button" 
-          label="Назад к спискам" 
-          icon="pi pi-arrow-left" 
-          class="p-button-text p-button-secondary" 
+          pButton
+          type="button"
+          label="Назад к спискам"
+          aria-label="Назад к спискам"
+          icon="pi pi-arrow-left"
+          class="p-button-text p-button-secondary"
           routerLink="/posts"
         ></button>
       </div>
@@ -21,7 +21,9 @@
       <div class="post-meta">
         <div class="views-info">
           <i class="pi pi-eye"></i>
-          <span>Просмотры: <strong>{{ post.views }}</strong></span>
+          <span
+            >Просмотры: <strong>{{ post.views }}</strong></span
+          >
         </div>
 
         <div class="tags-info">

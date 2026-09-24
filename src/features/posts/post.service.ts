@@ -8,7 +8,7 @@ import { IPost } from './IPost';
   providedIn: 'root',
 })
 export class PostService {
-  
+
   private postApiService: PostApiService = inject(PostApiService);
 
   private postsSubject: BehaviorSubject<IPostResponse | null> =
@@ -20,7 +20,7 @@ export class PostService {
     return this.postApiService.getPosts(limit, skip).pipe(
       tap((response: IPostResponse) => {
         this.postsSubject.next(response);
-      })
+      }),
     );
   }
 
@@ -30,7 +30,7 @@ export class PostService {
         const currentData: IPostResponse | null = this.postsSubject.getValue();
         if (currentData) {
           const updatedPosts: IPost[] = currentData.posts.filter(
-            (post) => post.id !== Number(id) && post.id !== id
+            (post) => post.id !== Number(id) && post.id !== id,
           );
           this.postsSubject.next({
             ...currentData,
@@ -38,7 +38,7 @@ export class PostService {
             total: currentData.total - 1,
           });
         }
-      })
+      }),
     );
   }
 
@@ -52,11 +52,11 @@ export class PostService {
         const currentData: IPostResponse | null = this.postsSubject.getValue();
         if (currentData) {
           const updatedPosts: IPost[] = currentData.posts.map((post: IPost) =>
-            post.id === resPost.id ? { ...post, ...resPost } : post
+            post.id === resPost.id ? { ...post, ...resPost } : post,
           );
           this.postsSubject.next({ ...currentData, posts: updatedPosts });
         }
-      })
+      }),
     );
   }
 
@@ -71,8 +71,8 @@ export class PostService {
             total: currentData.total + 1,
           });
         }
-      })
+      }),
     );
   }
-  
+
 }

@@ -27,12 +27,12 @@
       <input id="userId" type="number" pInputText formControlName="userId" min="1" />
     </div>
 
-    <div style="display: flex; gap: 1rem;">
-      <div class="field" style="flex: 1;">
+    <div style="display: flex; gap: 1rem">
+      <div class="field" style="flex: 1">
         <label for="likes">Likes</label>
         <input id="likes" type="number" pInputText formControlName="likes" min="0" />
       </div>
-      <div class="field" style="flex: 1;">
+      <div class="field" style="flex: 1">
         <label for="dislikes">Dislikes</label>
         <input id="dislikes" type="number" pInputText formControlName="dislikes" min="0" />
       </div>
@@ -42,6 +42,7 @@
       pButton
       type="submit"
       label="Создать"
+      aria-label="Создать"
       class="submit-btn"
       [disabled]="createForm.invalid || isSubmitting"
       [loading]="isSubmitting"
