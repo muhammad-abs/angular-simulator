@@ -4,6 +4,7 @@ import { IAuthResponse, IAuthTokens, ILoginRequest, IRefreshResponse, IUser } fr
 import { LocalStorageService } from '../../services/local-storage.service';
 import { AuthApiService } from './auth-api.service';
 import { TokenType } from '../../enums/TokenType';
+import { Role } from '../../enums/Role';
 
 @Injectable({
   providedIn: 'root',
@@ -17,6 +18,10 @@ export class AuthService {
   
   private currentUserSubject: BehaviorSubject<IUser | null> = new BehaviorSubject<IUser | null>(null);
   $currentUser: Observable<IUser | null> = this.currentUserSubject.asObservable();
+  
+  get isAdmin(): boolean {
+    return this.currentUserSubject.value?.role === Role.ADMIN;
+  }
   
   get tokens(): IAuthTokens | null {
     return this.localStorageService.getValue<IAuthTokens>(this.TOKENS_KEY);
