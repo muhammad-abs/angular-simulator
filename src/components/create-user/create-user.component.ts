@@ -1,27 +1,27 @@
 import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { IUser } from '../../interfaces/IUser';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { HoverDirective } from "../../directives/hover.directive";
-import { GradientDirective } from "../../directives/gradient.directive";
+import { HoverDirective } from '../../directives/hover.directive';
+import { GradientDirective } from '../../directives/gradient.directive';
 
 @Component({
   selector: 'app-create-user',
-  imports: [ReactiveFormsModule, HoverDirective, GradientDirective],
+  imports: [ReactiveFormsModule, GradientDirective],
   templateUrl: './create-user.component.html',
   styleUrl: './create-user.component.scss',
 })
 export class CreateUserComponent {
-  
+
   @Output() createUser: EventEmitter<IUser> = new EventEmitter<IUser>();
-  
-  inputGradientConfig = { 
-    delay: 100, 
-    colors: ['#F2BE22', '#E2E8F0'], 
-    thickness: '1px' 
+
+  inputGradientConfig = {
+    delay: 100,
+    colors: ['#F2BE22', '#E2E8F0'],
+    thickness: '1px',
   };
-  
+
   private fb: FormBuilder = inject(FormBuilder);
-  
+
   userForm: FormGroup = this.fb.group({
     name: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
     username: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
@@ -35,20 +35,20 @@ export class CreateUserComponent {
       zipcode: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(10)]],
       geo: this.fb.group({
         lat: ['', [Validators.required]],
-        lng: ['', [Validators.required]]
-      })
+        lng: ['', [Validators.required]],
+      }),
     }),
     company: this.fb.group({
       name: ['', [Validators.required, Validators.maxLength(50)]],
       catchPhrase: ['', [Validators.maxLength(200)]],
       bs: ['', [Validators.maxLength(100)]],
-    })
-  })
-    
+    }),
+  });
+
   handleSubmit(): void {
     const formValue: IUser = { id: Date.now(), ...this.userForm.value };
     this.createUser.emit(formValue);
     this.userForm.reset();
   }
-  
+
 }

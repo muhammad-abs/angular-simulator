@@ -10,19 +10,22 @@ import { Role } from '../../enums/Role';
   providedIn: 'root',
 })
 export class AuthService {
-  
-  localStorageService: LocalStorageService = inject(LocalStorageService)
-  authApiService: AuthApiService = inject(AuthApiService)
-  
-  private readonly TOKENS_KEY: "auth_tokens" = 'auth_tokens';
-  
-  private currentUserSubject: BehaviorSubject<IUser | null> = new BehaviorSubject<IUser | null>(null);
+
+  localStorageService: LocalStorageService = inject(LocalStorageService);
+  authApiService: AuthApiService = inject(AuthApiService);
+
+  private readonly TOKENS_KEY = 'auth_tokens' as const;
+
+  private currentUserSubject: BehaviorSubject<IUser | null> = new BehaviorSubject<IUser | null>(
+    null,
+  );
+
   $currentUser: Observable<IUser | null> = this.currentUserSubject.asObservable();
-  
+
   get isAdmin(): boolean {
     return this.currentUserSubject.value?.role === Role.ADMIN;
   }
-  
+
   get tokens(): IAuthTokens | null {
     return this.localStorageService.getValue<IAuthTokens>(this.TOKENS_KEY);
   }
@@ -30,20 +33,20 @@ export class AuthService {
   getToken(type: TokenType): string | null {
     return this.tokens?.[type as keyof IAuthTokens] ?? null;
   }
-  
+
   get isAuthenticated(): boolean {
     return !!this.getToken(TokenType.ACCESS);
   }
-  
+
   login(loginAndPassword: ILoginRequest): Observable<IAuthResponse> {
     return this.authApiService.getTokens(loginAndPassword).pipe(
       tap((response: IAuthResponse) => {
         this.saveTokens(response.accessToken, response.refreshToken);
         this.currentUserSubject.next(response);
-      })
+      }),
     );
   }
-  
+
   getCurrentProfile(): Observable<IUser> {
     return this.authApiService.getCurrentProfile().pipe(
       tap((user: IUser) => {
@@ -52,10 +55,10 @@ export class AuthService {
       catchError((error) => {
         this.logout();
         return throwError(() => error);
-      })
-    )
+      }),
+    );
   }
-  
+
   refreshToken(): Observable<IRefreshResponse> {
     const currentRefreshToken: string | null = this.getToken(TokenType.REFRESH);
 
@@ -71,11 +74,11 @@ export class AuthService {
       catchError((err) => {
         this.logout();
         return throwError(() => err);
-      })
+      }),
     );
   }
-  
-  public initializeApp(): Observable<IUser | null> {
+
+  initializeApp(): Observable<IUser | null> {
     const token: string | null = this.getToken(TokenType.ACCESS);
 
     if (!token) {
@@ -86,17 +89,17 @@ export class AuthService {
       catchError(() => {
         this.logout();
         return of(null);
-      })
+      }),
     );
   }
-  
+
   logout(): void {
     this.localStorageService.removeValue(this.TOKENS_KEY);
     this.currentUserSubject.next(null);
   }
-  
+
   private saveTokens(accessToken: string, refreshToken: string): void {
     this.localStorageService.setValue(this.TOKENS_KEY, { accessToken, refreshToken });
   }
-  
+
 }

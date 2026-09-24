@@ -3,5 +3,5 @@ export enum Message {
   INFO = 'Info',
   WARN = 'Warn',
   ERROR = 'Error',
-  DISCLAIMER = 'Disclaimer'
+  DISCLAIMER = 'Disclaimer',
 }

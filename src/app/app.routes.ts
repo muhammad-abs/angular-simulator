@@ -9,9 +9,9 @@ export const routes: Routes = [
     loadComponent: () =>
       import('../components/home-page/home-page.component').then((m) => m.HomePageComponent),
   },
-  { 
-    path: 'login', 
-    component: LoginComponent, 
+  {
+    path: 'login',
+    component: LoginComponent,
   },
   {
     path: 'users',
@@ -21,13 +21,14 @@ export const routes: Routes = [
   },
   {
     path: 'posts',
-    loadChildren: () =>
-      import('../features/posts/posts.routes').then((m) => m.postsRoutes),
+    loadChildren: () => import('../features/posts/posts.routes').then((m) => m.postsRoutes),
     canActivate: [authGuard, adminGuard],
   },
   {
     path: '**',
     loadComponent: () =>
-      import('../components/not-found-page/not-found-page.component').then((m) => m.NotFoundPageComponent),
+      import('../components/not-found-page/not-found-page.component').then(
+        (m) => m.NotFoundPageComponent,
+      ),
   },
 ];

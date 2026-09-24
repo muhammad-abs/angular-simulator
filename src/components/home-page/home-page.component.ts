@@ -10,9 +10,14 @@ import { IProgramCard } from '../../interfaces/IProgramCard';
 import { IDestination } from '../../interfaces/IDestination';
 import { IArticle } from '../../interfaces/IArticle';
 import { IPhoto } from '../../interfaces/IPhoto';
-import { faCirclePlay, faStar, faUsers, faTag, faShieldHalved } from '@fortawesome/free-solid-svg-icons';
+import {
+  faCirclePlay,
+  faStar,
+  faUsers,
+  faTag,
+  faShieldHalved,
+} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-
 
 @Component({
   selector: 'app-home-page',
@@ -21,18 +26,18 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
   styleUrl: './home-page.component.scss',
 })
 export class HomePageComponent {
-  
+
   messageService: MessageService = inject(MessageService);
-  
+
   faCirclePlay = faCirclePlay;
   faStar = faStar;
-  
+
   isDateFocused: boolean = false;
   isFormTouched: boolean = false;
   enteredText!: string;
   messageType: typeof Message = Message;
   currentAdvantageId!: number;
-  currentProgramCardId! : number;
+  currentProgramCardId!: number;
   currentArticleId!: number;
   isTimerView: boolean = true;
   currentDateTime: Date = new Date();
@@ -41,170 +46,173 @@ export class HomePageComponent {
   programs: IProgram = {
     location: '',
     dateRange: '',
-    peopleCount: ''
-  }
-  
-  peopleCount: IPeopleCount[] = [ 
+    peopleCount: '',
+  };
+
+  peopleCount: IPeopleCount[] = [
     { id: 1, count: 4 },
     { id: 2, count: 8 },
     { id: 3, count: 12 },
-    { id: 4, count: 16 }
+    { id: 4, count: 16 },
   ];
-  
+
   locations: ILocation[] = [
     { id: 1, value: 'Турция' },
     { id: 2, value: 'Италия' },
-    { id: 3, value: 'Греция' }
+    { id: 3, value: 'Греция' },
   ];
-  
+
   programCards: IProgramCard[] = [
     { id: 1, image: 'mountains' },
     { id: 2, image: 'hiking' },
     { id: 3, image: 'snowmobile' },
-    { id: 4, image: 'river' }
+    { id: 4, image: 'river' },
   ];
-  
+
   advantages: IAdvantage[] = [
     {
       id: 1,
       title: 'Опытный гид',
-      description: 'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.',
-      icon: faUsers
+      description:
+        'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.',
+      icon: faUsers,
     },
     {
       id: 2,
       title: 'Безопасный поход',
-      description: 'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.',
-      icon: faShieldHalved
+      description:
+        'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.',
+      icon: faShieldHalved,
     },
     {
       id: 3,
       title: 'Лояльные цены',
-      description: 'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.',
-      icon: faTag
+      description:
+        'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.',
+      icon: faTag,
     },
   ];
-  
+
   destinations: IDestination[] = [
-    { 
-      id: 1, 
+    {
+      id: 1,
       image: 'lake',
-      title: 'Озеро возле гор' ,
+      title: 'Озеро возле гор',
       subTitle: 'романтическое приключение',
       cost: 480,
-      review:' 4.9',
-      desc: 'Его корни уходят в один фрагмент классической латыни 45 года н.э., то есть более двух тысячелетий назад. Ричард МакКлинток, профессор латыни из колледжа Hampden-Sydney, штат Вирджиния, взял одно из самых странных слов в Lorem Ipsum, "consectetur"и занялся его поисками в классической латинской литературе.'
+      review: ' 4.9',
+      desc: 'Его корни уходят в один фрагмент классической латыни 45 года н.э., то есть более двух тысячелетий назад. Ричард МакКлинток, профессор латыни из колледжа Hampden-Sydney, штат Вирджиния, взял одно из самых странных слов в Lorem Ipsum, "consectetur"и занялся его поисками в классической латинской литературе.',
     },
-    { 
-      id: 2, 
+    {
+      id: 2,
       image: 'night',
-      title: 'Ночь в горах' ,
+      title: 'Ночь в горах',
       subTitle: 'в компании друзей',
       cost: 500,
       review: '4.5',
-      desc: '2Его корни уходят в один фрагмент классической латыни 45 года н.э., то есть более двух тысячелетий назад. Ричард МакКлинток, профессор латыни из колледжа Hampden-Sydney, штат Вирджиния, взял одно из самых странных слов в Lorem Ipsum, "consectetur"и занялся его поисками в классической латинской литературе.'
+      desc: '2Его корни уходят в один фрагмент классической латыни 45 года н.э., то есть более двух тысячелетий назад. Ричард МакКлинток, профессор латыни из колледжа Hampden-Sydney, штат Вирджиния, взял одно из самых странных слов в Lorem Ipsum, "consectetur"и занялся его поисками в классической латинской литературе.',
     },
-    { 
-      id: 3, 
+    {
+      id: 3,
       image: 'workout',
-      title: 'Растяжка в горах' ,
+      title: 'Растяжка в горах',
       subTitle: 'для тех, кто забоится о себе',
       cost: 230,
       review: '5.0',
-      desc: '3Его корни уходят в один фрагмент классической латыни 45 года н.э., то есть более двух тысячелетий назад. Ричард МакКлинток, профессор латыни из колледжа Hampden-Sydney, штат Вирджиния, взял одно из самых странных слов в Lorem Ipsum, "consectetur"и занялся его поисками в классической латинской литературе.'
+      desc: '3Его корни уходят в один фрагмент классической латыни 45 года н.э., то есть более двух тысячелетий назад. Ричард МакКлинток, профессор латыни из колледжа Hampden-Sydney, штат Вирджиния, взял одно из самых странных слов в Lorem Ipsum, "consectetur"и занялся его поисками в классической латинской литературе.',
     },
   ];
-  
+
   articles: IArticle[] = [
     {
       id: 1,
       img: 'italy',
       title: 'Красивая Италия, какая она в реальности?',
       desc: 'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.',
-      date: '01/04/2023'
+      date: '01/04/2023',
     },
     {
       id: 2,
       img: 'world',
       title: 'Долой сомнения! Весь мир открыт для вас!',
       desc: 'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации ... независимые способы реализации соответствующих...',
-      date: '01/06/2023'
+      date: '01/06/2023',
     },
     {
       id: 3,
       img: 'solo',
       title: 'Как подготовиться к путешествию в одиночку? ',
       desc: 'Для современного мира базовый вектор развития предполагает.',
-      date: '01/05/2023'
+      date: '01/05/2023',
     },
     {
       id: 4,
       img: 'india',
       title: 'Индия ... летим?',
       desc: 'Для современного мира базовый.',
-      date: '01/07/2023'
+      date: '01/07/2023',
     },
   ];
-  
+
   photos: IPhoto[] = [
     {
       id: 1,
-      img: 'balloons'
+      img: 'balloons',
     },
     {
       id: 2,
-      img: 'trip-map'
+      img: 'trip-map',
     },
     {
       id: 3,
-      img: 'hotel'
+      img: 'hotel',
     },
     {
       id: 4,
-      img: 'beach'
+      img: 'beach',
     },
     {
       id: 5,
-      img: 'canyon'
+      img: 'canyon',
     },
     {
       id: 6,
-      img: 'diary'
+      img: 'diary',
     },
   ];
-  
+
   constructor() {
     setInterval(() => {
       this.currentDateTime = new Date();
-    }, 1000); 
+    }, 1000);
   }
-  
+
   isFormInvalid(): boolean {
     return !this.programs.location || !this.programs.dateRange || !this.programs.peopleCount;
   }
-  
+
   selectAdvantage(advantageId: number): void {
     this.currentAdvantageId = advantageId;
   }
-  
+
   selectProgramCard(programCardId: number): void {
     this.currentProgramCardId = programCardId;
   }
-  
+
   selectArticle(articleId: number): void {
     this.currentArticleId = articleId;
   }
-  
+
   changeTask(): void {
     this.isTimerView = !this.isTimerView;
   }
-  
+
   increaseNumber(): void {
-    this.counter +=1;
+    this.counter += 1;
   }
-  
+
   reduceNumber(): void {
-    this.counter -=1;
+    this.counter -= 1;
   }
-  
+
 }

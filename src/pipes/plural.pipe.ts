@@ -2,12 +2,11 @@ import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
   name: 'pluralPipe',
-  pure: true
+  pure: true,
 })
 export class PluralPipe implements PipeTransform {
 
   transform(count: number | string | null, one: string, few: string, many: string): string {
-  
     const currentCount: number = count !== null ? Number(count) : 0;
     const lastDigit: number = currentCount % 10;
     const lastTwoDigits: number = currentCount % 100;
@@ -23,5 +22,5 @@ export class PluralPipe implements PipeTransform {
         return `${ currentCount } ${ many }`;
     }
   }
-  
+
 }

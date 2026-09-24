@@ -10,7 +10,7 @@ import { IPost } from './IPost';
   providedIn: 'root',
 })
 export class PostApiService {
-  
+
   private http: HttpClient = inject(HttpClient);
   private url: string = 'https://dummyjson.com/posts';
 
@@ -38,5 +38,5 @@ export class PostApiService {
   deletePost(id: number | string): Observable<IPost> {
     return this.http.delete<IPost>(`${ this.url }/${ id }`);
   }
-  
+
 }

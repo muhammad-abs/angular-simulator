@@ -1,23 +1,50 @@
 <form [formGroup]="editForm" (ngSubmit)="savePost()">
-  <div style="display: flex; flex-direction: column; gap: 1rem;">
+  <div style="display: flex; flex-direction: column; gap: 1rem">
     <div>
-      <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Title:</label>
-      <input pInputText type="text" formControlName="title" style="width: 100%;" />
+      <label for="edit-title" style="display: block; margin-bottom: 0.5rem; font-weight: 600"
+        >Title:</label
+      >
+      <input id="edit-title" pInputText type="text" formControlName="title" style="width: 100%" />
     </div>
 
     <div>
-      <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Tags (через запятую):</label>
-      <input pInputText type="text" formControlName="tags" style="width: 100%;" placeholder="history, american, crime" />
+      <label for="edit-tags" style="display: block; margin-bottom: 0.5rem; font-weight: 600"
+        >Tags (через запятую):</label
+      >
+      <input
+        id="edit-tags"
+        pInputText
+        type="text"
+        formControlName="tags"
+        style="width: 100%"
+        placeholder="history, american, crime"
+      />
     </div>
 
     <div>
-      <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Views:</label>
-      <input pInputText type="number" formControlName="views" style="width: 100%;" />
+      <label for="edit-views" style="display: block; margin-bottom: 0.5rem; font-weight: 600"
+        >Views:</label
+      >
+      <input id="edit-views" pInputText type="number" formControlName="views" style="width: 100%" />
     </div>
 
-    <div style="display: flex; justify-content: flex-end; gap: 0.5rem; margin-top: 1rem;">
-      <button pButton type="button" label="Отмена" class="p-button-secondary" (click)="closeDialog()"></button>
-      <button pButton type="submit" label="Сохранить" [disabled]="editForm.invalid"></button>
+    <div style="display: flex; justify-content: flex-end; gap: 0.5rem; margin-top: 1rem">
+      <button
+        pButton
+        type="button"
+        label="Отмена"
+        aria-label="Отмена"
+        class="p-button-secondary"
+        (click)="closeDialog()"
+      ></button>
+
+      <button
+        pButton
+        type="submit"
+        label="Сохранить"
+        aria-label="Сохранить"
+        [disabled]="editForm.invalid"
+      ></button>
     </div>
   </div>
 </form>

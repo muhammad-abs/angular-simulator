@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { MessageService } from '../../services/message.service';
-import { CommonModule} from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { Observable } from 'rxjs';
 import { IMessage } from '../../interfaces/IMessage';
 
@@ -11,8 +11,8 @@ import { IMessage } from '../../interfaces/IMessage';
   styleUrl: './message.component.scss',
 })
 export class MessageComponent {
-  
+
   messageService: MessageService = inject(MessageService);
   message$: Observable<IMessage[]> = this.messageService.message$;
-  
+
 }

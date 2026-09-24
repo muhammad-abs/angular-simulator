@@ -8,7 +8,7 @@ import { MessageService } from '../../services/message.service';
 
 export const postResolver: ResolveFn<IPost> = (
   route: ActivatedRouteSnapshot,
-  state: RouterStateSnapshot
+  state: RouterStateSnapshot,
 ) => {
   const postService: PostService = inject(PostService);
   const messageService: MessageService = inject(MessageService);
@@ -18,7 +18,6 @@ export const postResolver: ResolveFn<IPost> = (
     catchError(() => {
       messageService.showError('Не удалось загрузить пост');
       return EMPTY;
-    })
+    }),
   );
-  
 };
