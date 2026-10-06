@@ -2,11 +2,11 @@
 
 .main-info {
   @include flex-center();
-  
+
   flex-direction: column;
   gap: 41px;
   color: white;
-  
+
   .banner {
     background-image: url('/images/bg-mountains.png');
     background-repeat: no-repeat;
@@ -23,11 +23,11 @@
       filter: brightness(0.7) contrast(1.1);
     }
   }
-  
+
   .title {
     margin-top: 463px;
     width: 1180px;
-    
+
     h1 {
       width: 1080px;
       height: 150px;
@@ -39,10 +39,10 @@
       margin: 0px;
     }
   }
-  
+
   .search-program {
     @include flex-center();
-    
+
     width: 1180px;
     height: 161px;
     font-size: 16px;
@@ -57,7 +57,7 @@
       background: rgba(15, 23, 42, 0.65);
       border: 1px solid rgba(255, 255, 255, 0.1);
     }
-    
+
     .input-field {
       display: flex;
       flex-direction: column;
@@ -70,7 +70,7 @@
       width: 270px;
       height: 52px;
       background: transparent;
-      border: 1px solid #E1E3E4;
+      border: 1px solid #e1e3e4;
       border-radius: 8px;
       padding: 14px 42px 14px 16px;
       color: #fff;
@@ -94,9 +94,9 @@
       height: 18px;
       background: url('/icons/calendar-icon.svg') no-repeat center;
       background-size: contain;
-      pointer-events: none; 
+      pointer-events: none;
     }
-    
+
     .input-field.date input {
       padding-right: 16px;
     }
@@ -106,7 +106,7 @@
       width: 270px;
       height: 52px;
       background: transparent;
-      border: 1px solid #E1E3E4;
+      border: 1px solid #e1e3e4;
       border-radius: 8px;
       padding: 14px 30px 14px 16px;
       color: #fff;
@@ -142,7 +142,7 @@
 
     .search-program-button {
       @include flex-center();
-      
+
       font-weight: 700;
       color: var(--secondary-bg-color);
       width: 213px;
@@ -154,10 +154,10 @@
       .my-app-dark & {
         background-color: var(--third-text-color);
         border-color: var(--third-text-color);
-        color: #0F172A;
+        color: #0f172a;
       }
     }
-    
+
     .search-program-button:disabled {
       cursor: not-allowed;
       color: #6a6a6a;
@@ -169,13 +169,13 @@
 
 .live-input {
   @include flex-center();
-  
+
   .container {
     position: absolute;
     width: 1180px;
     display: flex;
     margin-bottom: 100px;
-    
+
     .content {
       display: flex;
       align-items: center;
@@ -186,18 +186,18 @@
       background-color: var(--secondary-bg-color);
       color: var(--secondary-text-color);
       padding-left: 20px;
-      
+
       input {
         width: 220px;
         height: 22px;
         border-radius: 4px;
         display: flex;
-        border: 1px solid #E1E3E4;
+        border: 1px solid #e1e3e4;
         padding-left: 10px;
         background-color: var(--primary-bg-color);
         color: var(--primary-text-color);
       }
-      
+
       p {
         font-size: 18px;
       }
@@ -207,41 +207,40 @@
 
 .our-trip {
   @include flex-center();
-  
+
   background-color: var(--primary-bg-color);
   color: var(--primary-text-color);
 
   .container {
     @include flex-center();
     @include transform();
-    
+
     height: 526px;
     width: 1180px;
     margin: 100px 0px;
     gap: 120px;
-    
+
     .visual-content {
       width: 480px;
       height: 526px;
       position: relative;
-      
+
       .video-card {
-        
         &-back {
           position: absolute;
           top: 0;
           left: 0;
         }
-        
+
         &-front {
           position: absolute;
           bottom: 0;
           right: 0;
-          
+
           &-circle {
             position: absolute;
             z-index: 1;
-            top: 50%; 
+            top: 50%;
             left: 50%;
             transform: translate(-50%, -25%);
             cursor: pointer;
@@ -249,10 +248,10 @@
         }
       }
     }
-    
+
     .desc-content {
       height: 398px;
-      
+
       .program-info-button {
         width: 200px;
       }
@@ -262,44 +261,44 @@
 
 .tour-program {
   @include flex-center();
-  
+
   background-color: var(--third-bg-color);
   color: var(--primary-text-color);
 
   .container {
     @include flex-center();
     @include transform();
-    
+
     height: 591px;
     width: 1180px;
     margin: 80px 0px 100px;
     gap: 120px;
-    
+
     .desc-content {
       height: 591px;
-      
+
       .advantages-list {
         display: flex;
         flex-direction: column;
         gap: 40px;
-        
+
         .advantage {
           width: 580px;
           height: 64px;
           display: flex;
           align-items: center;
-          
+
           &-text {
             flex-direction: column;
             margin-left: 16px;
             line-height: 20px;
-            
+
             h3 {
               font-weight: 700;
               font-size: 18px;
               letter-spacing: 1.2%;
             }
-            
+
             p {
               margin-top: 4px;
               font-weight: 400;
@@ -308,19 +307,19 @@
             }
           }
         }
-        
+
         .mouseenter-advantage {
           @include transform();
-          
-          background: rgba(242, 190, 34, 0.08); 
+
+          background: rgba(242, 190, 34, 0.08);
         }
       }
-      
+
       .program-price-button {
         width: 236px;
       }
     }
-    
+
     .program-cards {
       width: 510px;
       height: 510px;
@@ -331,9 +330,15 @@
       .img-wrapper {
         position: relative;
         overflow: hidden;
-        &:nth-child(1), &:nth-child(4) { border-radius: 0 50px} 
-        &:nth-child(2), &:nth-child(3) { border-radius: 50px 0}
-        
+        &:nth-child(1),
+        &:nth-child(4) {
+          border-radius: 0 50px;
+        }
+        &:nth-child(2),
+        &:nth-child(3) {
+          border-radius: 50px 0;
+        }
+
         .programCard-overlay {
           position: absolute;
           inset: 0;
@@ -345,7 +350,7 @@
             background: rgba(15, 23, 42, 0.45);
           }
         }
-        
+
         img {
           width: 100%;
           height: 100%;
@@ -358,28 +363,28 @@
 
 .popular-tours {
   @include flex-center();
-  
+
   background-color: var(--primary-bg-color);
   color: var(--primary-text-color);
   max-height: 893px;
-  
+
   .container {
     @include flex-center();
-    
+
     flex-direction: column;
     gap: 0px;
     width: 1180px;
-    
+
     .title-wrapper {
       text-align: center;
       margin: 80px 0 50px;
     }
-    
+
     .destination-cards {
       display: flex;
       gap: 20px;
       height: 500px;
-      
+
       .card-wrapper {
         flex: 1;
         position: relative;
@@ -389,10 +394,10 @@
           height: 100%;
           border-radius: 32px;
         }
-        
+
         .destination-review {
           @include flex-center();
-          
+
           position: absolute;
           width: 65px;
           height: 32px;
@@ -402,22 +407,22 @@
           background: rgba(255, 255, 255, 0.4);
           backdrop-filter: blur(4px);
           border-radius: 4px 0 0 4px;
-          
+
           p {
-            color: #1A3E3E;
+            color: #1a3e3e;
             font-weight: 700;
             font-size: 14px;
           }
-          
+
           img {
             width: 17px;
             height: 16px;
           }
         }
-        
+
         .destination-desc-block {
           @include flex-between();
-          
+
           position: absolute;
           bottom: 0;
           left: 0;
@@ -427,49 +432,49 @@
           padding: 20px 0px 20px 32px;
           background: rgba(255, 255, 255, 0.2);
           backdrop-filter: blur(6px);
-          color: #FDFDFD;
+          color: #fdfdfd;
 
           :host-context(.my-app-dark) &,
           .my-app-dark & {
             background: rgba(15, 23, 42, 0.45);
           }
-          
+
           .selectedDestination {
             width: 316px;
-            color: #FDFDFD;
+            color: #fdfdfd;
             font-weight: 400;
             font-size: 16px;
             line-height: 150%;
           }
-          
+
           .destination-title {
             @include flex-between();
-            
+
             width: 100%;
-            
+
             .destination-text {
               flex-direction: column;
-    
+
               h4 {
                 font-weight: 700;
                 font-size: 24px;
                 margin: 0;
               }
-              
+
               p {
                 font-weight: 400;
                 font-size: 14px;
                 margin: 0;
               }
             }
-            
+
             .destination-cost {
               margin-right: 32px;
               width: 86px;
               height: 40px;
               background: rgba(255, 255, 255, 0.3);
               border-radius: 4px;
-              
+
               p {
                 font-weight: 700;
                 font-size: 20px;
@@ -482,7 +487,7 @@
         }
       }
     }
-    
+
     .destination-rating-button {
       margin: 50px 0 95px;
       width: 244px;
@@ -492,28 +497,28 @@
 
 .blogs {
   @include flex-center();
-  
+
   max-height: 1036px;
   background-color: var(--third-bg-color);
-  
+
   .container {
     @include flex-center();
-    
+
     flex-direction: column;
     gap: 0px;
-    
+
     .title-wrapper {
       text-align: center;
       margin: 85px 0 40px;
     }
-    
+
     .articles {
       display: flex;
       flex-wrap: wrap;
       width: 1180px;
       height: 648px;
       gap: 20px;
-      
+
       .article {
         display: flex;
         width: 580px;
@@ -521,11 +526,11 @@
         background-color: var(--primary-bg-color);
         border-radius: 10px;
         gap: 24px;
-        
+
         img {
           padding: 16px 0px 16px 16px;
         }
-        
+
         .article-desc {
           display: flex;
           flex-direction: column;
@@ -534,34 +539,34 @@
           gap: 24px;
           padding: 16px 16px 16px 0px;
           color: var(--primary-text-color);
-          
+
           h2 {
             padding-top: 16px;
             font-weight: 700;
             font-size: 24px;
             line-height: 32px;
           }
-          
+
           p {
             font-weight: 400;
             font-size: 14px;
             line-height: 20px;
           }
-          
+
           .footer {
             @include flex-between();
-            
+
             margin-top: auto;
             padding-bottom: 16px;
             width: 294px;
-            
+
             p {
               font-weight: 700;
               font-size: 14px;
               line-height: 20px;
               color: var(--third-text-color);
             }
-            
+
             button {
               border: none;
               background: transparent;
@@ -571,7 +576,7 @@
           }
         }
       }
-      
+
       .mouseenter-article {
         box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.08);
 
@@ -579,13 +584,13 @@
         .my-app-dark & {
           box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.4);
         }
-        
+
         h2 {
           text-decoration: underline;
         }
       }
     }
-    
+
     .other-materials-button {
       margin: 50px 0 95px;
       width: 220px;
@@ -595,27 +600,27 @@
 
 .photo {
   @include flex-center();
-  
+
   max-height: 1036px;
   background-color: var(--primary-bg-color);
-  
+
   .container {
     @include flex-center();
-    
+
     width: 1180px;
     flex-direction: column;
     gap: 0px;
-    
+
     .title-wrapper {
       text-align: center;
       margin: 85px 0 40px;
     }
-    
+
     .album {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 20px;
-      
+
       .album-container:first-child {
         grid-column: span 2;
       }
@@ -623,12 +628,12 @@
       .album-container:nth-child(5) {
         grid-column: span 2;
       }
-      
+
       .album-container img {
         display: block;
       }
     }
-    
+
     .our-pinterest-button {
       margin: 50px 0px 196px;
       width: 178px;

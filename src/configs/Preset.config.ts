@@ -4,8 +4,8 @@ import Lara from '@primeuix/themes/lara';
 
 import { PrimePreset } from '../enums/PrimePreset';
 
-export const PRESETS_MAP: Record<string, any> = {
+export const PRESETS_MAP: Record<PrimePreset, typeof Lara | typeof Aura | typeof Nora> = {
   [PrimePreset.LARA]: Lara,
   [PrimePreset.AURA]: Aura,
-  [PrimePreset.NORA]: Nora
+  [PrimePreset.NORA]: Nora,
 };

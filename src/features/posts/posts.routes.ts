@@ -4,8 +4,7 @@ import { postResolver } from './post.resolver';
 export const postsRoutes: Routes = [
   {
     path: '',
-    loadComponent: () =>
-      import('./posts/posts.component').then((m) => m.PostsComponent),
+    loadComponent: () => import('./posts/posts.component').then((m) => m.PostsComponent),
   },
   {
     path: 'create',

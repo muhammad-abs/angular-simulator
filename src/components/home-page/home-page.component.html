@@ -1,13 +1,14 @@
 <section class="main-info white-text">
-  
   <div class="banner"></div>
 
   <div class="title container">
-    <h1>Насладись прогулкой в горах <br> с командой единомышленников</h1>
+    <h1>
+      Насладись прогулкой в горах <br />
+      с командой единомышленников
+    </h1>
   </div>
 
   <div class="search-program" (focusin)="isFormTouched = true">
-
     <div class="input-field">
       <select id="program-locations" [(ngModel)]="programs.location">
         <option value="" selected hidden>Локация для тура</option>
@@ -25,8 +26,8 @@
         [type]="isDateFocused ? 'date' : 'text'"
         placeholder="Дата похода"
         (focus)="isDateFocused = true"
-        (blur)="!programs.dateRange ? isDateFocused = false : null"
-      >
+        (blur)="!programs.dateRange ? (isDateFocused = false) : null"
+      />
       <span class="calendar-icon"></span>
       <span>укажите диапазон</span>
     </div>
@@ -34,7 +35,7 @@
     <div class="input-field">
       <select id="program-peopleCount" [(ngModel)]="programs.peopleCount">
         <option value="" selected hidden>Участники</option>
-        
+
         @for (peopleCount of peopleCount; track peopleCount.id) {
           <option [id]="'peopleCount-' + peopleCount.id">{{ peopleCount.count }}</option>
         }
@@ -45,19 +46,18 @@
     <button
       class="search-program-button primary-button"
       id="search-program-button"
-      [disabled]="(isFormInvalid() && isFormTouched)"
+      [disabled]="isFormInvalid() && isFormTouched"
       (click)="messageService.showSuccess('Программа успешно найдена')"
     >
       Найти программу
     </button>
-
   </div>
 </section>
 
 <section class="live-input">
   <div class="container">
     <div class="content">
-      <input id="enteredText" [(ngModel)]="enteredText" type="text">
+      <input id="enteredText" [(ngModel)]="enteredText" type="text" />
       <p>{{ enteredText }}</p>
     </div>
   </div>
@@ -65,17 +65,16 @@
 
 <section class="our-trip">
   <div class="container">
-
     <div class="visual-content">
       <div class="video-card">
         <div class="video-card-back">
-          <img src="/images/video-card-back.png" alt="video-card-back">
+          <img src="/images/video-card-back.png" alt="video-card-back" />
         </div>
         <div class="video-card-front">
-          <img src="/images/video-card-front.png" alt="video-card-front">
+          <img src="/images/video-card-front.png" alt="video-card-front" />
 
           <div class="video-card-front-circle">
-            <fa-icon [icon]="faCirclePlay" class="fa-3x"/>
+            <fa-icon [icon]="faCirclePlay" class="fa-3x" />
           </div>
         </div>
       </div>
@@ -89,25 +88,26 @@
 
       <div class="desc">
         <p>
-          Его корни уходят в один фрагмент классической латыни 45 года н.э., то есть более двух тысячелетий назад. Ричард МакКлинток, профессор латыни из колледжа Hampden-Sydney, штат Вирджиния, взял одно из самых странных слов в Lorem Ipsum, "consectetur" и занялся его поисками в классической латинской литературе.
+          Его корни уходят в один фрагмент классической латыни 45 года н.э., то есть более двух
+          тысячелетий назад. Ричард МакКлинток, профессор латыни из колледжа Hampden-Sydney, штат
+          Вирджиния, взял одно из самых странных слов в Lorem Ipsum, "consectetur" и занялся его
+          поисками в классической латинской литературе.
         </p>
       </div>
 
       <button
-        id="program-info-button" 
+        id="program-info-button"
         class="primary-button program-info-button"
         (click)="messageService.showError('Программа тура недоступна')"
       >
         Программа тура
       </button>
     </div>
-
   </div>
 </section>
 
 <section class="tour-program">
   <div class="container">
-
     <div class="desc-content desc-block">
       <div class="title-wrapper">
         <p class="subtitle">наше предложение</p>
@@ -116,19 +116,21 @@
 
       <div class="desc">
         <p>
-          Его корни уходят в один фрагмент классической латыни 45 года н.э., то есть более двух тысячелетий назад. Ричард МакКлинток, профессор латыни из колледжа.
+          Его корни уходят в один фрагмент классической латыни 45 года н.э., то есть более двух
+          тысячелетий назад. Ричард МакКлинток, профессор латыни из колледжа.
         </p>
       </div>
 
       <div class="advantages-list">
         @for (advantage of advantages; track advantage.id) {
-          <div class="advantage"
+          <div
+            class="advantage"
             [id]="'advantage-' + advantage.id"
             (mouseenter)="selectAdvantage(advantage.id)"
             (mouseleave)="selectAdvantage(0)"
             [class.mouseenter-advantage]="advantage.id === currentAdvantageId"
           >
-            <fa-icon [icon]="advantage.icon" class="fa-2x" style="color: #F2BE22"/>
+            <fa-icon [icon]="advantage.icon" class="fa-2x" style="color: #f2be22" />
             <div class="advantage-text">
               <h3>{{ advantage.title }}</h3>
               <p>{{ advantage.description }}</p>
@@ -137,8 +139,8 @@
         }
       </div>
 
-      <button 
-        id="program-price-button" 
+      <button
+        id="program-price-button"
         class="primary-button program-price-button"
         (click)="messageService.showWarn('Стоимость программ от 10k$')"
       >
@@ -148,49 +150,53 @@
 
     <div class="program-cards">
       @for (programCard of programCards; track programCard.id) {
-        <div class="img-wrapper"
+        <div
+          class="img-wrapper"
           [id]="'program-card-' + programCard.id"
           (mouseenter)="selectProgramCard(programCard.id)"
           (mouseleave)="selectProgramCard(0)"
         >
-
           @if (programCard.id === currentProgramCardId) {
             <div class="programCard-overlay"></div>
           }
 
-          <img [src]="'/images/program-card-'+ programCard.image + '.png'" [alt]="programCard.image">
+          <img
+            [src]="'/images/program-card-' + programCard.image + '.png'"
+            [alt]="programCard.image"
+          />
         </div>
       }
     </div>
-
   </div>
 </section>
 
 <section class="popular-tours">
   <div class="container desc-block">
-    
     <div class="title-wrapper">
       <p class="subtitle">по версии отдыхающих</p>
       <h2 class="title">Популярные направления</h2>
     </div>
-    
+
     <div class="destination-cards">
       @for (destination of destinations; track destination.id) {
         <div class="card-wrapper">
-          <img [src]="'/images/destination-' + destination.image + '.png'" [alt]="destination.image">
-        
+          <img
+            [src]="'/images/destination-' + destination.image + '.png'"
+            [alt]="destination.image"
+          />
+
           <div class="destination-review">
-            <fa-icon [icon]="faStar" style="color: #F2BE22"/>
+            <fa-icon [icon]="faStar" style="color: #f2be22" />
             <p>{{ destination.review }}</p>
           </div>
-          
+
           <div class="destination-desc-block">
             <div class="destination-title">
               <div class="destination-text">
                 <h4>{{ destination.title }}</h4>
                 <p>{{ destination.subTitle }}</p>
               </div>
-              
+
               <div class="destination-cost">
                 <p>{{ destination.cost }} &#36;</p>
               </div>
@@ -199,37 +205,37 @@
         </div>
       }
     </div>
-    
+
     <button id="destination-rating-button" class="primary-button destination-rating-button">
-        Рейтинг направлений
+      Рейтинг направлений
     </button>
   </div>
 </section>
 
 <section class="blogs">
   <div class="container desc-block">
-    
     <div class="title-wrapper">
       <p class="subtitle">делимся впечатлениями</p>
       <h2 class="title">Блог о путешествиях</h2>
     </div>
-    
+
     <div class="articles">
       @for (article of articles; track article.id) {
-        <div class="article"
+        <div
+          class="article"
           [id]="'article-' + article.id"
           (mouseenter)="selectArticle(article.id)"
           (mouseleave)="selectArticle(0)"
           [class.mouseenter-article]="article.id === currentArticleId"
         >
           <div>
-            <img [src]="'/images/article-' + article.img + '.png'" [alt]="article.img">
+            <img [src]="'/images/article-' + article.img + '.png'" [alt]="article.img" />
           </div>
-          
+
           <div class="article-desc">
             <h2>{{ article.title }}</h2>
             <p>{{ article.desc }}</p>
-            
+
             <div class="footer">
               <p>{{ article.date }}</p>
               <button id="read-article-button">читать статью</button>
@@ -238,7 +244,7 @@
         </div>
       }
     </div>
-    
+
     <button id="other-materials-button" class="primary-button other-materials-button">
       Другие материалы
     </button>
@@ -247,23 +253,21 @@
 
 <section class="photo">
   <div class="container desc-block">
-    
     <div class="title-wrapper">
       <p class="subtitle">фото-отчет</p>
       <h2 class="title">Делимся впечатлениям</h2>
     </div>
-    
+
     <div class="album">
       @for (photo of photos; track photo.id) {
         <div class="album-container">
-          <img [src]="'/images/photo-album/'+ photo.img + '.png'" [alt]="photo.img">
+          <img [src]="'/images/photo-album/' + photo.img + '.png'" [alt]="photo.img" />
         </div>
       }
     </div>
-    
+
     <button id="our-pinterest-button" class="primary-button our-pinterest-button">
       Наш pinterest
     </button>
-    
   </div>
 </section>

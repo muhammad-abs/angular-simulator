@@ -7,24 +7,24 @@ import { BehaviorSubject, delay, filter, Observable, of } from 'rxjs';
   providedIn: 'root',
 })
 export class MessageService {
-  
+
   private messageSubject: BehaviorSubject<IMessage[]> = new BehaviorSubject<IMessage[]>([]);
   message$: Observable<IMessage[]> = this.messageSubject.asObservable();
-  
+
   private addMessage(type: Message, text: string): void {
     const message: IMessage = {
       id: Date.now(),
       type: type,
-      text: text
+      text: text,
     };
 
     this.messageSubject.next([message, ...this.messageSubject.getValue()]);
-    
+
     setTimeout(() => {
       this.closeMessage(message);
     }, 5000);
   }
-  
+
   showWarn(message: string): void {
     this.addMessage(Message.WARN, message);
   }
@@ -40,11 +40,11 @@ export class MessageService {
   showInfo(message: string): void {
     this.addMessage(Message.INFO, message);
   }
-  
+
   closeMessage(messageToRemove: IMessage): void {
     this.messageSubject.next(
-      this.messageSubject.getValue()
-      .filter((message: IMessage) => message !== messageToRemove));
+      this.messageSubject.getValue().filter((message: IMessage) => message !== messageToRemove),
+    );
   }
-  
+
 }

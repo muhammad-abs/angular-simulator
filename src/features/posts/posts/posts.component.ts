@@ -20,14 +20,7 @@ import { PostEditDialogComponent } from '../post-edit-dialog/post-edit-dialog.co
   selector: 'app-posts',
   standalone: true,
   providers: [DialogService],
-  imports: [
-    TableModule,
-    ContextMenuModule,
-    SkeletonModule,
-    ButtonModule,
-    RouterLink,
-    AsyncPipe,
-  ],
+  imports: [TableModule, ContextMenuModule, SkeletonModule, ButtonModule, RouterLink, AsyncPipe],
   templateUrl: './posts.component.html',
   styleUrl: './posts.component.scss',
 })
@@ -66,7 +59,7 @@ export class PostsComponent implements OnInit {
             this.totalElements = data.total;
             this.cd.markForCheck();
           }
-        })
+        }),
       )
       .subscribe();
   }
@@ -93,8 +86,8 @@ export class PostsComponent implements OnInit {
 
   loadPostsPage(): void {
     this.isLoadingSubject.next(true);
-    this.skeletonRows = Array.from({ length: this.pageSize }).map((_, i) => `Item #${i}`);
-    
+    this.skeletonRows = Array.from({ length: this.pageSize }).map((_, i) => `Item #${ i }`);
+
     const skip: number = (this.currentPage - 1) * this.pageSize;
 
     this.postService
@@ -111,7 +104,7 @@ export class PostsComponent implements OnInit {
         finalize(() => {
           this.isLoadingSubject.next(false);
           this.cd.markForCheck();
-        })
+        }),
       )
       .subscribe();
   }
@@ -144,7 +137,7 @@ export class PostsComponent implements OnInit {
         contentStyle: { overflow: 'auto' },
         baseZIndex: 10000,
         data: this.selectedContextPost,
-      }
+      },
     );
 
     ref?.onClose
@@ -153,7 +146,7 @@ export class PostsComponent implements OnInit {
           if (updatedPost) {
             this.onSaveEditedPost(updatedPost);
           }
-        })
+        }),
       )
       .subscribe();
   }
@@ -168,7 +161,7 @@ export class PostsComponent implements OnInit {
         }),
         finalize(() => {
           this.cd.markForCheck();
-        })
+        }),
       )
       .subscribe();
   }
@@ -188,9 +181,9 @@ export class PostsComponent implements OnInit {
         finalize(() => {
           this.selectedContextPost = null;
           this.cd.markForCheck();
-        })
+        }),
       )
       .subscribe();
   }
-  
+
 }

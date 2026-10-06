@@ -1,10 +1,10 @@
 .card-user-item {
   position: relative;
   padding: 24px 20px;
-  border-top: 4px solid var(--third-text-color); 
+  border-top: 4px solid var(--third-text-color);
   border-radius: 10px;
-  background-color: var(--primary-bg-color); 
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15); 
+  background-color: var(--primary-bg-color);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -28,7 +28,7 @@
 
 .card-user-nickname {
   margin: 0 0 20px;
-  color: var(--third-text-color); 
+  color: var(--third-text-color);
   font-size: 14px;
   font-weight: 500;
   line-height: 1.2;
@@ -36,7 +36,7 @@
 
 .card-user-section {
   margin-bottom: 24px;
-  
+
   &:last-child {
     margin-bottom: 0;
   }
@@ -74,7 +74,7 @@
 }
 
 .card-user-property {
-  color: var(--placeholder-color); 
+  color: var(--placeholder-color);
   font-size: 14px;
   font-weight: 400;
   line-height: 1.35;
@@ -90,9 +90,9 @@
 }
 
 .user-value-link {
-  color: var(--third-text-color); 
+  color: var(--third-text-color);
   text-decoration: none;
-  
+
   &:hover {
     text-decoration: underline;
   }
@@ -113,7 +113,7 @@ button {
   margin-top: auto;
   padding: 12px 20px;
   width: 100%;
-  border: 1px solid #ef4444; 
+  border: 1px solid #ef4444;
   border-radius: 4px;
   background-color: transparent;
   color: #ef4444;
@@ -124,12 +124,12 @@ button {
   transition: all 0.25s ease-in-out;
 
   &:hover {
-    background-color: #ef4444; 
-    color: #ffffff;            
+    background-color: #ef4444;
+    color: #ffffff;
     box-shadow: 0 4px 12px rgba(239, 68, 68, 0.25);
   }
 
   &:active {
-    transform: scale(0.98); 
+    transform: scale(0.98);
   }
 }

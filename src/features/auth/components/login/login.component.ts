@@ -13,40 +13,43 @@ import { InputTextModule } from 'primeng/inputtext';
   styleUrl: './login.component.scss',
 })
 export class LoginComponent {
-  
+
   fb: FormBuilder = inject(FormBuilder);
   authService: AuthService = inject(AuthService);
-  router: Router = inject(Router); 
-  
+  router: Router = inject(Router);
+
   errorMessage: string = '';
   isLoading: boolean = false;
-  
+
   loginForm: FormGroup = this.fb.group({
     username: ['emilys', [Validators.required]],
     password: ['emilyspass', [Validators.required]],
   });
-  
+
   onSubmit(): void {
-    if(this.loginForm.invalid) {
+    if (this.loginForm.invalid) {
       this.loginForm.markAllAsTouched();
       return;
     }
-    
+
     this.isLoading = true;
     this.errorMessage = '';
-    
-    this.authService.login(this.loginForm.value).pipe(
-      tap(() => {
-        this.router.navigate(['/posts']);
-      }),
-      catchError((err) => {
-        this.errorMessage = err.error?.message || 'Неверный логин или пароль';
-        return EMPTY;
-      }),
-      finalize(() => {
+
+    this.authService
+      .login(this.loginForm.value)
+      .pipe(
+        tap(() => {
+          this.router.navigate(['/posts']);
+        }),
+        catchError((err) => {
+          this.errorMessage = err.error?.message || 'Неверный логин или пароль';
+          return EMPTY;
+        }),
+        finalize(() => {
           this.isLoading = false;
-      })
-    ).subscribe();
+        }),
+      )
+      .subscribe();
   }
-  
+
 }

@@ -1,21 +1,37 @@
 @keyframes spin {
-  from { transform: rotate(0deg) };
-  to { transform: rotate(360deg) };
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes message-anim {
   from {
     transform: translateX(100%);
     opacity: 0;
-  };
+  }
   to {
     transform: translateX(0);
     opacity: 1;
-  };
+  }
 }
 
 @keyframes moveGradient {
-  0% { background-position: 0% 0%, 0% 50%; };
-  50% { background-position: 0% 0%, 100% 50%; };
-  100% { background-position: 0% 0%, 0% 50%; };
+  0% {
+    background-position:
+      0% 0%,
+      0% 50%;
+  }
+  50% {
+    background-position:
+      0% 0%,
+      100% 50%;
+  }
+  100% {
+    background-position:
+      0% 0%,
+      0% 50%;
+  }
 }

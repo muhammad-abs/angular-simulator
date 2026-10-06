@@ -11,13 +11,7 @@ import { IPost } from '../IPost';
 @Component({
   selector: 'app-post-edit-dialog',
   standalone: true,
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    ButtonModule,
-    InputTextModule,
-    InputNumberModule,
-  ],
+  imports: [CommonModule, ReactiveFormsModule, ButtonModule, InputTextModule, InputNumberModule],
   templateUrl: './post-edit-dialog.component.html',
   styleUrl: './post-edit-dialog.component.scss',
 })
@@ -70,5 +64,5 @@ export class PostEditDialogComponent implements OnInit {
   closeDialog(): void {
     this.ref.close();
   }
-  
+
 }

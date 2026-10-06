@@ -20,11 +20,11 @@
   justify-content: flex-start;
   position: relative;
   padding: 15px;
-  background-color: #0F172AD9;
-  border: 1px solid #FFFFFF;
+  background-color: #0f172ad9;
+  border: 1px solid #ffffff;
   border-radius: 10px;
   gap: 15px;
-  
+
   &-icon {
     width: 40px;
     height: 40px;
@@ -33,25 +33,25 @@
     background-position: center;
     background-size: contain;
   }
-  
+
   .message-info {
     display: flex;
     flex-direction: column;
-    color: #E8E9EB;
-    
+    color: #e8e9eb;
+
     h2 {
       font-weight: 716;
       font-size: 16px;
       line-height: 20px;
     }
-    
+
     p {
       font-weight: 400;
       font-size: 14px;
       line-height: 20px;
     }
   }
-  
+
   &-close-button {
     position: absolute;
     right: 7px;

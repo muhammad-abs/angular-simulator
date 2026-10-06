@@ -1,10 +1,10 @@
 import { Component, inject, ViewEncapsulation } from '@angular/core';
 import { LocalStorageService } from '../services/local-storage.service';
 import { RouterOutlet } from '@angular/router';
-import { HeaderComponent } from "../components/header/header.component";
-import { FooterComponent } from "../components/footer/footer.component";
-import { MessageComponent } from "../components/message/message.component";
-import { LoaderComponent } from "../components/loader/loader.component";
+import { HeaderComponent } from '../components/header/header.component';
+import { FooterComponent } from '../components/footer/footer.component';
+import { MessageComponent } from '../components/message/message.component';
+import { LoaderComponent } from '../components/loader/loader.component';
 import { ButtonModule } from 'primeng/button';
 import { ThemeService } from '../services/theme.service';
 
@@ -20,13 +20,13 @@ import { ThemeService } from '../services/theme.service';
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
 })
 export class AppComponent {
-  
+
   localStorageService: LocalStorageService = inject(LocalStorageService);
   themeService: ThemeService = inject(ThemeService);
-    
+
   constructor() {
     this.saveLastVisitDate();
     this.saveVisitCount();
@@ -36,11 +36,10 @@ export class AppComponent {
     const nowDate: string = new Date().toISOString();
     this.localStorageService.setValue<string>('last-visit', nowDate);
   }
-  
+
   private saveVisitCount(): void {
     const visitCount: number = Number(this.localStorageService.getValue<number>('visit-count'));
     this.localStorageService.setValue<string>('visit-count', (visitCount + 1).toString());
   }
-  
-}
 
+}

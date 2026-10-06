@@ -1,4 +1,4 @@
-import { PrimePreset } from "../enums/PrimePreset"
+import { PrimePreset } from '../enums/PrimePreset';
 
 export interface IPreset {
   name: string;

@@ -1,9 +1,9 @@
-@use "../../assets/animations" as *;
-@import "../user-card/user-card.component.scss";
+@use '../../assets/animations' as *;
+@use '../user-card/user-card.component.scss';
 
 .users-page {
   min-height: 100vh;
-  padding: 60px 0 150px; 
+  padding: 60px 0 150px;
   background-color: var(--third-bg-color);
   box-sizing: border-box;
 }
@@ -32,7 +32,7 @@
   font-weight: 700;
   line-height: 1.1;
   text-align: center;
-} 
+}
 
 .users-filter-wrapper {
   display: flex;
@@ -65,7 +65,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   justify-content: center;
-  gap: 44px; 
+  gap: 44px;
   align-items: stretch;
 }
 
@@ -77,7 +77,8 @@
   padding: 40px;
 }
 
-app-create-user, app-user-card {
+app-create-user,
+app-user-card {
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -85,17 +86,19 @@ app-create-user, app-user-card {
 
 .animated-gradient-border {
   position: relative;
-  
-  border: var(--border-thickness) solid transparent; 
-  border-radius: 12px; 
 
-  background-image: 
-    linear-gradient(var(--primary-bg-color, white), var(--primary-bg-color, white)), 
+  border: var(--border-thickness) solid transparent;
+  border-radius: 12px;
+
+  background-image:
+    linear-gradient(var(--primary-bg-color, white), var(--primary-bg-color, white)),
     linear-gradient(to right, var(--gradient-colors));
-  
-  background-size: 100% 100%, 200% auto;
+
+  background-size:
+    100% 100%,
+    200% auto;
   background-origin: padding-box, border-box;
   background-clip: padding-box, border-box;
-  
+
   animation: moveGradient 2s linear infinite;
 }

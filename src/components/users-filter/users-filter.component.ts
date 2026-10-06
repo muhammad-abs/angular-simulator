@@ -17,13 +17,15 @@ export class UsersFilterComponent implements OnInit {
   private destroyRef: DestroyRef = inject(DestroyRef);
 
   ngOnInit(): void {
-    this.filterFormControl.valueChanges.pipe(
-      debounceTime(200),
-      distinctUntilChanged(),
-      map((value: string | null) => value ?? ''),
-      tap((value: string) => this.filter.emit(value)),
-      takeUntilDestroyed(this.destroyRef),
-    ).subscribe();
+    this.filterFormControl.valueChanges
+      .pipe(
+        debounceTime(200),
+        distinctUntilChanged(),
+        map((value: string | null) => value ?? ''),
+        tap((value: string) => this.filter.emit(value)),
+        takeUntilDestroyed(this.destroyRef),
+      )
+      .subscribe();
   }
 
 }
