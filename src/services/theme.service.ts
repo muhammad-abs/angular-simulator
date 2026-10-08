@@ -5,11 +5,14 @@ import { usePreset } from '@primeuix/themes';
 import { PrimePreset } from '../enums/PrimePreset';
 import { IPreset } from '../interfaces/IPreset';
 import { PRESETS_MAP } from '../configs/Preset.config';
+import { APP_CONFIG } from '../app/app-configuration.token';
+import { IAppConfig } from '../app/IAppConfig';
 
 @Injectable({ providedIn: 'root' })
 export class ThemeService {
 
   private localStorageService: LocalStorageService = inject(LocalStorageService);
+  private config: IAppConfig = inject(APP_CONFIG);
 
   private DARK_MODE_CLASS: string = 'my-app-dark';
   private APP_MODE_KEY: string = 'prime-mode';
@@ -38,11 +41,13 @@ export class ThemeService {
   ];
 
   toggleDarkMode(isDarkMode: boolean): void {
+    if (!this.config.enableTheming) return;
     this.localStorageService.setValue<boolean>(this.APP_MODE_KEY, isDarkMode);
     this.isDarkModeSubject.next(isDarkMode);
   }
 
   changePreset(preset: PrimePreset): void {
+    if (!this.config.enableTheming) return;
     this.localStorageService.setValue<PrimePreset>(this.APP_PRESET_KEY, preset);
     this.presetSubject.next(preset);
   }

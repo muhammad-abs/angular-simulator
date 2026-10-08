@@ -8,6 +8,8 @@ import {
   faSkype,
   IconDefinition,
 } from '@fortawesome/free-brands-svg-icons';
+import { APP_CONFIG } from '../../app/app-configuration.token';
+import { IAppConfig } from '../../app/IAppConfig';
 
 @Component({
   selector: 'app-footer',
@@ -18,6 +20,7 @@ import {
 export class FooterComponent {
 
   messageService: MessageService = inject(MessageService);
+  config: IAppConfig = inject(APP_CONFIG);
 
   socialNetworks: { icon: IconDefinition; url: string }[] = [
     { icon: faTelegram, url: '#' },
