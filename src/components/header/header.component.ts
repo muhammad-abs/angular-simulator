@@ -9,9 +9,11 @@ import { Observable, tap } from 'rxjs';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { faMoon, faSun, IconDefinition } from '@fortawesome/free-regular-svg-icons';
 import { PrimePreset } from '../../enums/PrimePreset';
-import { AsyncPipe } from '@angular/common';
+import { AsyncPipe, DatePipe } from '@angular/common';
 import { IPreset } from '../../interfaces/IPreset';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { IAppConfig } from '../../app/IAppConfig';
+import { APP_CONFIG } from '../../app/app-configuration.token';
 
 @Component({
   selector: 'app-header',
@@ -23,6 +25,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     SelectButtonModule,
     AsyncPipe,
     FontAwesomeModule,
+    DatePipe,
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
@@ -36,6 +39,9 @@ export class HeaderComponent {
   isDarkMode$: Observable<boolean> = this.themeService.isDarkMode$;
 
   presetOptions: IPreset[] = this.themeService.presetOptions;
+
+  currentDateAndTime: Date = new Date();
+  config: IAppConfig = inject(APP_CONFIG);
 
   faMoon: IconDefinition = faMoon;
   faSun: IconDefinition = faSun;
