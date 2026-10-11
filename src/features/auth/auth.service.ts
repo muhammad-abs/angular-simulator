@@ -5,6 +5,8 @@ import { LocalStorageService } from '../../services/local-storage.service';
 import { AuthApiService } from './auth-api.service';
 import { TokenType } from '../../enums/TokenType';
 import { Role } from '../../enums/Role';
+import { APP_CONFIG } from '../../app/app-configuration.token';
+import { IAppConfig } from '../../app/IAppConfig';
 
 @Injectable({
   providedIn: 'root',
@@ -13,6 +15,8 @@ export class AuthService {
 
   localStorageService: LocalStorageService = inject(LocalStorageService);
   authApiService: AuthApiService = inject(AuthApiService);
+
+  private config: IAppConfig = inject(APP_CONFIG);
 
   private readonly TOKENS_KEY = 'auth_tokens' as const;
 
@@ -39,7 +43,7 @@ export class AuthService {
   }
 
   login(loginAndPassword: ILoginRequest): Observable<IAuthResponse> {
-    return this.authApiService.getTokens(loginAndPassword).pipe(
+    return this.authApiService.getTokens(loginAndPassword, this.config.sessionTimeout).pipe(
       tap((response: IAuthResponse) => {
         this.saveTokens(response.accessToken, response.refreshToken);
         this.currentUserSubject.next(response);
@@ -67,7 +71,7 @@ export class AuthService {
       return throwError(() => new Error('No refresh token available'));
     }
 
-    return this.authApiService.refreshToken(currentRefreshToken).pipe(
+    return this.authApiService.refreshToken(currentRefreshToken, this.config.sessionTimeout).pipe(
       tap((response: IRefreshResponse) => {
         this.saveTokens(response.accessToken, response.refreshToken);
       }),

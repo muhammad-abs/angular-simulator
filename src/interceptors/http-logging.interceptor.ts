@@ -7,6 +7,9 @@ import {
   HttpResponse,
 } from '@angular/common/http';
 import { catchError, tap, throwError } from 'rxjs';
+import { APP_CONFIG } from '../app/app-configuration.token';
+import { IAppConfig } from '../app/IAppConfig';
+import { inject } from '@angular/core';
 
 export const httpLoggingInterceptor: HttpInterceptorFn = (
   req: HttpRequest<unknown>,
@@ -15,6 +18,9 @@ export const httpLoggingInterceptor: HttpInterceptorFn = (
   const startTime: number = Date.now();
   const method: string = req.method;
   const url: string = req.url;
+  const config: IAppConfig = inject(APP_CONFIG);
+
+  if (!config.enableLogs) return next(req);
 
   const logMessage = (title: string, status: number): void => {
     const duration: number = Date.now() - startTime;

@@ -1,12 +1,16 @@
 <header class="header">
   <div class="container" style="max-width: 2680px">
+    <div class="date-time">
+      <span>{{ currentDateAndTime | date }}</span>
+    </div>
+
     <div class="container">
       <div class="logo">
         <div class="logo-img">
           <img src="/images/logo.svg" alt="logo" />
         </div>
         <div class="logo-text">
-          <span class="companyNameText">{{ companyName }}</span>
+          <span class="companyNameText">{{ config.companyName }}</span>
         </div>
       </div>
 
