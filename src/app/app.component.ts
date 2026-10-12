@@ -7,6 +7,9 @@ import { MessageComponent } from '../components/message/message.component';
 import { LoaderComponent } from '../components/loader/loader.component';
 import { ButtonModule } from 'primeng/button';
 import { ThemeService } from '../services/theme.service';
+import { ParentComponent } from '../homework-28/parent/parent.component';
+import { TaskTwoComponent } from '../homework-28/task-two/task-two.component';
+import { TaskThreeComponent } from '../homework-28/task-three/task-three.component';
 
 @Component({
   selector: 'app-root',
@@ -17,6 +20,9 @@ import { ThemeService } from '../services/theme.service';
     MessageComponent,
     LoaderComponent,
     ButtonModule,
+    ParentComponent,
+    TaskTwoComponent,
+    TaskThreeComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
