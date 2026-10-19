@@ -1,0 +1,167 @@
+
+<section class="cart-page">
+  <div class="cart-header">
+    <div>
+      <h1>Корзина</h1>
+      <p class="cart-description">
+        Здесь собраны выбранные тобой товары.
+      </p>
+    </div>
+
+    <button
+      class="back-button"
+      type="button"
+      (click)="backToProducts()"
+    >
+      <i class="pi pi-arrow-left"></i>
+      Продолжить покупки
+    </button>
+  </div>
+
+  @if (cartService.productItems().length === 0) {
+    <div class="empty-cart">
+      <div class="empty-cart-icon">
+        <i class="pi pi-shopping-cart"></i>
+      </div>
+
+      <h2>Корзина пока пуста</h2>
+      <p>Добавь товары из каталога, и они появятся здесь.</p>
+
+      <button
+        class="primary-button"
+        type="button"
+        (click)="backToProducts()"
+      >
+        Перейти к покупкам
+        <i class="pi pi-arrow-right"></i>
+      </button>
+    </div>
+  } @else {
+    <div class="cart-layout">
+      <div class="cart-items">
+        <div class="cart-section-heading">
+          <h2>Твои товары</h2>
+
+          <span class="items-badge">
+            {{ cartService.itemsCount() }} шт.
+          </span>
+        </div>
+
+        @for (item of cartService.productItems(); track item.product.id) {
+          <article class="cart-item">
+            <div class="cart-item-image">
+              <img
+                [src]="item.product.thumbnail"
+                [alt]="item.product.title"
+              />
+            </div>
+
+            <div class="cart-item-info">
+              <h3>{{ item.product.title }}</h3>
+
+              <p class="cart-item-unit-price">
+                Цена за единицу:
+                <strong>${{ item.product.price.toFixed(2) }}</strong>
+              </p>
+
+              <div class="quantity-control">
+                <button
+                  type="button"
+                  aria-label="Уменьшить количество"
+                  [disabled]="item.quantity <= 1"
+                  (click)="updateQuantity(
+                    item.product.id,
+                    item.quantity - 1
+                  )"
+                >
+                  <i class="pi pi-minus"></i>
+                </button>
+
+                <span>{{ item.quantity }}</span>
+
+                <button
+                  type="button"
+                  aria-label="Увеличить количество"
+                  (click)="updateQuantity(
+                    item.product.id,
+                    item.quantity + 1
+                  )"
+                >
+                  <i class="pi pi-plus"></i>
+                </button>
+              </div>
+            </div>
+
+            <div class="cart-item-total">
+              <span>Стоимость</span>
+
+              <strong>
+                ${{ (item.product.price * item.quantity).toFixed(2) }}
+              </strong>
+
+              <button
+                class="remove-button"
+                type="button"
+                (click)="removeItem(item.product.id)"
+              >
+                <i class="pi pi-trash"></i>
+                Удалить
+              </button>
+            </div>
+          </article>
+        }
+      </div>
+      
+      <div class="cart-summary-column">
+        <aside class="cart-summary">
+          <h2>Итого</h2>
+
+          <div class="summary-row">
+            <span>Товаров</span>
+            <strong>{{ cartService.itemsCount() }}</strong>
+          </div>
+
+          <div class="summary-row">
+            <span>Subtotal</span>
+            <strong>${{ cartService.subtotal().toFixed(2) }}</strong>
+          </div>
+
+          <div class="summary-row">
+            <span>Налог ({{ cartService.TAX_RATE * 100 }}%)</span>
+            <strong>${{ cartService.tax().toFixed(2) }}</strong>
+          </div>
+
+          <div class="summary-divider"></div>
+
+          <div class="summary-total">
+            <span>Общая сумма</span>
+            <strong>${{ cartService.total().toFixed(2) }}</strong>
+          </div>
+
+          <button
+            class="primary-button checkout-button"
+            type="button"
+            disabled
+          >
+            Оформление заказа
+            <i class="pi pi-arrow-right"></i>
+          </button>
+
+          <p class="checkout-note">
+            Оформление заказа пока недоступно.
+          </p>
+        </aside>
+
+        <button
+          class="clear-cart-button"
+          type="button"
+          (click)="clearCart()"
+        >
+          <i class="pi pi-trash"></i>
+          Очистить корзину
+        </button>
+      </div>
+      
+    </div>
+  }
+</section>

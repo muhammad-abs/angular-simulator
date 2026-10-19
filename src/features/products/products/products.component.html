@@ -1,0 +1,150 @@
+
+<div class="products-controls">
+  <div class="products-search">
+    <app-product-search (filter)="onFilter($event)" />
+  </div>
+
+  <div class="products-toolbar">
+    <div class="products-sorting">
+      <p-select
+        [options]="sortOptions"
+        optionLabel="label"
+        optionValue="value"
+        placeholder="Сортировка по.."
+        [ngModel]="sortBy()"
+        (onChange)="onSortChange($event.value)"
+      />
+
+      <p-select
+        [options]="sortOrderOptions"
+        optionLabel="label"
+        optionValue="value"
+        placeholder="Направление.."
+        [ngModel]="order()"
+        (onChange)="onOrderChange($event.value)"
+      />
+
+      <p-select
+        [options]="categoryOptions()"
+        optionLabel="name"
+        optionValue="slug"
+        placeholder="Категория.."
+        [ngModel]="category()"
+        (onChange)="onCategoryChange($event.value)"
+      />
+    </div>
+  </div>
+
+  <div class="products-toolbar-info">
+    <button
+      class="cart-navigation-button"
+      type="button"
+      (click)="goToCart()"
+    >
+      <i class="pi pi-shopping-cart"></i>
+      <span>Корзина</span>
+      <span class="cart-count">{{ cartService.itemsCount() }}</span>
+    </button>
+
+    @if (productsResource.hasValue()) {
+      <p class="products-count">
+        Всего продуктов:
+        <span>{{ displayedTotal() }}</span>
+      </p>
+    }
+  </div>
+</div>
+
+
+@if (productsResource.isLoading()) {
+  <div class="products-grid">
+    @for (item of skeletonItems(); track $index) {
+      <div class="product-card">
+        <p-skeleton width="100%" height="180px" />
+        <p-skeleton width="80%" height="1.5rem" />
+        <p-skeleton width="50%" height="1rem" />
+        <p-skeleton width="35%" height="1.5rem" />
+      </div>
+    }
+  </div>
+} @else if (productsResource.error()) {
+  <p>Не удалось загрузить продукты.</p>
+} @else if (productsResource.hasValue()) {
+  <div class="products-grid">
+    @for (product of paginatedProducts(); track product.id) {
+      <div class="product-card">
+        <div class="product-image">
+          <img [src]="product.thumbnail" [alt]="product.title" />
+        </div>
+
+        <div class="product-info">
+          <span class="product-category">
+            {{ product.category }}
+          </span>
+
+          <h3 class="product-title">{{ product.title }}</h3>
+
+          <div class="product-details">
+            <div class="product-price">
+              <span class="detail-label">Цена</span>
+              <span class="price-value">
+                ${{ product.price }}
+              </span>
+            </div>
+
+            <div class="product-rating">
+              <span class="detail-label">Рейтинг</span>
+              <span class="rating-value">
+                <i class="pi pi-star-fill"></i>
+                {{ product.rating }}
+              </span>
+            </div>
+          </div>
+
+          <div class="product-stock">
+            <i class="pi pi-box"></i>
+            <span>В наличии:</span>
+            <strong>{{ product.stock }} шт.</strong>
+          </div>
+
+          <div class="product-actions">
+            <button
+              class="product-details-button"
+              type="button"
+              (click)="viewProduct(product.id)"
+            >
+              <span>Подробнее</span>
+              <i class="pi pi-arrow-right"></i>
+            </button>
+
+            <button
+              class="add-to-cart-button"
+              type="button"
+              (click)="addToCart(product)"
+              aria-label="Добавить товар в корзину"
+              title="Добавить в корзину"
+            >
+              <i class="pi pi-shopping-cart"></i>
+              <span>В корзину</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    } @empty {
+      <p>Продукты не найдены.</p>
+    }
+  </div>
+
+  <p-paginator
+    class="products-paginator"
+    [first]="skip()"
+    [rows]="pageSize()"
+    [totalRecords]="displayedTotal()"
+    [rowsPerPageOptions]="[9, 18, 27]"
+    (onPageChange)="onPageChange($event)"
+  />
+
+  <p class="pages-count">
+    Страница {{ currentPage() }} из {{ totalPages() }}
+  </p>
+}
