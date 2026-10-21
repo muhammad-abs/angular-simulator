@@ -1,6 +1,11 @@
 @if (product; as item) {
   <section class="product-detail">
-    <button class="back-button" type="button" (click)="backToProducts()">
+    <button
+      id="back-button"
+      class="back-button"
+      type="button"
+      (click)="backToProducts()"
+    >
       <i class="pi pi-arrow-left"></i>
       Назад к продуктам
     </button>
@@ -43,9 +48,9 @@
           <strong>{{ item.stock }} шт.</strong>
         </div>
 
-        
         <div class="product-cart-actions">
           <button
+            id="add-to-cart-button"
             class="add-to-cart"
             type="button"
             (click)="addToCart(item)"
@@ -55,6 +60,7 @@
           </button>
 
           <button
+            id="view-cart-button"
             class="view-cart-button"
             type="button"
             (click)="goToCart()"
@@ -64,7 +70,6 @@
             <span class="cart-count">{{ cartService.itemsCount() }}</span>
           </button>
         </div>
-
       </div>
     </div>
 

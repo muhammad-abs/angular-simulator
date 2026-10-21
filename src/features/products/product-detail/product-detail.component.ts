@@ -1,6 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IProductDetails } from '../interfaces/IProductDetails';
+import { ProductService } from '../product.service';
 import { CartService } from '../cart.service';
 
 @Component({
@@ -12,7 +13,7 @@ import { CartService } from '../cart.service';
 export class ProductDetailComponent implements OnInit{
   
   private route: ActivatedRoute = inject(ActivatedRoute);
-  private router: Router = inject(Router);
+  productService: ProductService = inject(ProductService);
   cartService: CartService = inject(CartService);
   
   product: IProductDetails | null = null;
@@ -21,16 +22,16 @@ export class ProductDetailComponent implements OnInit{
     this.product = this.route.snapshot.data['productDetails'];
   }
   
+  backToProducts(): void {
+    this.productService.backToProducts();
+  }
+  
   addToCart(product: IProductDetails): void {
     this.cartService.addToCart(product);
   }
-  
-  backToProducts(): void {
-    this.router.navigate(['/products']);
-  }
 
   goToCart(): void {
-    this.router.navigate(['/products/cart']);
+    this.cartService.goToCart();
   }
   
 }

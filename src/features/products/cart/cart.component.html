@@ -1,4 +1,3 @@
-
 <section class="cart-page">
   <div class="cart-header">
     <div>
@@ -9,6 +8,7 @@
     </div>
 
     <button
+      id="back-to-products-button"
       class="back-button"
       type="button"
       (click)="backToProducts()"
@@ -28,6 +28,7 @@
       <p>Добавь товары из каталога, и они появятся здесь.</p>
 
       <button
+        id="empty-cart-shopping-button"
         class="primary-button"
         type="button"
         (click)="backToProducts()"
@@ -66,6 +67,7 @@
 
               <div class="quantity-control">
                 <button
+                  [id]="'decrease-quantity-' + item.product.id"
                   type="button"
                   aria-label="Уменьшить количество"
                   [disabled]="item.quantity <= 1"
@@ -80,6 +82,7 @@
                 <span>{{ item.quantity }}</span>
 
                 <button
+                  [id]="'increase-quantity-' + item.product.id"
                   type="button"
                   aria-label="Увеличить количество"
                   (click)="updateQuantity(
@@ -100,6 +103,7 @@
               </strong>
 
               <button
+                [id]="'remove-cart-item-' + item.product.id"
                 class="remove-button"
                 type="button"
                 (click)="removeItem(item.product.id)"
@@ -111,7 +115,7 @@
           </article>
         }
       </div>
-      
+
       <div class="cart-summary-column">
         <aside class="cart-summary">
           <h2>Итого</h2>
@@ -139,6 +143,7 @@
           </div>
 
           <button
+            id="checkout-button"
             class="primary-button checkout-button"
             type="button"
             disabled
@@ -153,6 +158,7 @@
         </aside>
 
         <button
+          id="clear-cart-button"
           class="clear-cart-button"
           type="button"
           (click)="clearCart()"
@@ -161,7 +167,6 @@
           Очистить корзину
         </button>
       </div>
-      
     </div>
   }
 </section>

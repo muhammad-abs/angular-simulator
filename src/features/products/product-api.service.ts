@@ -1,58 +1,60 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { inject, Injectable } from '@angular/core';
+
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IProductResponce } from './interfaces/IProductResponce';
-import { ProductSorts } from './enums/ProductSorts';
+import { ProductSort } from './enums/ProductSort';
 import { ProductSortOrder } from './enums/ProductSortOrder';
 import { IProductCategories } from './interfaces/IProductCategories';
 import { IProductDetails } from './interfaces/IProductDetails';
+import { IProductQueryParams } from './interfaces/IProductQueryParams';
+import { BaseApiService } from './base-api.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class ProductApiService {
+export class ProductApiService extends BaseApiService {
   
-  private http: HttpClient = inject(HttpClient);
-  private url: string = 'https://dummyjson.com/products';
-  
-  getProductById(id: number | string): Observable<IProductDetails> {
-    return this.http.get<IProductDetails>(`${ this.url }/${ id }`);
-  }
-    
-  getProductCategories(): Observable<IProductCategories[]> {
-    return this.http.get<IProductCategories[]>(`${ this.url }/categories`);
-  }
-  
-  getProducts(
-    query: string,
-    category: string,
-    sortBy: ProductSorts,
-    order: ProductSortOrder,
-    limit: number = 9,
-    skip: number = 0,
-  ): Observable<IProductResponce> {
-    let url: string = this.url;
+  override key: string = 'products';
 
-    let params: HttpParams = new HttpParams()
-      .set('limit', limit.toString())
-      .set('skip', skip.toString());
-    
-    if (sortBy !== ProductSorts.EMPTY) {
-      params = params.set('sortBy', sortBy);
+  getProductById(id: number | string): Observable<IProductDetails> {
+    return this.get<IProductDetails>(`/${ id }`);
+  }
+
+  getProductCategories(): Observable<IProductCategories[]> {
+    return this.get<IProductCategories[]>('/categories');
+  }
+
+  getProducts({
+    query,
+    category,
+    sortBy,
+    order,
+    limit = 9,
+    skip = 0,
+  }: IProductQueryParams): Observable<IProductResponce> {
+    let url: string = '';
+
+    const params: Record<string, string | number> = {
+      limit,
+      skip,
+    };
+
+    if (sortBy !== ProductSort.EMPTY) {
+      params['sortBy'] = sortBy;
     }
 
     if (order !== ProductSortOrder.EMPTY) {
-      params = params.set('order', order);
-    }  
-    
-    if (query) {
-      url += '/search';
-      params = params.set('q', query);
-    } else if (category) {
-      url += `/category/${ category }`;
+      params['order'] = order;
     }
 
-    return this.http.get<IProductResponce>(url, { params });
+    if (query) {
+      url = '/search';
+      params['q'] = query;
+    } else if (category) {
+      url = `/category/${ encodeURIComponent(category) }`;
+    }
+
+    return this.get<IProductResponce>(url, params);
   }
   
 }

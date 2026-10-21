@@ -1,5 +1,5 @@
 export interface IProductCategories {
-  slug: string,
-  name: string,
-  url: string
+  slug: string;
+  name: string;
+  url: string;
 }

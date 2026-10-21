@@ -1,13 +1,15 @@
 import { computed, inject, Injectable, ResourceRef, signal, Signal, WritableSignal } from '@angular/core';
-import { ICartItem } from './interfaces/ICart';
+import { ICartItem } from './interfaces/ICartItem';
 import { ProductService } from './product.service';
 import { IProduct } from './interfaces/IProduct';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CartService {
   
+  private router: Router = inject(Router);
   productService: ProductService = inject(ProductService);
   
   readonly TAX_RATE: number = 0.1;
@@ -26,7 +28,7 @@ export class CartService {
   
   addToCart(product: IProduct): void {
     this.productItems.update((items: ICartItem[]) => {
-      const existingItem = items.find(
+      const existingItem: ICartItem | undefined = items.find(
         (item: ICartItem) => item.product.id === product.id,
       );
 
@@ -64,6 +66,10 @@ export class CartService {
   
   clearCart(): void {
     this.productItems.set([]);
+  }
+  
+  goToCart(): void {
+    this.router.navigate(['/products/cart']);
   }
   
 }

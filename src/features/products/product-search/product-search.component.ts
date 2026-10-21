@@ -14,7 +14,7 @@ export class ProductSearchComponent implements OnInit {
   
   private destroyRef: DestroyRef = inject(DestroyRef);
   
-  @Output() filter = new EventEmitter<string>();
+  @Output() filter: EventEmitter<string> = new EventEmitter<string>();
 
   filterFormControl: FormControl<string | null> = new FormControl<string>('');
   
