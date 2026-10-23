@@ -10,7 +10,7 @@ import { CartService } from '../cart.service';
   templateUrl: './product-detail.component.html',
   styleUrl: './product-detail.component.scss',
 })
-export class ProductDetailComponent implements OnInit{
+export class ProductDetailComponent implements OnInit {
   
   private route: ActivatedRoute = inject(ActivatedRoute);
   productService: ProductService = inject(ProductService);

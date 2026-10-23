@@ -7,7 +7,6 @@ import { IProductResponce } from './interfaces/IProductResponce';
 import { ProductSort } from './enums/ProductSort';
 import { ProductSortOrder } from './enums/ProductSortOrder';
 import { Router } from '@angular/router';
-import { IProduct } from './interfaces/IProduct';
 import { rxResource } from '@angular/core/rxjs-interop';
 import { PaginatorState } from 'primeng/paginator';
 import { IProductQueryParams } from './interfaces/IProductQueryParams';
@@ -30,57 +29,18 @@ export class ProductService {
   skip: Signal<number> = computed(() => this.page() * this.pageSize());
   currentPage: Signal<number> = computed(() => this.page() + 1);
   
-  skeletonItems: Signal<unknown[]> = computed(() =>
-    Array.from({ length: this.pageSize() }),
-  );
-  
   totalPages: Signal<number> = computed(() =>
-    Math.ceil(this.displayedTotal() / this.pageSize()),
+    Math.ceil(this.productsResource.value()?.total ?? 0 / this.pageSize()),
   );
-  
-  filteredProducts: Signal<IProduct[]> = computed(() => {
-    const products: IProduct[] = this.productsResource.value()?.products ?? [];
-    const query: string = this.searchQuery().trim().toLowerCase();
-
-    if (!query) {
-      return products;
-    }
-
-    return products.filter(
-      (product: IProduct) =>
-        product.title.toLowerCase().includes(query)
-    );
-  });
-  
-  paginatedProducts: Signal<IProduct[]> = computed(() => {
-    const products: IProduct[] = this.filteredProducts();
-
-    if (!this.category()) {
-      return products;
-    }
-
-    return products.slice(
-      this.skip(),
-      this.skip() + this.pageSize(),
-    );
-  });
-
-  displayedTotal: Signal<number> = computed(() => {
-    if (this.category()) {
-      return this.filteredProducts().length;
-    }
-
-    return this.productsResource.value()?.total ?? 0;
-  });
   
   productsResource: ResourceRef<IProductResponce | undefined> = rxResource({
     params: () => ({
-      query: this.category() ? '' : this.searchQuery().trim(),
+      query: this.searchQuery().trim(),
       category: this.category(),
       sortBy: this.sortBy(),
       order: this.order(),
-      limit: this.category() ? 0 : this.pageSize(),
-      skip: this.category() ? 0 : this.skip()
+      limit: this.pageSize(),
+      skip: this.skip(),
     }),
 
     stream: ({ params }) => {

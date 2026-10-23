@@ -10,7 +10,6 @@ import { Router } from '@angular/router';
 export class CartService {
   
   private router: Router = inject(Router);
-  productService: ProductService = inject(ProductService);
   
   readonly TAX_RATE: number = 0.1;
   productItems: WritableSignal<ICartItem[]> = signal<ICartItem[]>([]);

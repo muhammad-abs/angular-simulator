@@ -24,37 +24,30 @@ export class ProductApiService extends BaseApiService {
     return this.get<IProductCategories[]>('/categories');
   }
 
-  getProducts({
-    query,
-    category,
-    sortBy,
-    order,
-    limit = 9,
-    skip = 0,
-  }: IProductQueryParams): Observable<IProductResponce> {
+  getProducts(params: IProductQueryParams): Observable<IProductResponce> {
     let url: string = '';
 
-    const params: Record<string, string | number> = {
-      limit,
-      skip,
+    const queryParams: Record<string, string | number> = {
+      limit: params.limit ?? 9,
+      skip: params.skip ?? 0,
     };
 
-    if (sortBy !== ProductSort.EMPTY) {
-      params['sortBy'] = sortBy;
+    if (params.sortBy && params.sortBy !== ProductSort.EMPTY) {
+      queryParams['sortBy'] = params.sortBy;
     }
 
-    if (order !== ProductSortOrder.EMPTY) {
-      params['order'] = order;
+    if (params.order && params.order !== ProductSortOrder.EMPTY) {
+      queryParams['order'] = params.order;
     }
 
-    if (query) {
+    if (params.query) {
       url = '/search';
-      params['q'] = query;
-    } else if (category) {
-      url = `/category/${ encodeURIComponent(category) }`;
+      queryParams['q'] = params.query;
+    } else if (params.category) {
+      url = `/category/${ encodeURIComponent(params.category) }`;
     }
 
-    return this.get<IProductResponce>(url, params);
+    return this.get<IProductResponce>(url, queryParams);
   }
-  
+
 }

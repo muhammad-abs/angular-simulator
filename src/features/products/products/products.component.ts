@@ -1,4 +1,4 @@
-import { Component, computed, inject, ResourceRef } from '@angular/core';
+import { Component, computed, inject, ResourceRef, Signal } from '@angular/core';
 import { rxResource } from '@angular/core/rxjs-interop';
 import { SkeletonModule } from 'primeng/skeleton';
 import { ProductSearchComponent } from '../product-search/product-search.component';
@@ -7,11 +7,11 @@ import { ProductSortOrder } from '../enums/ProductSortOrder';
 import { SelectModule } from 'primeng/select';
 import { FormsModule } from '@angular/forms';
 import { ProductService } from '../product.service';
-import { Router } from '@angular/router';
 import { CartService } from '../cart.service';
 import { IProduct } from '../interfaces/IProduct';
 import { IProductCategories } from '../interfaces/IProductCategories';
 import { Paginator } from 'primeng/paginator';
+import { ISortOptions } from '../interfaces/ISortOptions';
 
 @Component({
   selector: 'app-products',
@@ -24,24 +24,28 @@ export class ProductsComponent {
   productService: ProductService = inject(ProductService);
   cartService: CartService = inject(CartService);
   
-  sortOptions: { label: string, value: ProductSort }[] = [
+  sortOptions: ISortOptions<ProductSort>[] = [
     { label: 'Сортировка по..', value: ProductSort.EMPTY },
     { label: 'По названию', value: ProductSort.TITLE },
     { label: 'По цене', value: ProductSort.PRICE },
     { label: 'По рейтингу', value: ProductSort.RATING },
     { label: 'По наличию', value: ProductSort.STOCK },
   ];
-  
-  sortOrderOptions: { label: string, value: ProductSortOrder }[] = [
+
+  sortOrderOptions: ISortOptions<ProductSortOrder>[] = [
     { label: 'Направление..', value: ProductSortOrder.EMPTY },
     { label: 'По возрастанию', value: ProductSortOrder.ASC },
     { label: 'По убыванию', value: ProductSortOrder.DESC },
   ];
   
-  categoryOptions = computed(() => [
+  categoryOptions: Signal<(IProductCategories | { name: string; slug: string; })[]> = computed(() => [
     { name: 'Все категории', slug: '' },
     ...(this.categoriesResource.value() ?? []),
   ]);
+  
+  skeletonItems: Signal<unknown[]> = computed(() =>
+    Array.from({ length: this.productService.pageSize() }),
+  );
   
   categoriesResource: ResourceRef<IProductCategories[] | undefined> = rxResource({
     stream: () => this.productService.getProductCategories(),
