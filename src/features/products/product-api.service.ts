@@ -1,9 +1,6 @@
-
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IProductResponce } from './interfaces/IProductResponce';
-import { ProductSort } from './enums/ProductSort';
-import { ProductSortOrder } from './enums/ProductSortOrder';
 import { IProductCategories } from './interfaces/IProductCategories';
 import { IProductDetails } from './interfaces/IProductDetails';
 import { IProductQueryParams } from './interfaces/IProductQueryParams';
@@ -27,27 +24,19 @@ export class ProductApiService extends BaseApiService {
   getProducts(params: IProductQueryParams): Observable<IProductResponce> {
     let url: string = '';
 
-    const queryParams: Record<string, string | number> = {
-      limit: params.limit ?? 9,
-      skip: params.skip ?? 0,
-    };
-
-    if (params.sortBy && params.sortBy !== ProductSort.EMPTY) {
-      queryParams['sortBy'] = params.sortBy;
-    }
-
-    if (params.order && params.order !== ProductSortOrder.EMPTY) {
-      queryParams['order'] = params.order;
-    }
-
     if (params.query) {
       url = '/search';
-      queryParams['q'] = params.query;
     } else if (params.category) {
       url = `/category/${ encodeURIComponent(params.category) }`;
     }
 
-    return this.get<IProductResponce>(url, queryParams);
+    return this.get<IProductResponce>(url, {
+      limit: params.limit ?? 9,
+      skip: params.skip ?? 0,
+      sortBy: params.sortBy,
+      order: params.order,
+      q: params.query,
+    });
   }
-
+  
 }

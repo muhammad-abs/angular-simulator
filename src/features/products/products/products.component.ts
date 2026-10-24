@@ -38,7 +38,7 @@ export class ProductsComponent {
     { label: 'По убыванию', value: ProductSortOrder.DESC },
   ];
   
-  categoryOptions: Signal<(IProductCategories | { name: string; slug: string; })[]> = computed(() => [
+  categoryOptions: Signal<IProductCategories[]> = computed(() => [
     { name: 'Все категории', slug: '' },
     ...(this.categoriesResource.value() ?? []),
   ]);
