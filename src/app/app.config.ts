@@ -9,16 +9,16 @@ import { provideRouter } from '@angular/router';
 import { providePrimeNG } from 'primeng/config';
 import { routes } from './app.routes';
 import { Preset } from '@primeuix/themes/types';
-import { PRESETS_MAP } from '../configs/Preset.config';
-import { PrimePreset } from '../enums/PrimePreset';
+import { PRESETS_MAP } from './core/configs/prime-preset.config';
+import { PrimePreset } from './shared/enums/PrimePreset';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
-import { httpLoggingInterceptor } from '../interceptors/http-logging.interceptor';
-import { httpErrorInterceptor } from '../interceptors/http-error.interceptor';
-import { authInterceptor } from '../features/auth/components/auth.interceptor';
-import { AuthService } from '../features/auth/auth.service';
+import { httpLoggingInterceptor } from './core/interceptors/http-logging.interceptor';
+import { httpErrorInterceptor } from './core/interceptors/http-error.interceptor';
+import { authInterceptor } from './core/interceptors/auth.interceptor';
+import { AuthService } from '../app/core/services/auth.service';
 import { DATE_PIPE_DEFAULT_OPTIONS } from '@angular/common';
-import { APP_CONFIG } from './app-configuration.token';
-import { configuration } from './configuration';
+import { APP_CONFIG } from './core/tokens/app-configuration.token';
+import { configuration } from './core/configs/configuration';
 
 function getInitialPreset(): Preset {
   const savedPreset: PrimePreset | null = localStorage.getItem(

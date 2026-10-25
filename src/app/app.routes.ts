@@ -1,13 +1,13 @@
 import { Routes } from '@angular/router';
-import { authGuard } from '../features/auth/components/auth.guard';
-import { LoginComponent } from '../features/auth/components/login/login.component';
-import { adminGuard } from '../features/auth/admin.guard';
+import { authGuard } from './core/guards/auth.guard';
+import { LoginComponent } from './features/auth/components/login/login.component';
+import { adminGuard } from './core/guards/admin.guard';
 
 export const routes: Routes = [
   {
     path: '',
     loadComponent: () =>
-      import('../components/home-page/home-page.component').then((m) => m.HomePageComponent),
+      import('../app/features/home/components/home-page/home-page.component').then((m) => m.HomePageComponent),
   },
   {
     path: 'login',
@@ -16,22 +16,22 @@ export const routes: Routes = [
   {
     path: 'users',
     loadComponent: () =>
-      import('../components/users-page/users-page.component').then((m) => m.UsersPageComponent),
+      import('./features/users/components/users-page/users-page.component').then((m) => m.UsersPageComponent),
     canActivate: [authGuard, adminGuard],
   },
   {
     path: 'posts',
-    loadChildren: () => import('../features/posts/posts.routes').then((m) => m.postsRoutes),
+    loadChildren: () => import('./features/posts/posts.routes').then((m) => m.postsRoutes),
     canActivate: [authGuard, adminGuard],
   },
   {
     path: 'products',
-    loadChildren: () => import('../features/products/products.routes').then((m) => m.productsRoutes)
+    loadChildren: () => import('./features/products/products.routes').then((m) => m.productsRoutes)
   },
   {
     path: '**',
     loadComponent: () =>
-      import('../components/not-found-page/not-found-page.component').then(
+      import('./features/home/components/not-found-page/not-found-page.component').then(
         (m) => m.NotFoundPageComponent,
       ),
   },
