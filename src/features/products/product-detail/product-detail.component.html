@@ -1,0 +1,132 @@
+@if (product; as item) {
+  <section class="product-detail">
+    <button
+      id="back-button"
+      class="back-button"
+      type="button"
+      (click)="backToProducts()"
+    >
+      <i class="pi pi-arrow-left"></i>
+      Назад к продуктам
+    </button>
+
+    <div class="product-layout">
+      <div class="product-gallery">
+        <div class="main-image">
+          <img [src]="item.thumbnail" [alt]="item.title" />
+        </div>
+      </div>
+
+      <div class="product-content">
+        <span class="product-category">{{ item.category }}</span>
+
+        <h1 class="product-title">{{ item.title }}</h1>
+
+        <p class="product-brand">
+          Бренд: {{ item.brand || 'Не указан' }}
+        </p>
+
+        <div class="product-rating">
+          <i class="pi pi-star-fill"></i>
+          <strong>{{ item.rating }}</strong>
+          <span>Рейтинг продукта</span>
+        </div>
+
+        <div class="price-block">
+          @if (+item.discount > 0) {
+            <span class="discount">
+              Скидка {{ item.discount }}%
+            </span>
+          }
+
+          <p class="product-price">${{ item.price }}</p>
+        </div>
+
+        <div class="stock-status">
+          <i class="pi pi-box"></i>
+          <span>Количество на складе</span>
+          <strong>{{ item.stock }} шт.</strong>
+        </div>
+
+        <div class="product-cart-actions">
+          <button
+            id="add-to-cart-button"
+            class="add-to-cart"
+            type="button"
+            (click)="addToCart(item)"
+          >
+            <i class="pi pi-shopping-cart"></i>
+            Добавить в корзину
+          </button>
+
+          <button
+            id="view-cart-button"
+            class="view-cart-button"
+            type="button"
+            (click)="goToCart()"
+          >
+            <i class="pi pi-shopping-cart"></i>
+            <span>В корзине</span>
+            <span class="cart-count">{{ cartService.itemsCount() }}</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <section class="additional-info">
+      <h2>Характеристики продукта</h2>
+
+      <div class="specifications">
+        <div class="spec-row">
+          <span>Название</span>
+          <strong>{{ item.title }}</strong>
+        </div>
+
+        <div class="spec-row">
+          <span>Категория</span>
+          <strong>{{ item.category }}</strong>
+        </div>
+
+        <div class="spec-row">
+          <span>Бренд</span>
+          <strong>{{ item.brand || 'Не указан' }}</strong>
+        </div>
+
+        <div class="spec-row">
+          <span>Цена</span>
+          <strong>${{ item.price }}</strong>
+        </div>
+
+        <div class="spec-row">
+          <span>Скидка</span>
+          <strong>{{ item.discount }}%</strong>
+        </div>
+
+        <div class="spec-row">
+          <span>Рейтинг</span>
+          <strong>{{ item.rating }}</strong>
+        </div>
+
+        <div class="spec-row">
+          <span>Количество на складе</span>
+          <strong>{{ item.stock }} шт.</strong>
+        </div>
+
+        <div class="spec-row">
+          <span>Ширина</span>
+          <strong>{{ item.dimensions.width }}</strong>
+        </div>
+
+        <div class="spec-row">
+          <span>Высота</span>
+          <strong>{{ item.dimensions.height }}</strong>
+        </div>
+
+        <div class="spec-row">
+          <span>Глубина</span>
+          <strong>{{ item.dimensions.depth }}</strong>
+        </div>
+      </div>
+    </section>
+  </section>
+}

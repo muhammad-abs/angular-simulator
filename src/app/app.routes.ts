@@ -25,6 +25,10 @@ export const routes: Routes = [
     canActivate: [authGuard, adminGuard],
   },
   {
+    path: 'products',
+    loadChildren: () => import('../features/products/products.routes').then((m) => m.productsRoutes)
+  },
+  {
     path: '**',
     loadComponent: () =>
       import('../components/not-found-page/not-found-page.component').then(

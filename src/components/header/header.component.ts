@@ -67,6 +67,12 @@ export class HeaderComponent {
     },
     {
       id: 4,
+      label: 'Продукты',
+      path: '/products',
+      exact: false,
+    },
+    {
+      id: 5,
       label: 'Логин',
       path: '/login',
       exact: false,
