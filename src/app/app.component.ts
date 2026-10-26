@@ -1,15 +1,12 @@
 import { Component, inject, ViewEncapsulation } from '@angular/core';
-import { LocalStorageService } from '../services/local-storage.service';
+import { LocalStorageService } from './core/services/local-storage.service';
 import { RouterOutlet } from '@angular/router';
-import { HeaderComponent } from '../components/header/header.component';
-import { FooterComponent } from '../components/footer/footer.component';
-import { MessageComponent } from '../components/message/message.component';
-import { LoaderComponent } from '../components/loader/loader.component';
+import { HeaderComponent } from '../app/layouts/components/header/header.component';
+import { FooterComponent } from '../app/layouts/components/footer/footer.component';
+import { MessageComponent } from './shared/ui/message/message.component';
+import { LoaderComponent } from './shared/ui/loader/loader.component';
 import { ButtonModule } from 'primeng/button';
-import { ThemeService } from '../services/theme.service';
-import { ParentComponent } from '../homework-28/parent/parent.component';
-import { TaskTwoComponent } from '../homework-28/task-two/task-two.component';
-import { TaskThreeComponent } from '../homework-28/task-three/task-three.component';
+import { ThemeService } from './core/services/theme.service';
 
 @Component({
   selector: 'app-root',
@@ -20,9 +17,6 @@ import { TaskThreeComponent } from '../homework-28/task-three/task-three.compone
     MessageComponent,
     LoaderComponent,
     ButtonModule,
-    ParentComponent,
-    TaskTwoComponent,
-    TaskThreeComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
