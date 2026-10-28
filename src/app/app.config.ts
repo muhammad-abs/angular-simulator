@@ -19,6 +19,11 @@ import { AuthService } from '../app/core/services/auth.service';
 import { DATE_PIPE_DEFAULT_OPTIONS } from '@angular/common';
 import { APP_CONFIG } from './core/tokens/app-configuration.token';
 import { configuration } from './core/configs/configuration';
+import { provideStore } from '@ngrx/store'
+import { recipesReducer } from './features/recipes/state/recipes.reducer';
+import { provideEffects } from '@ngrx/effects';
+import { RecipeEffects } from './features/recipes/state/recipe.effects';
+import { RECIPES_FEATURE_KEY } from './features/recipes/interfaces/IRecipesState';
 
 function getInitialPreset(): Preset {
   const savedPreset: PrimePreset | null = localStorage.getItem(
@@ -56,5 +61,9 @@ export const appConfig: ApplicationConfig = {
       const authService = inject(AuthService);
       return authService.initializeApp();
     }),
+    provideStore({
+      [RECIPES_FEATURE_KEY]: recipesReducer
+    }),
+    provideEffects([RecipeEffects])
   ],
 };
