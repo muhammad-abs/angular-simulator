@@ -1,0 +1,91 @@
+<div class="recipes-header">
+  <div class="recipes-heading">
+    <h1>Recipes</h1>
+    <p>Discover recipes for your next meal</p>
+  </div>
+
+  <p-button
+    label="Reload recipes"
+    icon="pi pi-refresh"
+    (onClick)="loadRecipes()"
+    [loading]="(isLoading$ | async) ?? false"
+  />
+</div>
+
+
+@if (isLoading$ | async) {
+  <div class="recipes-grid">
+    @for (item of [1, 2, 3, 4, 5, 6]; track item) {
+      <div class="recipe-card recipe-skeleton">
+        <p-skeleton width="45%" height="1.5rem" />
+        <p-skeleton width="75%" height="1rem" />
+        <div class="recipe-skeleton-details">
+          <p-skeleton width="100%" height="4rem" />
+          <p-skeleton width="100%" height="4rem" />
+        </div>
+      </div>
+    }
+  </div>
+} @else if (error$ | async; as error) {
+  <div class="recipes-empty">
+    <i class="pi pi-exclamation-circle"></i>
+    <h2>Failed to load recipes</h2>
+    <p>{{ error }}</p>
+    <p-button
+      label="Try again"
+      icon="pi pi-refresh"
+      (onClick)="loadRecipes()"
+    />
+  </div>
+} @else if (recipes$ | async; as recipes) {
+  @if (recipes.length) {
+    <div class="recipes-grid">
+      @for (recipe of recipes; track recipe.id) {
+        <div class="recipe-card">
+          <div class="recipe-card-header">
+            <span class="recipe-icon">
+              <i class="pi pi-book"></i>
+            </span>
+
+            <span class="recipe-rating">
+              <i class="pi pi-star-fill"></i>
+              {{ recipe.rating }}
+            </span>
+          </div>
+
+          <div class="recipe-info">
+            <span class="recipe-cuisine">
+              {{ recipe.cuisine }}
+            </span>
+
+            <h2 class="recipe-title">{{ recipe.name }}</h2>
+
+            <div class="recipe-details">
+              <div class="recipe-detail">
+                <i class="pi pi-clock"></i>
+                <div>
+                  <span class="detail-label">Cooking time</span>
+                  <strong>{{ recipe.cookTimeMinutes }} min</strong>
+                </div>
+              </div>
+
+              <div class="recipe-detail">
+                <i class="pi pi-star"></i>
+                <div>
+                  <span class="detail-label">Rating</span>
+                  <strong>{{ recipe.rating }} / 5</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  } @else {
+    <div class="recipes-empty">
+      <i class="pi pi-book"></i>
+      <h2>No recipes yet</h2>
+      <p>Reload recipes to try again.</p>
+    </div>
+  }
+}
