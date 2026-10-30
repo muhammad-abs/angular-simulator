@@ -10,6 +10,11 @@ export const routes: Routes = [
       import('../app/features/home/components/home-page/home-page.component').then((m) => m.HomePageComponent),
   },
   {
+    path: 'quotes',
+    loadComponent: () =>
+      import('../app/features/quotes/quotes/quotes.component').then((m) => m.QuotesComponent),
+  },
+  {
     path: 'recipes',
     loadComponent: () =>
        import('../app/features/recipes/components/recipes/recipes.component').then((m) => m.RecipesComponent),

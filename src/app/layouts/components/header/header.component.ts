@@ -79,6 +79,12 @@ export class HeaderComponent {
     },
     {
       id: 6,
+      label: 'Цитаты',
+      path: './quotes',
+      exact: false
+    },
+    {
+      id: 6,
       label: 'Логин',
       path: '/login',
       exact: false,
