@@ -24,20 +24,22 @@ export const QuotesStore = signalStore(
 
   withLoading(),
 
-  withComputed(({ quotes, favorites, filter }) => ({
+  withComputed(({ quotes, favorites }) => ({
     favoritesCount: computed(() => favorites().length),
 
     authorsCount: computed(
       () => new Set(quotes().map((quote: IQuote) => quote.author)).size,
     ),
 
-    favoriteIds: computed(() => favorites().map((quote: IQuote) => quote.id)),
+    favoriteIds: computed(
+      (): Set<number> => new Set(favorites().map((quote: IQuote) => quote.id)),
+    ),
+  })),
 
+  withComputed(({ quotes, filter, favoriteIds }) => ({
     filteredQuotes: computed(() => {
       if (filter() === QuotesFilter.FAVORITES) {
-        return quotes().filter((quote: IQuote) =>
-          favorites().some((favorite: IQuote) => favorite.id === quote.id),
-        );
+        return quotes().filter((quote: IQuote) => favoriteIds().has(quote.id));
       }
 
       return quotes();
@@ -68,9 +70,7 @@ export const QuotesStore = signalStore(
     ),
 
     toggleFavorite(quote: IQuote): void {
-      const isFavorite: boolean = store
-        .favorites()
-        .some((favorite: IQuote) => favorite.id === quote.id);
+      const isFavorite: boolean = store.favoriteIds().has(quote.id);
 
       if (isFavorite) {
         patchState(store, (state) => ({

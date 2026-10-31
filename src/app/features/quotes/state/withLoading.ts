@@ -1,5 +1,5 @@
 import { patchState, signalStoreFeature, withMethods, withState, } from '@ngrx/signals';
-import { ILoadingState } from '../interfaces/ILoadingState';
+import { ILoadingState } from '../../../shared/interfaces/ILoadingState';
 
 const initialLoadingState: ILoadingState = {
   loading: false,

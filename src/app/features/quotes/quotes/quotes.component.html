@@ -59,7 +59,7 @@
           <span>— {{ quote.author }}</span>
 
           <button (click)="quotesStore.toggleFavorite(quote)">
-            @if (quotesStore.favoriteIds().includes(quote.id)) {
+            @if (quotesStore.favoriteIds().has(quote.id)) {
               ★ Удалить из избранного
             } @else {
               ☆ Добавить в избранное
